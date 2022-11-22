@@ -11,7 +11,7 @@ side_bar_repo_limit: 5
 author: zuti666
 organization: 
 organization_url: 
-github_username: Chauby
+github_username: zuti666
 location: Xi'an, China
 email: 
 
@@ -22,8 +22,8 @@ navs:
     label: Homepage
 
   -
-    href: /cv/
-    label: CV
+    href: /RL/
+    label: RL
 
   -
     href: /publications/
