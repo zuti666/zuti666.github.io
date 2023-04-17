@@ -2,11 +2,20 @@
 
 我的个人博客：<https://zuti666.github.io>，欢迎 Star 和 Fork。
 
-#Blog
-https://github.com/zuti666/zuti666.github.io
+# Blog  https://github.com/zuti666/zuti666.github.io
+- game Theory https://github.com/zuti666/zuti666.github.io/tree/master/_posts/GameTheory
+- Plane 
 
 
 # 代码仓库
+
+## CFR  https://github.com/zuti666/CFR
+
+
+##  Plane
+
+
+
 
 ## 论文阅读 Paper 
 
