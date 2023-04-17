@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: mixed strategy solution in matrix game 矩阵博弈中的混合策略求解
