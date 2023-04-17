@@ -31,8 +31,9 @@ I am currently a PhD candidate in University of Electronic Science and Technolog
 
 ## Note
 ### Game Theory
-<h3 class="repo-list-name">
-                      <a href="https://zuti666.github.io/2021/10/11/Mixed strategy solution in matrix game/">Mixed strategy solution in matrix game 矩阵博弈中的混合策略求解</a>
+
+ <h3 class="repo-list-name">
+                      <a href="https://zuti666.github.io/2021/10/01/Mixed-strategy-solution-in-matrix-game/">1. mixed strategy solution in matrix game</a>
                     </h3>
 
 ## Publications
