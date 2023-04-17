@@ -31,9 +31,9 @@ I am currently a PhD candidate in University of Electronic Science and Technolog
 
 ## Note
 ### Game Theory
-- [1. mixed strategy solution in matrix game](https://zuti666.github.io/2021/10/01/Mixed-strategy-solution-in-matrix-game/)
-
-
+- [1. 矩阵博弈的混合策略求解mixed strategy solution in matrix game](https://zuti666.github.io/2021/10/01/Mixed-strategy-solution-in-matrix-game/)
+- [2. 扩展型博弈 Extensive Form Games](https://zuti666.github.io/2021/10/01/Mixed-strategy-solution-in-matrix-game/)
+- [3. CFR算法介绍 CFR Introduction]()
                     
 
 ## Publications
