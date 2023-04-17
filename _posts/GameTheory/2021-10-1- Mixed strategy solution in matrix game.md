@@ -294,3 +294,10 @@ $$
 博弈论与机制设计
 
 Game Theory and Mechanism Design Y.Narahari
+
+时间有限，本博客就暂时写到这里，有时间会再补充更新一些细节。如果有问题或者对其中的一部分细节不理解，可以扫描下方二维码关注我的微信公众号或者联系我的邮箱 1978192989@qq.com，我会第一时间解答。
+
+<center>
+    <img src="/assets/images/qrcode.jpg" alt="picture not found" style="zoom:80%;" />
+    <br>
+</center>
