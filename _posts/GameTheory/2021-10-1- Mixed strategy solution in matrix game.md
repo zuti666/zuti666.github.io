@@ -3,7 +3,7 @@ layout: post
 title: mixed strategy solution in matrix game 矩阵博弈中的混合策略求解
 categories: GameTheory
 description:  介绍矩阵博弈的混合策略求解，最大最小值以及最小最大值，线性规划求解方法以及求解石头剪刀步的一个实例。
-keywords: gameTheory
+keywords: GameTheory
 ---
 
 介绍矩阵博弈的混合策略求解，最大最小值以及最小最大值，线性规划求解方法以及求解石头剪刀步的一个实例。
