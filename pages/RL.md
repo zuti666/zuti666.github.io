@@ -29,20 +29,25 @@ I am currently a PhD candidate in University of Electronic Science and Technolog
 - Motion planning / Gait analysis and planning
 - Robot simulation
 
+## Note
+### Game Theory
+<h3 class="repo-list-name">
+                      <a href="https://zuti666.github.io/2021/10/11/Mixed strategy solution in matrix game/">Mixed strategy solution in matrix game 矩阵博弈中的混合策略求解</a>
+                    </h3>
+
 ## Publications
 
 #### Under review
 
-1. C. Zou, C. Zeng, J. Qiu, J. Zhang, H. Cheng, “Online Gait Learning with Assist-as-Needed Control for Post-stroke Rehabilitation Exoskeletons”, in IEEE Robotics and Automation Letters (R-AL), 2021.
+1. xx
 
 #### Published
 
-1. 
+1. xx
 
 ## Educations
 
 #### 2021-2024
-
 
 
 #### 2017-Expected 2021
@@ -50,8 +55,6 @@ I am currently a PhD candidate in University of Electronic Science and Technolog
 
 
 
-
-#### 2011- 2015
 
 
 
