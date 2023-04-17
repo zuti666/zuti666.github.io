@@ -2,7 +2,7 @@
 layout: page
 title: Curriculum Vitae
 description: Time flies
-keywords: game theory, RL
+keywords: gameTheory, RL
 comments: true
 menu: Curriculum Vitae
 permalink: /RL/
@@ -51,9 +51,9 @@ I am currently a PhD candidate in University of Electronic Science and Technolog
 #### 2021-2024
 
 
-#### 2017-Expected 2021
+#### 2017- 2021
 
-
+- NanJing TECH University  
 
 
 
