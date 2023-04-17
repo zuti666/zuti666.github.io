@@ -16,7 +16,7 @@ I am currently a PhD candidate in University of Electronic Science and Technolog
 - 知乎@()
 - [Google Scholar]()
 - [Research Gate]()
-- Github:[Chauby](https://github.com/zuti666)
+- Github:[Zuti](https://github.com/zuti666)
 
 ## Contact
 
@@ -31,10 +31,10 @@ I am currently a PhD candidate in University of Electronic Science and Technolog
 
 ## Note
 ### Game Theory
+- [1. mixed strategy solution in matrix game](https://zuti666.github.io/2021/10/01/Mixed-strategy-solution-in-matrix-game/)
 
- <h3 class="repo-list-name">
-                      <a href="https://zuti666.github.io/2021/10/01/Mixed-strategy-solution-in-matrix-game/">1. mixed strategy solution in matrix game</a>
-                    </h3>
+
+                    
 
 ## Publications
 
