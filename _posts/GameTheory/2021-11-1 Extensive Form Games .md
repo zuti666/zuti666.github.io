@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  扩展型博弈 Extensive Form Games
-categories: GameTheory
+categories: GameTheory, Blog
 description:  介绍扩展型博弈的基础知识。
-keywords: gameTheory
+keywords: gameTheory, Blog
 ---
 
 介绍扩展型博弈的基础知识。
