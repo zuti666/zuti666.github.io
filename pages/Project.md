@@ -5,7 +5,7 @@ description: 项目仓库
 keywords:  Project
 comments: false
 menu: project
-permalink: /project/
+permalink: /Project/
 ---
 
 
