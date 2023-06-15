@@ -9,20 +9,13 @@ permalink: /about me/
 ---
 <br>
 
-\documentclass{resume}
-\usepackage{zh_CN-Adobefonts_external} % Simplified Chinese Support using external fonts (./fonts/zh_CN-Adobe/)
-%\usepackage{zh_CN-Adobefonts_internal} % Simplified Chinese Support using system fonts
-\usepackage{linespacing_fix} % disable extra space before next section
-\usepackage{cite}
 
-\begin{document}
-\pagenumbering{gobble} % suppress displaying page number
 
 
 # Liying Wang
 
-**\email{li.ying.wang@outlook.com}** · 
-**\phone{(+86) 187-616-06609}**
+**email**  {li.ying.wang@outlook.com}  \\
+**phone**  {(+86) 187-616-06609}
 
 ## Education
 
@@ -32,7 +25,7 @@ permalink: /about me/
 - Advisor: Prof. Genjiu Xv
 - The First Prize Scholarship
 - GPA: 86/100
-- Courses: Mathematical Statistics, Game Theory and Mechanism Design, Machine Learning and Model Optimization, Intelligent Information Processing and Collaboration for Unmanned Systems, etc.
+- **Courses**: Mathematical Statistics, Game Theory and Mechanism Design, Machine Learning and Model Optimization, Intelligent Information Processing and Collaboration for Unmanned Systems, etc.
 
 ### NanJing Tech University (Nanjing, CHINA)
 
@@ -41,7 +34,7 @@ permalink: /about me/
 - Pacemaker to Merit Student; Nanjing Marathon Medical Volunteers
 - GPA: 3.85/4.0
 - Ranking: 1/59
-- Courses: Mathematical Analysis, Advanced Algebra, Probability Theory, Operations and Optimization, Numerical Analysis, Analytic Geometry, Data Structure and Algorithm, Pattern Recognition, etc.
+- **Courses**: Mathematical Analysis, Advanced Algebra, Probability Theory, Operations and Optimization, Numerical Analysis, Analytic Geometry, Data Structure and Algorithm, Pattern Recognition, etc.
 
 ## Research Experience
 
@@ -79,4 +72,4 @@ permalink: /about me/
 - GitHub: [https://github.com/zuti666](https://github.com/zuti666)
 - Language: English (IELTS: 6.5)
 
-\end{document}
+
