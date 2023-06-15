@@ -6,4 +6,5 @@ description: some word here
 keywords: keyword1, keyword2
 ---
 
-Content here
+
+learn more thing
