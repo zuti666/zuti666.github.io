@@ -5,15 +5,15 @@ description: 项目仓库
 keywords:  Project
 comments: false
 menu: project
-permalink: /Project/
+permalink: /project/
 ---
 
 
 
 <section class="container posts-content">
-{% for project in site.project %}
-{% if project.title != "project Template" %}
-<li class="listing-item"><a href="{{ site.url }}{{ project.url }}">{{ project.title }}</a></li>
+{% for p in site.project %}
+{% if p.title != "project Template" %}
+<li class="listing-item"><a href="{{ site.url }}{{ p.url }}">{{ p.title }}</a></li>
 {% endif %}
 {% endfor %}
 </section>
