@@ -12,9 +12,8 @@ permalink: /categories/
 {% assign sorted_categories = site.categories | sort %}
   <h3>{{ site.categories }}</h3>
   ---------------------
-  <h3>{{ site.wiki }}</h3>
   ---------------------
-  <h3>{{ site.project }}</h3>
+  <h3>{ site.project }</h3>
   ----------------------------
   <h3>{{ site }}</h3>
 {% for category in sorted_categories %}
