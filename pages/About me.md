@@ -9,6 +9,14 @@ permalink: /about me/
 ---
 <br>
 
+\documentclass{resume}
+\usepackage{zh_CN-Adobefonts_external} % Simplified Chinese Support using external fonts (./fonts/zh_CN-Adobe/)
+%\usepackage{zh_CN-Adobefonts_internal} % Simplified Chinese Support using system fonts
+\usepackage{linespacing_fix} % disable extra space before next section
+\usepackage{cite}
+
+\begin{document}
+\pagenumbering{gobble} % suppress displaying page number
 
 
 # Liying Wang
@@ -67,5 +75,8 @@ permalink: /about me/
 - The Second Prize, Jiangsu Province Data Mining Challenge (2020/09)
 
 ## Else
+- Blog: [https://zuti666.github.io](https://zuti666.github.io)
+- GitHub: [https://github.com/zuti666](https://github.com/zuti666)
+- Language: English (IELTS: 6.5)
 
-- Blog: [https://zuti666.github.io](https://z
+\end{document}
