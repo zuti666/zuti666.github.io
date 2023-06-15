@@ -22,14 +22,12 @@ navs:
     label: Homepage
 
   -
-    href: /RL/
-    label: RL
-
-
-
-  -
     href: /categories/
     label: Blogs
+
+  -
+    href: /Project/
+    label: Project
 
   -
     href: /wiki/
