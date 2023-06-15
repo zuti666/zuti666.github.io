@@ -11,7 +11,7 @@ permalink: /categories/
 
 
 <section class="container posts-content">
-{% assign sorted_categories = site.categories  %}
+{% assign sorted_projects = site.projects  %}
 {% for category in sorted_categories %}
 <h3>{{ category | first }}</h3>
 <ol class="posts-list" id="{{ category[0] }}">
