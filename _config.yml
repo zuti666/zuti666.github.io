@@ -67,6 +67,9 @@ collections:
     wiki:
         output: true
         permalink: /wiki/:path/
+    project:
+        output: true
+        permalink: /project/:path/
 
 repository: chauby/chauby.github.io
 
