@@ -1,13 +1,13 @@
 ---
 layout: about me
-title: about me
-description: about me
-keywords: Paper, Books
-comments: true
-menu: about me
+title: About me
+description: CV
+keywords: CV
+comments: false
+menu: Curriculum Vitae
 permalink: /about me/
 ---
-
+<br>
 
 
 
