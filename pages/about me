@@ -1,11 +1,11 @@
 ---
-layout: About me
-title: About me
-description: About me
+layout: about me
+title: about me
+description: about me
 keywords: Paper, Books
 comments: true
-menu: About me
-permalink: /About me/
+menu: about me
+permalink: /about me/
 ---
 
 
