@@ -1,5 +1,5 @@
 ---
-layout: About me
+layout: page
 title: About me
 description: CV
 keywords: CV
