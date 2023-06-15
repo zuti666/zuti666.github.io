@@ -1,10 +1,8 @@
 ---
 layout: post
-title: Project
-description: project
-keywords: project
-comments: true
-menu: Project
-permalink: /Project/
+title: 测试Project
+categories: [CFR]
+description: The simple introduction of 
+keywords: CFR Implement
 ---
 
