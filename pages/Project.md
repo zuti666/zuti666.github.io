@@ -1,11 +1,11 @@
 ---
 layout: page
 title: Project
-description: Project
+description: 项目仓库
 keywords:  Project
-comments: true
+comments: false
 menu: Project
-permalink: /Project/
+permalink: /categories/
 ---
 
 
