@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Curriculum Vitae
+title: Reinforcement Learning and 
 description: Time flies
-keywords: gameTheory, RL
+keywords: game theory, RL
 comments: true
-menu: Curriculum Vitae
+menu: Reinforcement Learning and 
 permalink: /RL/
 ---
 <br>
