@@ -1,10 +1,10 @@
 baseurl:
 url: https://zuti666.github.io
 title: 英飞
-subtitle: "the more hardworking , the luckier"
-description: "zuti's personal page"
+subtitle: "the more hardworking, the luckier"
+description: "Zuti's personal page"
 date_format: "ordinal"
-# timezone: Asia/Chengdu
+# timezone: Asia/Xi'an
 encoding: "utf-8"
 side_bar_repo_limit: 5
 
@@ -25,9 +25,7 @@ navs:
     href: /RL/
     label: RL
 
-  -
-    href: /publications/
-    label: Publications
+
 
   -
     href: /categories/
@@ -36,6 +34,10 @@ navs:
   -
     href: /wiki/
     label: Wiki
+
+  -
+    href: /about me/
+    label: About me
 
   # -
   #   href: /links/
