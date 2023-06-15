@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 测试Project
-categories: [CFR]
+categories: test
 description: The simple introduction of 
 keywords: CFR Implement
 ---
