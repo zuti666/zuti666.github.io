@@ -14,27 +14,28 @@ permalink: /about me/
 
 # Liying Wang
 
-**email**  {li.ying.wang@outlook.com}  \\
-**phone**  {(+86) 187-616-06609}
+## Contact
 
-## Education
+- Email: li.ying.wang@outlook.com
+- phone: (+86) 187-616-06609
 
-### Northwestern Polytechnical University (Xi'an, CHINA)
+## Research Interests
 
-- **Master of Science** in Electronic Information (2021/09 -- 2024/03(expected))
-- Advisor: Prof. Genjiu Xv
-- The First Prize Scholarship
-- GPA: 86/100
-- **Courses**: Mathematical Statistics, Game Theory and Mechanism Design, Machine Learning and Model Optimization, Intelligent Information Processing and Collaboration for Unmanned Systems, etc.
+- Exoskeletons / Legged Robots
+- Robot Learning / Machine Learning
+- Motion planning / Gait analysis and planning
+- Robot simulation
 
-### NanJing Tech University (Nanjing, CHINA)
+## Publications
 
-- **Bachelor of Science** in Information and Computational Science (2017/09 -- 2021/06)
-- National Encouragement Scholarships and First-Class Scholarships for THREE consecutive years
-- Pacemaker to Merit Student; Nanjing Marathon Medical Volunteers
-- GPA: 3.85/4.0
-- Ranking: 1/59
-- **Courses**: Mathematical Analysis, Advanced Algebra, Probability Theory, Operations and Optimization, Numerical Analysis, Analytic Geometry, Data Structure and Algorithm, Pattern Recognition, etc.
+### Under review
+
+1. xx
+
+### Published
+
+1. xx
+
 
 ## Research Experience
 
@@ -55,6 +56,28 @@ permalink: /about me/
 - Modeled fire propagation, quadcopter movement, and observations.
 - Designed a reward function considering observation coverage and fire development trends.
 - Employed mean-field representation to capture communication interactions among multiple agents and applied reinforcement learning to learn the Q-function.
+
+
+## Education
+
+### Northwestern Polytechnical University (Xi'an, CHINA)
+
+- **Master of Science** in Electronic Information (2021/09 -- 2024/03(expected))
+- Advisor: Prof. Genjiu Xv
+- The First Prize Scholarship
+- GPA: 86/100
+- **Courses**: Mathematical Statistics, Game Theory and Mechanism Design, Machine Learning and Model Optimization, Intelligent Information Processing and Collaboration for Unmanned Systems, etc.
+
+### NanJing Tech University (Nanjing, CHINA)
+
+- **Bachelor of Science** in Information and Computational Science (2017/09 -- 2021/06)
+- National Encouragement Scholarships and First-Class Scholarships for THREE consecutive years
+- Pacemaker to Merit Student; Nanjing Marathon Medical Volunteers
+- GPA: 3.85/4.0
+- Ranking: 1/59
+- **Courses**: Mathematical Analysis, Advanced Algebra, Probability Theory, Operations and Optimization, Numerical Analysis, Analytic Geometry, Data Structure and Algorithm, Pattern Recognition, etc.
+
+
 
 ## Skill
 
