@@ -1,3 +1,13 @@
+---
+layout: post
+title:  GAN 的相关发展 Wasserstein GAN
+categories: GAN
+description:  GAN的后续工作，生成样本和真实样本之间距离的衡量，Wasserstein GAN。
+keywords: GAN
+---
+
+
+
 #  GAN 的后序 
 
 [TOC]
