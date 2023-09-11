@@ -21,5 +21,6 @@ permalink: /categories/
 {% endfor %}
 </ol>
 {% endfor %}
+{site.categories}
 </section>
 <!-- /section.content -->
