@@ -10,6 +10,8 @@ permalink: /categories/
 
 <section class="container posts-content">
 {% assign sorted_categories = site.categories | sort %}
+ site.categories
+  
 {% for category in sorted_categories %}
 <h3>{{ category | first }}</h3>
 <ol class="posts-list" id="{{ category[0] }}">
@@ -21,6 +23,6 @@ permalink: /categories/
 {% endfor %}
 </ol>
 {% endfor %}
-{site.categories}
+
 </section>
 <!-- /section.content -->
