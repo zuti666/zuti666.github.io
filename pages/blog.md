@@ -10,7 +10,7 @@ permalink: /categories/
 
 <section class="container posts-content">
 {% assign sorted_categories = site.categories | sort %}
-<span class="posts-list-meta">{{sorted_categories }}</span>
+
   
 {% for category in sorted_categories %}
 <h3>{{ category | first }}</h3>
