@@ -1,9 +1,16 @@
+---
+layout: post
+title:  最大似然估计 MLE 与最大后验估计 MAP  Kullback-Leibler Divergence
+categories: GAN
+description:  介绍最大似然估计 MLE 与最大后验估计 MAP  Kullback-Leibler Divergence。
+keywords: GAN
+---
+
 # 最大似然估计
 
 [TOC]
 
 ------
-
 
 
 # 贝叶斯派与频率派
