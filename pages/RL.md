@@ -9,7 +9,7 @@ permalink: /RL/
 ---
 <br>
 
-I am currently a PhD candidate in University of Electronic Science and Technology of China (UESTC) 
+
 
 ## Social
 
