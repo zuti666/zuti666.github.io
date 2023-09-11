@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  从统计学理解KL散度   KL divergence
-categories: GAN, math
+categories: GAN math
 description: 最大似然估计，最大后验估计，KL散度
-keywords: GAN, math
+keywords: GAN math
 ---
 
 # 最大似然估计
