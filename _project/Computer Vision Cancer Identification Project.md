@@ -1,6 +1,6 @@
 ---
 layout: post
-title: template page
+title: Computer Vision Cancer Identification Project
 categories: [Computer Vision, project]
 description: 计算机视觉，癌症识别
 keywords: Computer Vision, cancer identification
