@@ -1,7 +1,14 @@
-# 李宏毅视频1 ——从Generator和Discrimator角度来看待GAN
+---
+layout: post
+title:  从Generator和Discrimator角度来看待GAN——李宏毅视频 
+categories: GAN
+description:  根据李宏毅老师的视频理解GAN。
+keywords: GAN
+---
 
 
 
+# 从Generator和Discrimator角度来看待GAN——李宏毅视频 
 
 
 # Generator
