@@ -10,21 +10,18 @@ permalink: /about me/
 <br>
 
 
-
-
 # Liying Wang
 
-## Contact
 
-- Email: li.ying.wang@outlook.com
-- phone: (+86) 187-616-06609
 
 ## Research Interests
 
-- Exoskeletons / Legged Robots
-- Robot Learning / Machine Learning
-- Motion planning / Gait analysis and planning
-- Robot simulation
+-  Operations Research,  Game Theory
+-   Multi-agent systems
+- Reinforcement Learning,  AI-Based Methods
+-  AI-enabled robots,  Autopilot
+- Generative Adversarial Networks (GAN)
+-  Counterfactual Regret Minimization (CFR)
 
 ## Publications
 
@@ -91,9 +88,13 @@ permalink: /about me/
 - The Second Prize, Shaanxi Province 2022 Intelligent Unmanned System Application Challenge (2022/09)
 - The Second Prize, Jiangsu Province Data Mining Challenge (2020/09)
 
+
 ## Else
 - Blog: [https://zuti666.github.io](https://zuti666.github.io)
 - GitHub: [https://github.com/zuti666](https://github.com/zuti666)
 - Language: English (IELTS: 6.5)
 
+## Contact
 
+- Email: li.ying.wang@outlook.com
+- phone: (+86) 187-616-06609
