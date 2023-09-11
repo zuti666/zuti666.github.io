@@ -1,3 +1,14 @@
+---
+layout: post
+title:  从Generator和Discrimator角度来看待GAN（李宏毅视频） Introduction to GAN （Hongyi Li）
+categories: GAN
+description:  学习李宏毅老师的讲课视频，笔记，记录介绍GAN网络
+keywords: GAN
+---
+
+
+
+
 # 李宏毅视频1 ——从Generator和Discrimator角度来看待GAN
 
 
