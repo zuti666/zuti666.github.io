@@ -28,14 +28,15 @@ permalink: /about me/
 
 ## Publications
 
-### Under review
+### Paper
 
-1. xx
+[1]  Zekun Duan, Genjiu Xu, Xin Liu, Jiayuan Ma, <u>**Liying Wang**</u>, “Optimal confrontation position selecting games model and its application to one-on-one air combat”, *Defence Technology*, 2023.  
+[2]  **<u>Liying Wang</u>**,Yi Liu, Zesheng Li, Xin Liu, Genjiu Xu, "Multi-UAV Cooperative Target Allocation Method Based on Auction Mechanism", *Journal of Command and Control*, 2023. [Accepted]
+[3]  **<u>Liying Wang</u>**, Genjiu Xu, Mengda Ji,"A CFR-based method for Solving Mobile Robot Confrontation Problems", *IEEE Robotics and Automation Letters*, 2023.[Under review]
 
-### Published
+### Conference
 
-1. xx
-
+[1]  Zesheng Li, Genjiu Xu, **<u>Liying Wang</u>**, "A Generalizable Autumous Maneuvering Decesion Making Method for UCAV Air Combat Combing PER-D3QN and Zero-Sum Markov Game" in *International Conference on Autonomous Unmanned Systems*，2023.
 
 ## Research Experience
 
