@@ -1,6 +1,13 @@
-#  GAN 的后序 
+---
+layout: post
+title:  GAN的后续发展  Wasserstein GAN
+categories: GAN
+description:  Wasserstein GAN，使用 Wasserstein distance 衡量不同分布之间的差距
+keywords: GAN
+---
 
-[TOC]
+
+#  GAN 的后序 
 
 
 
