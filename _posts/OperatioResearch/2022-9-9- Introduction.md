@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  运筹优化问题介绍 Introduction to Operation Resrarch
-categories: Operation Resrarch
+categories: OperationResrarch
 description: 介绍常见的优化问题与算法
-keywords: Operation Resrarch
+keywords: OperationResrarch
 ---
 
 
