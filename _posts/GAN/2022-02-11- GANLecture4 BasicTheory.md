@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  GAN Lecture 4 (2018): Basic Theory 
+title:  GAN Lecture 4 (2018) Basic Theory 
 categories: GAN
 description:  GAN Lecture 4，李宏毅
 keywords: GAN
