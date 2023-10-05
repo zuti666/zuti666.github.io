@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  GAN Lecture 3 (2018): Unsupervised Conditional Generation
+title:  GAN Lecture 3 (2018) Unsupervised Conditional Generation
 categories: GAN
 description:  GAN Lecture 3，李宏毅
 keywords: GAN
