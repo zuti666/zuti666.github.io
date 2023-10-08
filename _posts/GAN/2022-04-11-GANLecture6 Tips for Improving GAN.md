@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  GAN Lecture 6 (2018):  GANLecture6 Tips for Improving GAN
+title:  GAN Lecture 6 (2018) GANLecture6 Tips for Improving GAN
 categories: GAN
 description:  GAN Lecture 6，李宏毅
 keywords: GAN
