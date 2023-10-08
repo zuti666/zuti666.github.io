@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  从Generator和Discrimator角度来看待GAN（李宏毅视频） Introduction to GAN （Hongyi Li）
+title:  Gan Lecture 1 (2018) 01  Introduction to GAN 
 categories: GAN
-description:  学习李宏毅老师的讲课视频，笔记，记录介绍GAN网络
+description:  学习李宏毅老师的讲课视频，笔记，记录介绍GAN网络 从Generator和Discrimator角度来看待GAN（李宏毅视频）
 keywords: GAN
 ---
 
@@ -14,6 +14,8 @@ keywords: GAN
 
 
 
+
+[了解生成对抗网络 （GAN） |作者：约瑟夫·罗卡 |迈向数据科学 (towardsdatascience.com)](
 
 # Generator
 
