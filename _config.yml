@@ -48,6 +48,7 @@ subscribe_rss: /feed.xml
 markdown: kramdown
 kramdown:
     input: GFM
+    math_engine: katex
 highlighter: rouge
 paginate: 8
 lsi: false
