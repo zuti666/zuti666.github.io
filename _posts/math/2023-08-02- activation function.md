@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  activation function
-categories: math machine learning
+title:  Activation function
+categories: math MachineLearning
 description: 
-keywords: math machine learning
+keywords: math MachineLearning
 
 
 
@@ -11,7 +11,7 @@ keywords: math machine learning
 
 
 
-# 激活函数 activation function
+# 激活函数 Activation function
 
 [TOC]
 
