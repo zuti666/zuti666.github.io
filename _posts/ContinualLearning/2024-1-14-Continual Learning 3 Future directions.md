@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  Continual Learning 3 Future directions
-categories: ContinualLearning 
+categories: [Continual Learning] 
 description: 
-keywords: ContinualLearning 
+keywords: [Continual Learning] 
 
 ---
 
