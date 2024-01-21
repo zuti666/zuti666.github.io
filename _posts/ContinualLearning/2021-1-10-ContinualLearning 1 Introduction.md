@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  Continual Learning 1 Introduction
-categories: GAN math
+categories: [Continual Learning]
 description: 
-keywords: GAN math
+keywords: [Continual Learning]
 ---
 
 # Continual Learning 1 Introduction
