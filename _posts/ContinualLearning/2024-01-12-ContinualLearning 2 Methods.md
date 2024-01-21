@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  Continual Learning 2 methods
-categories: ContinualLearning 
+categories: [Continual Learning] 
 description: 
-keywords: ContinualLearning 
+keywords: [Continual Learning] 
 ---
 
 # Continual Learning 2 Methods
