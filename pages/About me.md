@@ -30,7 +30,7 @@ permalink: /about me/
 
 [1]  Zekun Duan, Genjiu Xu, Xin Liu, Jiayuan Ma, <u>**Liying Wang**</u>, “Optimal confrontation position selecting games model and its application to one-on-one air combat”, *Defence Technology*, 2023.  
 
-[2]  Mengda Ji, Genjiu Xu, Zekun Duan, **<u>Liying Wang</u>**, Zesheng Li, Jianjun Ge, Mingqiang Li, "Cooperative Pursuit with Multiple Pursuers based on Deep Minimax Q-learning", \textit{Aerospace Science and Technology}, 2023. (TOP)
+[2]  Mengda Ji, Genjiu Xu, Zekun Duan, **<u>Liying Wang</u>**, Zesheng Li, Jianjun Ge, Mingqiang Li, "Cooperative Pursuit with Multiple Pursuers based on Deep Minimax Q-learning", *Aerospace Science and Technology*, 2023. (TOP)
 
 [3]  **<u>Liying Wang</u>**,Yi Liu, Zesheng Li, Xin Liu, Genjiu Xu, "Multi-UAV Cooperative Target Allocation Method Based on Auction Mechanism", *Journal of Command and Control*, 2023. [Accepted]
 
