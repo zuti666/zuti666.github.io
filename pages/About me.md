@@ -22,6 +22,7 @@ permalink: /about me/
 -  AI-enabled robots,  Autopilot
 - Generative Adversarial Networks (GAN)
 -  Counterfactual Regret Minimization (CFR)
+-  Countinual Learning
 
 ## Publications
 
