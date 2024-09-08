@@ -115,6 +115,7 @@ index:
 markdown: kramdown
 kramdown:
     input: GFM
+    math_engine: katex
 highlighter: rouge
 paginate: 10
 lsi: false
