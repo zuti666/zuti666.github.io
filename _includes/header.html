@@ -93,10 +93,11 @@
       gtag('config', '{{ site.google.analytics_id }}');
     </script>
     {% endif %}
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    {% unless page.no_latex %}
+<!--     {% unless page.no_latex %}
         {% include latex.html %}
-    {% endunless %}
+    {% endunless %} -->
 </head>
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
     <header class="site-header">
