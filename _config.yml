@@ -115,7 +115,7 @@ index:
 markdown: kramdown
 kramdown:
     input: GFM
-    math_engine: null
+    math_engine: MathJax
 highlighter: rouge
 paginate: 10
 lsi: false
