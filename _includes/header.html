@@ -93,6 +93,10 @@
       gtag('config', '{{ site.google.analytics_id }}');
     </script>
     {% endif %}
+
+    {% unless page.no_latex %}
+        {% include latex.html %}
+    {% endunless %}
 </head>
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
     <header class="site-header">
