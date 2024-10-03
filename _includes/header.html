@@ -175,6 +175,18 @@ MathJax.Hub.Config({
     {% endunless %} -->
 </head>
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
+<!--     测试效果-->
+<body>
+    <!-- 渲染 Markdown 转换的内容 -->
+    <div id="content">
+        {{ content }}
+    </div>
+
+    <!-- MathJax 公式渲染 -->
+    <script>
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("content")]);
+    </script>
+</body>
     <header class="site-header">
         <div class="container">
             <h1><a href="{{ site.url }}/" title="{{ site.title }}"><span class="octicon octicon-mark-github"></span> {{ site.title }}</a></h1>
