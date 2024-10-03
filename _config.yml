@@ -114,8 +114,11 @@ index:
 # ---------------- #
 markdown: kramdown
 kramdown:
-    input: GFM
-    math_engine: MathJax
+  math_engine: mathjax
+  syntax_highlighter_opts:
+    block:
+      disable: true
+
 highlighter: rouge
 paginate: 10
 lsi: false
