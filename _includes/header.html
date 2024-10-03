@@ -147,25 +147,25 @@ MathJax.Hub.Config({
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
-  <!-- 初始化 MathJax 和 marked.js 的脚本 -->
-  <script>
-    function parseMarkdown(text) {
-      return marked.parse(text);
-    }
+  <!-- 引入 MathJax 和 marked.js -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-    document.addEventListener("DOMContentLoaded", function () {
-      var div = document.getElementById('content');
-      
-      // 这里你可以加载你的 Markdown 内容，比如从文件中获取
-      var markdownContent = '**can** render: \\(J\'_\\theta = J_\\theta\\)';
-      
-      // 将 Markdown 转换为 HTML 并渲染到页面
-      div.innerHTML = parseMarkdown(markdownContent);
+<!-- 初始化 MathJax 和 marked.js 的脚本 -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var div = document.getElementById('content');
 
-      // 解析公式
-      MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
-    });
-  </script>
+    // 加载并解析 Markdown 内容
+    var markdownContent = '**can** render: \\(J\'_\\theta = J_\\theta\\)';
+    
+    // 将 Markdown 转换为 HTML 并插入到页面中
+    div.innerHTML = marked.parse(markdownContent);
+
+    // 渲染 MathJax 公式
+    MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
+  });
+</script>
     
 
 
@@ -176,17 +176,10 @@ MathJax.Hub.Config({
 </head>
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
 <!--     测试效果-->
-<body>
-    <!-- 渲染 Markdown 转换的内容 -->
-    <div id="content">
-        {{ content }}
-    </div>
-
-    <!-- MathJax 公式渲染 -->
-    <script>
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("content")]);
-    </script>
-</body>
+<!-- 渲染 Markdown 转换的内容 -->
+<div id="content">
+  {{ content | markdownify }}
+</div>
     <header class="site-header">
         <div class="container">
             <h1><a href="{{ site.url }}/" title="{{ site.title }}"><span class="octicon octicon-mark-github"></span> {{ site.title }}</a></h1>
