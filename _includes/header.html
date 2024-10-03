@@ -94,7 +94,7 @@
     </script>
     {% endif %}
     
-    <script type="text/x-mathjax-config">
+   <!-- <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
               skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -103,7 +103,24 @@
               processEscapes: true
     }
   });
-</script> <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+</script> <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS"
+        }
+    },
+    tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+    }
+});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 <!--     {% unless page.no_latex %}
         {% include latex.html %}
