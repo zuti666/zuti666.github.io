@@ -93,98 +93,12 @@
       gtag('config', '{{ site.google.analytics_id }}');
     </script>
     {% endif %}
-    
-   <!-- <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-              inlineMath: [['$', '$']],
-              displayMath: [['$$', '$$']],
-              processEscapes: true
-    }
-  });
-</script> <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    TeX: {
-        equationNumbers: {
-            autoNumber: "AMS"
-        }
-    },
-    tex2jax: {
-        inlineMath: [ ['$','$'] ],
-        displayMath: [ ['$$','$$'] ],
-        processEscapes: true,
-    }
-});
-</script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>  <!-- -->
-
-<!--<div id="content"></div>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    function parseMarkdown(text) {
-        var scripts = text.match(/<script[^>]*>([\s\S]*?)<\/script>/gi);
-        text = marked.parse(text);
-        return text.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, m => scripts.shift());
-    }
-    var div = document.getElementById('content');
-    var div2 = document.createElement('div');
-    div2.innerHTML = '**can** render: \\(J\'_\\theta = J_\\theta\\)';
-    MathJax.Hub.Queue(
-        ['Typeset', MathJax.Hub, div2],
-        function() {
-            div.innerHTML = parseMarkdown(div2.innerHTML);
-            div.querySelectorAll('.MathJax').forEach(e => e.remove());
-            MathJax.Hub.Typeset(div);
-        }
-    );
-</script> -->
-<!-- 引入 MathJax 和 marked.js -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-  <!-- 引入 MathJax 和 marked.js -->
-<!--<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> -->
-<!--<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-
-<!-- 初始化 MathJax 和 marked.js 的脚本 -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var div = document.getElementById('content');
-
-    // 加载并解析 Markdown 内容
-    var markdownContent = '**can** render: \\(J\'_\\theta = J_\\theta\\)';
-    
-    // 将 Markdown 转换为 HTML 并插入到页面中
-    div.innerHTML = marked.parse(markdownContent);
-
-    // 渲染 MathJax 公式
-    MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
-  });
-</script>
-    
-
-
-    
-<!--     {% unless page.no_latex %}
-        {% include latex.html %}
-    {% endunless %} -->
 </head>
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
-<!--     测试效果-->
-<!-- 渲染 Markdown 转换的内容 -->
-<div id="content">
-  {{ content | markdownify }}
-<<<<<<< HEAD
-</div> 
-</body>  -->
-=======
-</div>
->>>>>>> parent of f2b0566 (Update header.html)
+
+
+
     <header class="site-header">
         <div class="container">
             <h1><a href="{{ site.url }}/" title="{{ site.title }}"><span class="octicon octicon-mark-github"></span> {{ site.title }}</a></h1>
