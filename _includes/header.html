@@ -192,10 +192,14 @@ MathJax.Hub.Config({
         {% include latex.html %}
     {% endunless %} -->
 </head>
-
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  document.body.style.display = 'block';  // 页面加载完成后显示内容
+});
+</script>
     
 <!-- <body class="{{ page.class }}" data-mz="{{ page.class }}">  -->
-<!-- <body class="{{ page.class | default: 'default-class' }}" data-mz="{{ page.class | default: 'default-class' }}">  -->
+<body class="{{ page.class | default: 'default-class' }}" data-mz="{{ page.class | default: 'default-class' }}"> 
 <!--     测试效果-->
 <!-- 渲染 Markdown 转换的内容 -->
 <!--  <body>
