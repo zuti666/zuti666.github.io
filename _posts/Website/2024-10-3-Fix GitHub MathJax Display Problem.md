@@ -18,7 +18,8 @@ keywords: [Blog, MathJax]
 
 ### 参考链接
 
-[让MathJax更好地兼容谷歌翻译和延时加载 - 科学空间|Scientific Spaces (kexue.fm)](https://kexue.fm/archives/10320)
+
+[让MathJax更好地兼容谷歌翻译和延时加载 - 科学空间Scientific Spaces (kexue.fm)](https://kexue.fm/archives/10320)
 
 解决方法：
 
