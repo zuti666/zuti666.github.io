@@ -197,6 +197,11 @@ MathJax.Hub.Config({
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
 <!--     测试效果-->
 <!-- 渲染 Markdown 转换的内容 -->
+<!--  <body>
+<div id="content">
+  {{ content | markdownify }}
+</div> 
+</body>  -->
     <header class="site-header">
         <div class="container">
             <h1><a href="{{ site.url }}/" title="{{ site.title }}"><span class="octicon octicon-mark-github"></span> {{ site.title }}</a></h1>
