@@ -61,3 +61,29 @@ keywords: [Blog, MathJax]
 </p>
 ```
 
+## 代码高亮
+
+首先修改Jekyll项目的**_config.yml** 文件，修改其中的 highlighter 为：rouge
+
+```html
+# markdown 设置
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+```
+
+
+
+然后在_includes/header.html中添加以下代码 
+
+```html
+ <!-- 代码高亮 -->
+    <link rel="stylesheet" href="{{ assets_base_url }}/assets/css/posts/github.css">
+    <script src="{{ assets_base_url }}/assets/js/highlight.min.js"></script>
+```
+
+同时在对应的路径文件夹中添加对应的css 文件和 js 文件
+
+js 下载地址 ：  [Download a Custom Build - highlight.js (highlightjs.org)](https://highlightjs.org/download)
+
