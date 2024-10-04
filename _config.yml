@@ -116,9 +116,9 @@ markdown: kramdown
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    block:
-      disable: true
+  #syntax_highlighter_opts:
+    #block:
+      #disable: true
 
 # 高亮设置
 #highlighter: rouge
