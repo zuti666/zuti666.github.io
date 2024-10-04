@@ -192,21 +192,11 @@ MathJax.Hub.Config({
         {% include latex.html %}
     {% endunless %} -->
 </head>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-  document.body.style.display = 'block';  // 页面加载完成后显示内容
-});
-</script>
+
     
-<!-- <body class="{{ page.class }}" data-mz="{{ page.class }}">  -->
-<!--  <body class="{{ page.class | default: 'default-class' }}" data-mz="{{ page.class | default: 'default-class' }}"> -->
+<body class="{{ page.class }}" data-mz="{{ page.class }}">
 <!--     测试效果-->
 <!-- 渲染 Markdown 转换的内容 -->
-<!--  <body>
-<div id="content">
-  {{ content | markdownify }}
-</div> 
-    </body>  -->
     <header class="site-header">
         <div class="container">
             <h1><a href="{{ site.url }}/" title="{{ site.title }}"><span class="octicon octicon-mark-github"></span> {{ site.title }}</a></h1>
