@@ -115,14 +115,15 @@ index:
 markdown: kramdown
 kramdown:
   math_engine: mathjax
+  syntax_highlighter: rouge
   syntax_highlighter_opts:
     block:
       disable: true
-      
+
 # 高亮设置
-highlighter: rouge
+#highlighter: rouge
 # 代码高亮风格，支持的 theme 列表见 https://github.com/mzlogin/rouge-themes
-highlight_theme: base16.monokai
+#highlight_theme: base16.monokai
 
 paginate: 10
 lsi: false
