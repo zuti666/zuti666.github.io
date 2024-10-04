@@ -94,6 +94,25 @@
     </script>
     {% endif %}
 
+     <!-- 添加latex设置-->
+     <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']]   },
+          TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}, extensions: ["AMSmath.js", "AMSsymbols.js", "extpfeil.js"]},
+          "HTML-CSS": {linebreaks: {automatic: true, width: "95% container"}, noReflows: false, availableFonts: ["tex"], styles: {".MathJax_Display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"}}},
+          "CommonHTML": {linebreaks: {automatic: true, width: "95% container"}, noReflows: false, availableFonts: ["tex"], styles: {".MJXc-display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"}}},
+          "SVG": {linebreaks: {automatic: true, width: "95% container"}, styles: {".MathJax_SVG_Display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"}}},
+          "PreviewHTML": {linebreaks: {automatic: true, width: "95% container"}}
+      });
+      MathJax.Hub.Queue(function() {
+          document.querySelectorAll('.MathJax').forEach(element => element.classList.add('notranslate'));
+          document.querySelectorAll('a.title-link, p.summary').forEach(element => element.classList.remove('notranslate'));
+      });
+  </script>
+  <script src="/static/MathJax-2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- latex设置完成-->
+
+
 </head>
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
 
