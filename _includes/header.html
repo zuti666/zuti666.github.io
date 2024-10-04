@@ -104,7 +104,7 @@
     }
   });
 </script> <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
-
+<!--
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     TeX: {
@@ -120,9 +120,29 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>  <!-- -->
+</script>   
+    -->
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']]   },
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}, extensions: ["AMSmath.js", "AMSsymbols.js", "extpfeil.js"]},
+        "HTML-CSS": {linebreaks: {automatic: true, width: "95% container"}, noReflows: false, availableFonts: ["tex"], styles: {".MathJax_Display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"}}},
+        "CommonHTML": {linebreaks: {automatic: true, width: "95% container"}, noReflows: false, availableFonts: ["tex"], styles: {".MJXc-display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"}}},
+        "SVG": {linebreaks: {automatic: true, width: "95% container"}, styles: {".MathJax_SVG_Display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"}}},
+        "PreviewHTML": {linebreaks: {automatic: true, width: "95% container"}}
+    });
+    MathJax.Hub.Queue(function() {
+        document.querySelectorAll('.MathJax').forEach(element => element.classList.add('notranslate'));
+        document.querySelectorAll('a.title-link, p.summary').forEach(element => element.classList.remove('notranslate'));
+    });
+</script>
+<script src="/static/MathJax-2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<!--<div id="content"></div>
+    
+
+<!--
+    <div id="content"></div>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
@@ -142,17 +162,18 @@ MathJax.Hub.Config({
             MathJax.Hub.Typeset(div);
         }
     );
-</script> -->
+</script> 
+    -->
 <!-- 引入 MathJax 和 marked.js -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!--  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+-->
   <!-- 引入 MathJax 和 marked.js -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 <!-- 初始化 MathJax 和 marked.js 的脚本 -->
-<script>
+<!-- <script>
   document.addEventListener("DOMContentLoaded", function () {
     var div = document.getElementById('content');
 
@@ -165,21 +186,22 @@ MathJax.Hub.Config({
     // 渲染 MathJax 公式
     MathJax.Hub.Queue(['Typeset', MathJax.Hub, div]);
   });
-</script>
-    
-
-
+</script> -->
     
 <!--     {% unless page.no_latex %}
         {% include latex.html %}
     {% endunless %} -->
 </head>
+
+    
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
 <!--     测试效果-->
 <!-- 渲染 Markdown 转换的内容 -->
+<!--  <body>
 <div id="content">
   {{ content | markdownify }}
-</div>
+</div> 
+    </body>  -->
     <header class="site-header">
         <div class="container">
             <h1><a href="{{ site.url }}/" title="{{ site.title }}"><span class="octicon octicon-mark-github"></span> {{ site.title }}</a></h1>
