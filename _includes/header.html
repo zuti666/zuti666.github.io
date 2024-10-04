@@ -97,12 +97,40 @@
      <!-- 添加latex设置-->
      <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
-          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']]   },
-          TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}, extensions: ["AMSmath.js", "AMSsymbols.js", "extpfeil.js"]},
-          "HTML-CSS": {linebreaks: {automatic: true, width: "95% container"}, noReflows: false, availableFonts: ["tex"], styles: {".MathJax_Display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"}}},
-          "CommonHTML": {linebreaks: {automatic: true, width: "95% container"}, noReflows: false, availableFonts: ["tex"], styles: {".MJXc-display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"}}},
-          "SVG": {linebreaks: {automatic: true, width: "95% container"}, styles: {".MathJax_SVG_Display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"}}},
-          "PreviewHTML": {linebreaks: {automatic: true, width: "95% container"}}
+          tex2jax: {  
+            inlineMath: [['$','$'], ['\\(','\\)']], 
+            displayMath: [['$$','$$'], ['\\[','\\]']]   
+          },
+          TeX: {
+            equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}, 
+            extensions: ["AMSmath.js", "AMSsymbols.js", "extpfeil.js"]
+          },
+          "HTML-CSS": {
+            linebreaks: {automatic: true, width: "95% container"}, 
+            noReflows: false, availableFonts: ["tex"], 
+            styles: {
+              ".MathJax_Display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"},
+              ".MathJax .math": {color: "blue!important" /* 设置行内公式颜色为蓝色 */ }
+            }
+          },
+          "CommonHTML": {
+            linebreaks: {automatic: true, width: "95% container"}, 
+            noReflows: false, availableFonts: ["tex"], 
+            styles: {
+              ".MJXc-display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"},
+              ".MJXc-script": {color: "blue!important" /* 设置行内公式颜色为蓝色 */ }
+            }
+          },
+          "SVG": {
+            linebreaks: {automatic: true, width: "95% container"}, 
+            styles: {
+              ".MathJax_SVG_Display": {margin: "1em 0em 0.7em;", display: "inline-block!important;"},
+              ".MJXc-script": {color: "blue!important" /* 设置行内公式颜色为蓝色 */ }
+            }
+          },
+          "PreviewHTML": {
+            linebreaks: {automatic: true, width: "95% container"}
+          }
       });
       MathJax.Hub.Queue(function() {
           document.querySelectorAll('.MathJax').forEach(element => element.classList.add('notranslate'));
