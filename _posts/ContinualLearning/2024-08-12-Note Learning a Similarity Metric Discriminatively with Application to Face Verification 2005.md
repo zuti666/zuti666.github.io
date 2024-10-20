@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  Note Learning a Similarity Metric Discriminatively with Application to Face Verification 2005
-categories: [Continual Learning, Note_paper] 
+title:  Paper Reading Note1---Learning a Similarity Metric Discriminatively with Application to Face Verification 2005
+categories: [Continual Learning, Paper Reading Note] 
 description: 
-keywords: [Continual Learning, Note_paper] 
+keywords: [Continual Learning, Paper Reading Note] 
 ---
 
 

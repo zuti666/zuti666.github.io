@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  Paper Reading1 SDC-ADC-LDC
-categories: [Paper Reading, Continual Learning ] 
-description: Reading1 SDC-ADC-LDC
-keywords: [Paper Reading, Continual Learning ] 
+title:  Paper Reading Note2---SDC-ADC-LDC
+categories: [Paper Reading Note, Continual Learning ] 
+description: Paper Reading Note2 SDC-ADC-LDC
+keywords: [Paper Reading Note, Continual Learning ] 
 
 ---
 
