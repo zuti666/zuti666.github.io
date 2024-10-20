@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Screen 的使用
-categories: [Linux, Screen ] 
+categories: [Linux ] 
 description: Linux中的Screen 使用
 keywords: [Liunx, Screen ] 
 ---
