@@ -2,13 +2,13 @@
 layout: post
 title:  Screen 的使用
 categories: [Linux ] 
-description: Linux中的Screen 使用
-keywords: [Liunx, Screen ] 
+description: Linux中的screen的常见命令
+keywords: [Linux, screen ] 
 ---
 
 
 
-# Screen 的使用记录
+# Linux中的screen的常见命令
 
 为什么要使用 screen 
 
