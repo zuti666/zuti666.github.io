@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Paper Reading 3 Continual Learning in Image Retrieval-- My summary 
-categories: [Paper Reading, Continual Learning ] 
+categories: [Paper Reading, Continual Learning, Image Retrieval  ] 
 description: 
 keywords: [Paper Reading, Continual Learning, Image Retrieval ] 
 

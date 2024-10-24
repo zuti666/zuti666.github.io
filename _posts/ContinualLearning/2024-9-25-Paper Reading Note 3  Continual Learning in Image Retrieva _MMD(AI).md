@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  Paper Reading Note3---Continual Learning in Image Retrieval AI  Summary 
-categories: [Paper Reading Note, Continual Learning ] 
+title:  Paper Reading Note3---Continual Learning in Image Retrieval --MMD(AI) 
+categories: [Paper Reading Note, Continual Learning, Image Retrieval ] 
 description: Paper Reading Note3---Continual Learning in Image Retrieval AI  Summary 
-keywords: [Paper Reading Note, Continual Learning, Image Retrieval ] 
+keywords: [Paper Reading Note, Continual Learning, Image Retrieval, AI Summary ] 
 
 ---
 
