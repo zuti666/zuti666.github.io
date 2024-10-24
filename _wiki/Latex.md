@@ -1,0 +1,54 @@
+---
+layout: wiki
+title: Latex 使用参考
+categories: Linux
+description: Latex 使用参考
+keywords: Latex
+---
+
+
+
+
+
+# Latex  使用参考
+
+
+
+## latex 常用命令参考网址
+
+<a href="https://blog.inkuang.com/2019/511/" target="_blank">latex 常用命令</a>
+
+- **本文链接：** https://blog.inkuang.com/2019/511/
+- **版权声明：** 本博客所有文章除特别声明外，均采用 [BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议。转载请注明出处！
+- **联系方式：** 本博客不提供评论功能，如需联系博主，请使用 [E-Mail](mailto:blog@inkuang.com) 或 [Telegram](https://t.me/inkuang) ！
+
+
+
+
+
+## latex 文档查看 
+
+<a href="https://zuti666.github.io/resources/symbols.pdf" target="_blank">symbols.PDF</a>
+
+
+[symbols.PDF](https://zuti666.github.io/resources/symbols.pdf)
+
+
+
+## latex 矩阵
+
+
+
+[如何用latex编写矩阵（包括各类复杂、大型矩阵）？ - 知乎](https://zhuanlan.zhihu.com/p/266267223#:~:text=latex作为专业的数学排版工具，自然也是为矩阵设计了专门的关键词的。 直接用begin {matrix},end {matrix} 也可以实现上述的排列。)
+
+
+
+##  对齐与排版
+
+[LaTex 关于优化问题公式排版及算法格式排版例子_latex约束优化问题怎么打-CSDN博客](https://blog.csdn.net/weixin_43835470/article/details/105250995)
+
+
+
+## 算法流程伪代码
+
+[LeTeX 写算法流程【algorithm,algorithmic】【algorithm, algorithmicx, algpseudocode】_latex写算法流程-CSDN博客](https://blog.csdn.net/frx_bwcx/article/details/120641816)
