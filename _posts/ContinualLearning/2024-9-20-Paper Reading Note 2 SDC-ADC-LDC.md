@@ -8,7 +8,7 @@ keywords: [Paper Reading Note, Continual Learning ]
 ---
 
 
-# Paper Reading1 SDC-ADC-LDC
+# Paper Reading Note2---SDC-ADC-LDC
 
 
 论文阅读笔记，给大家带来3篇论文的阅读，都是来自LAMP组，三篇文章的思想也都很接近，是基于 特征空间的漂移进行的工作。
