@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  Paper Reading 3  Continual Learning in Image Retrieval AI  Summary 
-categories: [Paper Reading, Continual Learning ] 
-description: 
-keywords: [Paper Reading, Continual Learning, Image Retrieval ] 
+title:  Paper Reading Note3---Continual Learning in Image Retrieval AI  Summary 
+categories: [Paper Reading Note, Continual Learning ] 
+description: Paper Reading Note2 SDC-ADC-LDC
+keywords: [Paper Reading Note, Continual Learning, Image Retrieval ] 
 
 ---
 
