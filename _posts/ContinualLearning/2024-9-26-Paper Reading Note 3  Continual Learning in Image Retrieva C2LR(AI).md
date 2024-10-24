@@ -23,7 +23,24 @@ keywords: [Paper Reading Note, Continual Learning, Image Retrieval, AI Summary ]
 
 ### 目标
 
-目标是设计一个训练过程来学习模型 $ \phi_t $，使得经过该模型变换的任何查询图像都可以通过某种距离函数 $ \text{dist} : \mathbb{R}^d \times \mathbb{R}^d \rightarrow \mathbb{R}^+ $ 执行视觉搜索，从而识别出与查询特征 $F_Q$ 最近的特征 $F_G$，而不会遗忘先前的特征表示，也无需重新计算 $F_G = { f \in \mathbb{R}^d | f = \phi_t(x), \forall x \in I_G }$（即不需要重新索引）。如果这一点成立，那么生成的表示 $ \phi_t $ 就被认为与 $ \phi_k $ 是终身兼容的。CL2R 问题的主要挑战在于同时缓解灾难性遗忘并学习一种与先前模型兼容的表示。
+目标是设计一个训练过程来学习模型 $ \phi_t $，使得经过该模型变换的任何查询图像都可以通过某种距离函数 
+
+
+$$
+ \text{dist} : \mathbb{R}^d \times \mathbb{R}^d \rightarrow \mathbb{R}^+ 
+ $$ 
+
+执行视觉搜索，从而识别出与查询特征 $F_Q$ 最近的特征 $F_G$，而不会遗忘先前的特征表示，也无需重新计算 
+
+
+$$
+F_G = { f \in \mathbb{R}^d | f = \phi_t(x), \forall x \in I_G }
+$$
+
+
+（即不需要重新索引）。
+
+如果这一点成立，那么生成的表示 $ \phi_t $ 就被认为与 $ \phi_k $ 是终身兼容的。CL2R 问题的主要挑战在于同时缓解灾难性遗忘并学习一种与先前模型兼容的表示。
 
 ### 创新点
 
