@@ -36,7 +36,7 @@ keywords: [Paper Reading Note, Continual Learning, Image Retrieval, AI Summary ]
 
 
 $$
-d(\phi_{\text{new}}(x_i), \phi_{\text{old}}(x_j)) \geq d(\phi_{\text{old}}(x_i), \phi_{\text{old}}(x_j)), \quad \forall (i, j) \in \{(i, j) | y_i \neq y_j \}
+d(\phi_{\text{new}}(x_i), \phi_{\text{old}}(x_j)) \geq d(\phi_{\text{old}}(x_i), \phi_{\text{old}}(x_j)), \quad \forall (i, j) \in \{(i, j)  \vert y_i \neq y_j \}
 $$
 
 
@@ -49,7 +49,8 @@ $$
 
 
 $$
-d(\phi_{\text{new}}(x_i), \phi_{\text{old}}(x_j)) \leq d(\phi_{\text{old}}(x_i), \phi_{\text{old}}(x_j)), \quad \forall (i, j) \in \{(i, j) | y_i = y_j \}
+d(\phi_{\text{new}}(x_i), \phi_{\text{old}}(x_j)) \leq d(\phi_{\text{old}}(x_i), \phi_{\text{old}}(x_j)), \quad \forall (i, j) \in 
+\{ (i, j) \vert y_i = y_j \}
 $$
 
 
@@ -78,7 +79,8 @@ $$
 
 $$
 L_{BCT}(w_c, w_\phi; T_{new}, T_{BCT})
-= L(w_c, w_\phi; T_{new}) + \lambda L(w_c^{old}, w_\phi; T_{BCT})
+= 
+L(w_c, w_\phi; T_{new}) + \lambda L(w_c^{old}, w_\phi; T_{BCT})
 $$
 
 
@@ -147,7 +149,7 @@ Continual Learning for Visual Search with Backward Consistent Feature Embedding
 
 **技术细节：**  
 
-旧类的特征被提取为 $g_i = f_i\{G_i\} |^j_{i=1}$
+旧类的特征被提取为 $g_i = f_i\{G_i\}  \vert^{j_{i=1}}$
 
 目标是在当前的session $j+1$ ，训练模型$f_{j+1}$从$G_{j+1}(\mathbf{g}_{j+1}=f_{j+1}\{G_{j+1}\})$ 中提取特征，且保持之前的特征$\mathbf{g}_{1:j}$保持不变
 
@@ -174,7 +176,7 @@ $\xi$表示 期望运算符
 
 
 $$
-L^{d_I}_{ \{1:j\};j+1} = \sum_{c \in \Pi_{j+1}} \sum_{x_i \in c} \|f_{j+1}(x_i) - E_c\|_2^2,
+L^{d_I}_{ \{1:j\};j+1} = \sum_{c \in \Pi_{j+1}} \sum_{x_i \in c} \Vert f_{j+1}(x_i) - E_c \Vert,
 $$
 
 
@@ -185,7 +187,7 @@ $\Pi_{j+1} = \cup_{i=1}^j C(i) \cap C(j+1)$ 表示当前session $j+1$ 与所有�
 
 $x_i$表示当前session $(j+1)$ 中属于类别$c$的数据
 
-**整体大概是说 在第 $j+1$的session 中属于类$c$ 的样本$x_i$ ,它的特征提取结果$f_{j+1}$ 要与 这个类的特征均值 $E_c$ 的差别  **
+**整体大概是说 在第 $j+1$ 的session 中属于类$c$ 的样本$x_i$ ,它的特征提取结果$f_{j+1}$ 要与 这个类的特征均值 $E_c$ 的差别  **
 
 也就是同一类别在不同session 下要保持特征一致性
 
@@ -194,7 +196,7 @@ $x_i$表示当前session $(j+1)$ 中属于类别$c$的数据
 
 
 $$
-L^{d_o}_{{\{1:j\};j+1}} = \sum_{c \in \Gamma_{j+1}} \sum_{\tilde{x}_i \in c} \|f_{j+1}(\tilde{x}_i) - E_c\|_2^2,
+L^{d_o}_{{\{1:j\};j+1}} = \sum_{c \in \Gamma_{j+1}} \sum_{\tilde{x}_i \in c} \Vert f_{j+1}(\tilde{x}_i) - E_c \Vert,
 $$
 
 
@@ -240,14 +242,14 @@ $$
 
 
 $$
-L_{m_{j;j+1}} = \frac{1}{n} \sum_{x_a} \left[ d_{j+1}^j(x_a, x_a) - d_{j+1}^j(x_a, x_n) + m \right]_+
+L_{m_{j:j+1}} = \frac{1}{n} \sum_{x_a}  {\left[ d_{j+1}^j(x_a, x_a) - d_{j+1}^j(x_a, x_n) + m \right]}_{+}
 $$
 
 
 
 其中，
 
-$d_{j+1}^j(x, y) = \|f_{j+1}(x) - f_j(y)\|_2^2$，
+$d_{j+1}^j(x, y) = \Vert f_{j+1}(x) - f_j(y) \Vert $，
 
 $m$ 是预设的边界（默认为 0.1），
 
