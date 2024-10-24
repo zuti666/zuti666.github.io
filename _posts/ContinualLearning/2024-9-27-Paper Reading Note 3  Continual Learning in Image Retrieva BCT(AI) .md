@@ -214,7 +214,7 @@ $\bar{x_i}$ 表示  replay data 中的数据
 
 
 $$
-L^d_{\{1:j\};j+1} = \frac{1}{n} \left( L^{d_I}_{{\{1:j\};j+1}} + L^{d_o}_{{\{1:j\};j+1}} \right)
+L^d_{ \{1:j\};j+1} = \frac{1}{n} \left( L^{d_I}_{\{1:j\};j+1} + L^{d_o}_{\{1:j\};j+1} \right)
 $$
 
 
