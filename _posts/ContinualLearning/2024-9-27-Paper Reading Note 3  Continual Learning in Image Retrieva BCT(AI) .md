@@ -196,7 +196,7 @@ $x_i$表示当前session $(j+1)$ 中属于类别$c$的数据
 
 
 $$
-L^{d_o}_{{\{1:j\};j+1}} = \sum_{c \in \Gamma_{j+1}} \sum_{\tilde{x}_i \in c} \Vert f_{j+1}(\tilde{x}_i) - E_c \Vert,
+L^{d_o}_{ \{1:j \};j+1} = \sum_{c \in \Gamma_{j+1}} \sum_{\tilde{x}_i \in c} \Vert f_{j+1}(\tilde{x}_i) - E_c \Vert,
 $$
 
 
