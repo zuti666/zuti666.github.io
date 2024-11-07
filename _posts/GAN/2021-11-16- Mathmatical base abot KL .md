@@ -188,6 +188,8 @@ $P_G(x;\theta)$ 是某一具体的分布（比如简单的高斯分布），而 
 > 即： $ \theta^* = arg \ max_\theta L=arg \ max_\theta \Pi_{i=1}^m P_G(x^i;\theta)$
 
 咱们继续推导：
+
+
 $$
 \begin{aligned}
 \theta^*  
