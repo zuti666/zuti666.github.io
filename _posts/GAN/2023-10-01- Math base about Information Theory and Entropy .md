@@ -19,11 +19,19 @@ keywords: GAN math
 
 # 信息论——信息量、熵、相对熵、交叉熵、JS Divergence ,Wasserstein distance
 
+阅读链接
+
+https://www.cnblogs.com/kyrieng/p/8694705.html
+
+
+
 问题
 
 比较模型，同一下模型，可以比较
 
 如何衡量和比较不同模型
+
+
 
 ## 熵
 
