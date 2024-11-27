@@ -102,9 +102,8 @@ comments: false
                 <h3 class="repo-list-name">
                   <a href="{{ site.url }}{{ post.url }}"><span class="top-most-flag">[置顶]</span>{{ post.title }}</a>
                 </h3>
-                <post class="description"></post>
                 <p class="repo-list-description">
-                {{  post.description | default: "No description available." | strip_html | strip | truncate: 150 }}
+                {{  post.excerpt | default: "No description available." | strip_html | strip | truncate: 150 }}
                 </p>
                 <p class="repo-list-meta">
                 <span class="meta-info">
