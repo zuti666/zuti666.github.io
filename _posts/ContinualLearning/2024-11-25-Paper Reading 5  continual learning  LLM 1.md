@@ -7,18 +7,10 @@ keywords: [Paper Reading, Continual Learning, LLM ]
 
 ---
 
-
-
 # Paper Reading 5   Continual learning LLM1
 
-
-
-
-
 # 论文信息
-
 Investigating Forgetting in Pre-Trained Representations Through Continual Learning
-
 
 
 # AI 概括
