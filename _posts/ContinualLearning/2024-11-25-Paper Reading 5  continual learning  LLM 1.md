@@ -2,7 +2,7 @@
 layout: post
 title:  Paper Reading 5 Continual learning LLM1
 categories: [Paper Reading, Continual Learning, LLM ] 
-description: 
+description: [Investigating Forgetting in Pre-Trained Representations Through Continual Learning]
 keywords: [Paper Reading, Continual Learning, LLM ] 
 
 ---

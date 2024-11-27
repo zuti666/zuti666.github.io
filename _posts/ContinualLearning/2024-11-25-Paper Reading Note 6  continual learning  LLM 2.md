@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  Paper Reading 5 Continual learning LLM1
+title:  Paper Reading 6 Continual learning LLM2
 categories: [Paper Reading, Continual Learning, LLM ] 
-description: 
+description:  [Continual Learning of Large Language Models: A Comprehensive Survey]
 keywords: [Paper Reading, Continual Learning, LLM ] 
 
 ---
