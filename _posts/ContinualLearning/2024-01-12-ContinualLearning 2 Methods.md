@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  Continual Learning 2 methods
-categories: [Continual Learning] 
+categories: [Continual Learning, video class, survey ] 
 description: 
-keywords: [Continual Learning] 
+keywords: [Continual Learning, video class,survey ] 
 ---
 
 # Continual Learning 2 Methods

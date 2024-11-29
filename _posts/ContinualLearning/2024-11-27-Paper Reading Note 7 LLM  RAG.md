@@ -1,20 +1,18 @@
 ---
 layout: post
-title:  Paper Reading 7 LLM RAG
-categories: [Paper Reading, RAG, LLM ] 
+title:  Paper Reading 7 LLM-RAG(Retrieval-Augmented Generation)
+categories: [Paper Reading, RAG, LLM, survey ] 
 description:  [Retrieval-Augmented Generation for Large  Language Models: A Survey]
-keywords: [Paper Reading, RAG, LLM ] 
+keywords: [Paper Reading, RAG, survey ] 
 ---
 
 
 
-# Paper Reading 7  LLM- RAG
+# Paper Reading 7  LLM- RAG(Retrieval-Augmented Generation)
 
 # 论文信息
 
 Retrieval-Augmented Generation for Large  Language Models: A Survey
-
-
 
 
 
@@ -359,7 +357,6 @@ $$
   Rejection = \frac{\text{无答案问题中生成“无答案”的数量}}{\text{总无答案问题数量}}
   $$
   
-
 - **含义**：评估系统在无答案场景下保持沉默的能力。
 
 - **解释**：确保模型在无法回答时不生成误导性内容。
