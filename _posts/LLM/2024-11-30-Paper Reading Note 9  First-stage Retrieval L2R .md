@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  Paper Reading 9 LLM- First-stage Retrieval L2R
-categories: [Paper Reading, IR, LLM, survey ] 
+categories: [Paper Reading, IR, LLM, Continual learning] 
 description:  [L2R: Lifelong Learning for First-stage Retrieval with Backward-Compatible Representations]
-keywords: [Paper Reading, IR, LLM, survey ] 
+keywords: [Paper Reading, IR, LLM, First-stage Retrieval, Continual learning, Data Distribution Drift, BCT] 
 ---
 
 
@@ -417,6 +417,7 @@ L2R 使用记忆机制缓解分布漂移的影响：
 - 公式
   
   
+  
   $$
   \begin{aligned}
   L_t^{rank} &= -\log \frac{\exp(<E^q_t(q), \mathbf{d}^+_q>)}{Z} \\
@@ -447,16 +448,13 @@ L2R 使用记忆机制缓解分布漂移的影响：
   
 
   $$
-  L^{{align_e}}_t = \sum_{d \in\left\{d_q^{+}\right\} \cup D_q^{\text {mem }}}
-  
-  
-  \frac{1}{2} \|E_d^t(d) - \mathbf{d}\|^2
+  L^{{align_e}}_{t} = \sum_{d \in\left\{d_q^{+}\right\} \cup D_q^{\text {mem}}} \frac{1}{2} \Vert E_d^t(d) - \mathbf{d}\Vert^2
   $$
-
+  
    
-
+  
   其中 $E_d^t$ 是新模型生成的嵌入，$\mathbf{d} $是旧文档的固定嵌入。
-
+  
 - 优点
 
   - 能够维持嵌入的一致性。
@@ -485,7 +483,7 @@ L2R 使用记忆机制缓解分布漂移的影响：
   \begin{aligned}
   L^{{align-r}}_t
   
-  &= \text{KL}\left(p(D|q) \| p'(D|q)\right) \\
+  &= \text{KL}\left(p(D\vert q) \vert p'(D|q)\right) \\
   &\text { where } D=\left\{d_q^{+}\right\} \cup D_q^{\text {mem }} \cup D_q^{\text {new }} \text {, and }\\
   &\begin{aligned}
   & p(d \mid q)=\left\{\begin{array}{ll}
@@ -520,9 +518,9 @@ L2R 使用记忆机制缓解分布漂移的影响：
 
 $$
 \begin{aligned}
-L_t^{\text {com }}=L_t^{\text {rank }}+\lambda \cdot L_t^{\text {align }},\\
-\text{where } L_t^{\text {align } } \text{ is either } L_t^{{align_e }}
-\text{or} L_t^{{align_r }}
+L_t^{\text{com}}=L_t^{\text {rank}}+\lambda \cdot L_t^{\text{align}},\\
+\text{where} L_t^{\text{align} } \text{is either} L_t^{{align_e }}
+\text{or } L_t^{{align_r }}
 \end{aligned}
 $$
 
@@ -606,9 +604,9 @@ $$
 
 - PSS 衡量候选文档 $d$ 与查询 $q$ 的相关性是否显著低于正样本$d^+_q$。
 
-- 如果符号是正，即 $\mathbf{d}^+_{\parallel q} - \mathbf{d}_{\parallel q}$大于0，说明候选文档 $d$ 在 $q$上的投影$\mathbf{d}_{\parallel q}$ 在 $\mathbf{d}^+_{\parallel q}$的（$q$方向的负）左侧，代表与 $\mathbf{d}^+_{\parallel q}$ 没有那么相关的数据
+- 如果符号是正，即 $\mathbf{d}^+_{\parallel q} - \mathbf{d}_{\parallel q}$ 大于0，说明候选文档 $d$ 在 $q$ 上的投影  $\mathbf{d}_{\parallel q}$ 在 $\mathbf{d}^+_{\parallel q}$ 的（$q$方向的负）左侧，代表与 $\mathbf{d}^+_{\parallel q}$ 没有那么相关的数据
 
-- 如果符号是负，即 $\mathbf{d}^+_{\parallel q} - \mathbf{d}_{\parallel q}$小于0， 说明候选文档 $d$ 在 $q$上的投影$\mathbf{d}_{\parallel q}$ 在 $\mathbf{d}^+_{\parallel q}$的右（$q$方向的正侧）侧，选文档 $d$ 和正样本文档 $\mathbf{d}_{\parallel}^{+}$ 在 查询$q$上的投影方向是一致的
+- 如果符号是负，即 $\mathbf{d}^+_{\parallel q} - \mathbf{d}_{\parallel q}$ 小于0， 说明候选文档 $d$ 在 $q$上的投影 $\mathbf{d}_{\parallel q}$ 在 $\mathbf{d}^+_{\parallel q}$ 的右（ $q$ 方向的正侧）侧，选文档 $d$ 和正样本文档  $\mathbf{d}_{\parallel}^{+}$ 在 查询 $q$ 上的投影方向是一致的
 
 - 如果数值越大，说明候选文档 $d$  和正样本文档 $\mathbf{d}_{\parallel}^{+}$ 的距离越远
 
