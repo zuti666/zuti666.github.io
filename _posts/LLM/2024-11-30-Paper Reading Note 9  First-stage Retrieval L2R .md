@@ -415,6 +415,8 @@ L2R 使用记忆机制缓解分布漂移的影响：
   定义一个基本的兼容性对齐目标 $L_{\text{rank}}$，确保新模型生成的嵌入与旧模型生成的嵌入保持一致。
 
 - 公式
+  
+  
   $$
   \begin{aligned}
   L_t^{rank} &= -\log \frac{\exp(<E^q_t(q), \mathbf{d}^+_q>)}{Z} \\
@@ -426,9 +428,10 @@ L2R 使用记忆机制缓解分布漂移的影响：
   \end{aligned}
   $$
   
-
-- 问题
-
+  
+  
+  问题
+  
   - 简单地固定旧嵌入可能导致新模型过度约束，难以有效学习新数据分布，从而影响新数据的检索性能。
 
 ------
@@ -442,15 +445,17 @@ L2R 使用记忆机制缓解分布漂移的影响：
 - **公式**： 
 
   
+
   $$
   L^{{align_e}}_t = \sum_{d \in\left\{d_q^{+}\right\} \cup D_q^{\text {mem }}}
   
   
   \frac{1}{2} \|E_d^t(d) - \mathbf{d}\|^2
   $$
-  
 
-   其中 $E_d^t$ 是新模型生成的嵌入，$\mathbf{d} $是旧文档的固定嵌入。
+   
+
+  其中 $E_d^t$ 是新模型生成的嵌入，$\mathbf{d} $是旧文档的固定嵌入。
 
 - 优点
 
@@ -474,6 +479,7 @@ L2R 使用记忆机制缓解分布漂移的影响：
 - 公式
 
   
+
   $$
   \begin{equation}
   \begin{aligned}
@@ -491,12 +497,13 @@ L2R 使用记忆机制缓解分布漂移的影响：
   \end{aligned}
   \end{equation}
   $$
+
   
 
   其中：
 
-  - $p(D|q)$：旧模型生成的排序分布。
-  - $p'(D|q)$：新模型基于当前嵌入生成的排序分布。
+  - $p(D \vert q)$：旧模型生成的排序分布。
+  - $p'(D \vert q)$：新模型基于当前嵌入生成的排序分布。
 
 - 优点
 
@@ -510,6 +517,7 @@ L2R 使用记忆机制缓解分布漂移的影响：
 ## 文中所用整体损失函数
 
 
+
 $$
 \begin{aligned}
 L_t^{\text {com }}=L_t^{\text {rank }}+\lambda \cdot L_t^{\text {align }},\\
@@ -517,6 +525,8 @@ L_t^{\text {com }}=L_t^{\text {rank }}+\lambda \cdot L_t^{\text {align }},\\
 \text{or} L_t^{{align_r }}
 \end{aligned}
 $$
+
+
 
 
 ### **实验验证与效果**
