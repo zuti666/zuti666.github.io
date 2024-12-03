@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Paper Reading 7 LLM-RAG(Retrieval-Augmented Generation)
+title:  Paper Reading 7 LLM-RAG(Retrieval-Augmented Generation)-survey
 categories: [Paper Reading, RAG, LLM, survey ] 
 description:  [Retrieval-Augmented Generation for Large  Language Models: A Survey]
 keywords: [Paper Reading, RAG, survey ] 
@@ -8,7 +8,7 @@ keywords: [Paper Reading, RAG, survey ]
 
 
 
-# Paper Reading 7  LLM- RAG(Retrieval-Augmented Generation)
+# Paper Reading 7  LLM- RAG(Retrieval-Augmented Generation)-survey
 
 # 论文信息
 
@@ -720,3 +720,12 @@ RAG 技术被划分为**检索（Retrieval）**、**生成（Generation）\**和
    - 模块化 RAG 完全覆盖检索、生成、增强三阶段，适应最广。
 
 如果需要深入讨论某一范式或代表方法的实现细节，请进一步说明！
+
+
+
+# 个人理解
+
+## 相关笔记
+
+[前沿重器[41\] | 综述-面向大模型的检索增强生成（RAG）](https://mp.weixin.qq.com/s?__biz=MzIzMzYwNzY2NQ==&mid=2247489372&idx=1&sn=8fc154edac26943a447d596a4e697ede&chksm=e8824fc2dff5c6d44d8e7a1be4cc1b472e8cdd8e8484bf02d00f78ab708e6340f6f90243cb0c&scene=21#wechat_redirect)
+
