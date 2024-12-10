@@ -6,6 +6,14 @@ description: Git 常用操作记录。
 keywords: Git, 版本控制
 ---
 
+## Git 删除缩减本地仓库大小
+
+[5 个 Git 仓库优化命令：清理、压缩与性能提升技巧 - 阿小信的博客](https://blog.axiaoxin.com/post/git-gc-prune-clean/)
+
+
+
+[Git命令总结(缩减GitHub仓库大小,彻底清除垃圾文件) - 简书](https://www.jianshu.com/p/6217949e87a3)
+
 ## 常用命令
 
 | 功能                      | 命令                                  |
@@ -466,3 +474,4 @@ git config --global core.ignorecase false
 ```
 
 或者使用 `git mv oldname newname` 也是可以的。
+

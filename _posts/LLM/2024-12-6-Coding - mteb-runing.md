@@ -553,7 +553,7 @@ static PyObject* RelevanceEvaluator_evaluate(RelevanceEvaluator* self, PyObject*
 >       DCG@k = \sum_{i=1}^k \frac{rel_i}{\log_2(i+1)}
 >       $$
 >       $relirel_i$ 是第 ii 个文档的相关性得分。 IDCG@kIDCG@k 是理想排序下的 DCG。
->
+>    
 >     - **MAP (Mean Average Precision)**: 衡量多个查询的准确率均值。
 >
 >       
@@ -563,13 +563,13 @@ static PyObject* RelevanceEvaluator_evaluate(RelevanceEvaluator* self, PyObject*
 >       其中：
 >       $$
 >       AP(q) = \frac{\sum_{k=1}^n P(k) \cdot rel(k)}
->       
+>           
 >       P(k)P(k)
 >       $$
 >       
 >
 >       $P(k) $是前 $k$个结果的精确率，$rel(k)$ 是第 $k $个文档的相关性标注。
->
+>    
 >     - **Recall**: 衡量相关文档的检索覆盖率。
 >       $$
 >       Recall@k = \frac{\text{RelevantRetrieved}@k}{\text{Relevant}}
@@ -1127,75 +1127,332 @@ cos_scores_top_k_idx = cos_scores_top_k_idx.cpu().tolist()
 
 # 尝试进行可视化
 
-1 查看 query 原列表的格式
+## 1 查看原文件
 
-query 是一个 长度为6980的列表
-
-每一个元素是字符串表达的问题 
+### 原始加载的 query  
 
 
 
-![image-20241208093022747](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412080930893.png)
+#### 格式  
+
+```json
+{ 
+    qid1:{text1} ,
+ 	qid2:{text2} ,
+ 	.... 
+}
+```
+
+query 是一个 长度为6980的字典，其元素也是一个字典，格式为 id:{text}
 
 
 
-![image-20241208093110247](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412080931387.png)
+#### 长度： 6980
 
 
 
-2 查看 query 对应的 embedding 格式
+#### 第一个元素
+
+
+
+```json
+query_dict.get("300674")=
+
+'how many years did william bradford serve as governor of plymouth colony?'
+```
+
+
+
+#### 展示
+
+
+
+![image-20241209161028610](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091610793.png)
+
+
+
+
+
+### 原始加载的 corpus  
+
+
+
+#### 格式 
+
+```json
+{ 
+    cid1:{id:cid, title: , text: } , 
+ 	cid2:{id:cid2, title: , text: } ,
+    ...
+}
+```
+
+ 
+
+corpus 是一个 长度为8841823的字典，其元素也是一个字典，格式为 cid1:{id:cid, title: , text: }
+
+
+
+#### 长度  8841823
+
+
+
+#### 第一个元素
+
+```json
+corpus_dict.get("0")=
+{
+    'id': '0', 
+    'title': '', 
+    'text': 'The presence of communication amid scientific minds was equally important to the success of the Manhattan Project as scientific intellect was. The only cloud hanging over the impressive achievement of the atomic researchers and engineers is what their success truly meant; hundreds of thousands of innocent lives obliterated.'}
+
+corpus_dict.get("7067032")=
+{'id': '7067032', 'title': '', 'text': 'http://en.wikipedia.org/wiki/William_Bradford_(Plymouth_Colony_governor) William Bradford (c.1590 â\x80\x93 1657) was an English Separatist leader in Leiden, Holland and in Plymouth Colony was a signatory to the Mayflower Compact. He served as Plymouth Colony Governor five times covering about thirty years between 1621 and 1657.'}
+```
+
+
+
+![image-20241209161437836](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091614997.png)
+
+
+
+#### 展示
+
+![image-20241209161504057](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091615216.png)
+
+
+
+### 原始 relation
+
+
+
+#### 格式
+
+```json
+ { 
+     ‘qid1’:{corpusid:1} ,
+  	 ‘qid2’:{corpusid:1, corpusid:2} ,
+     .... 
+ }
+```
+
+
+
+#### 长度： 6980
+
+
+
+#### 第一个元素
+
+```json
+relation_data.get("300674")=
+{'7067032': 1}
+```
+
+
+
+#### 展示
+
+
+
+![image-20241209160352223](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091603410.png)
+
+
+
+### 尝试进行匹配，查看原始问题和结果之间的对应关系
+
+
+
+#### 格式
+
+```json
+{  qid:{ query:{querytext}, 
+
+​		   corpus_matches:{  }     }   }
+```
+
+#### 长度 6980
+
+
+
+#### 第一个元素
+
+```json
+match_results.get("300674")=
+{
+    'query': 'how many years did william bradford serve as governor of plymouth colony?', 
+ 	'corpus_matches': {
+     '7067032': 'http://en.wikipedia.org/wiki/William_Bradford_(Plymouth_Colony_governor) William Bradford (c.1590 â\x80\x93 1657) was an English Separatist leader in Leiden, Holland and in Plymouth Colony was a signatory to the Mayflower Compact. He served as Plymouth Colony Governor five times covering about thirty years between 1621 and 1657.'}
+}
+```
+
+
+
+#### 展示
+
+![image-20241209162829151](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091628317.png)
+
+
+
+
+
+## 2 查看embedding 前后变化
+
+
+
+### encodequery 中 原始 query
+
+#### 格式
+
+['querytext', 'query2text']
+
+是一个只有query 的文本的列表，丢失了 id 
+
+但由于 query 只有一个文件，所以其对应着原来query 加载的默认id 只不过将id 抹去了
+
+
+
+#### 长度 6980
+
+
+
+#### 第一个元素
+
+```python
+query_data[0]
+'how many years did william bradford serve as governor of plymouth colony?'
+```
+
+
+
+#### 展示
+
+
+
+![image-20241209165629375](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091656545.png)
+
+![image-20241209165545376](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091655547.png)
+
+![image-20241209165747940](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091657111.png)
+
+###  encodequery 后  query in embedding
+
+#### 格式
+
+[ [0.0073,,], [] , ]
+
+将每一个query 都进行编码为一个数字向量，与query 的文本对应
 
 query 是一个 6980 维度的列表。
 
+#### 长度 6980 * 768
+
+
+
+#### 第一个元素
+
 每一个元素是一个 768 维度的向量
 
-![image-20241208092321931](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412080923082.png)
+![image-20241208092941277](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091700172.png)
+
+#### 展示
+
+![image-20241208092321931](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091700982.png)
 
 
 
-![image-20241208092941277](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412080929403.png)
+### encodecorpus 中 原始  corpus
+
+#### 格式
+
+[corpustext1,corpustext1,]
+
+corpus 是进行分割了，而且在分割前还进行了排序，按着文件大小进行排序得到的结果，所以id 与原来的 corpus 的 id 不能再一一对应，应当找到其分割对应的id列表才可以 
 
 
-
-
-
-3 查看 corpus 的原始文件
 
 第一个chunk 是有着 5000 个元素的列表
 
-
-
-![image-20241208093751873](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412080937002.png)
-
-
-
-第一个元素是一个字符串，里卖弄是一段话
+#### 长度 5000
 
 
 
-![image-20241208093902169](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412080939312.png)
+#### 第一个元素
+
+```python
+corpus_data[0] 
+'Sliding Dovetail Keys. As promised, here is a quick summary of how the sliding dovetail â\x80\x9ckeyâ\x80\x9d which will slide into the â\x80\x9cwayâ\x80\x9d that I cut yesterday. In order to make the process as user friendly as possible, I cut the keys using a router table.I install the 14Â° x 9/16â\x80³ dovetail bit into the router table motor.You can use any number of dove-tail bits for this task as long as it has the same angle (14Â° in this case) as the corresponding joint.ne more look at the through dovetail joints that hold the side panels on. The next day or two will be filled with the most joyous task in woodworkingâ\x80¦ sanding. I need to remove all of the machining marks left by the wide belt sander and then I will do the final assembly on both the cabinet carcass and the table base.'
+```
 
 
 
-4 查看 corpus 的 embedding 结果
+#### 展示
 
-是一个 5000 长度的列表，
+![image-20241209170109581](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091701764.png)
 
+###  encodecorpus 后  corpus
 
+#### 格式
 
-![image-20241208094017189](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412080940350.png)
-
-
-
-每个元素是一个 长768 维度的向量，代表字符编译后的结果
+将每一个元素编码为 长度为768的向量
 
 
 
-![image-20241208094100262](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412080941405.png)
+#### 长度  5000 * 768 
 
 
 
-查看query 与 corpus 之间的对应结果
+
+
+#### 第一个元素
+
+![](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091703926.png)
+
+![image-20241208094100262](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091703679.png)
+
+#### 展示
+
+![image-20241209170551887](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091705066.png)
+
+![image-20241209170609217](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091706413.png)
 
 
 
+## 3 查看 代码预测的匹配结果
+
+
+
+### 格式
+
+```python
+{
+qid1:{corpusid1:score, corpusid2:score}
+
+}
+```
+
+得分是倒序排列的结果
+
+
+
+### 长度 6980
+
+
+
+### 第一个元素
+
+
+
+```
+300674:{6627576:0.527291}
+```
+
+![image-20241209191245961](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091912137.png)
+
+
+
+### 展示
+
+
+
+![image-20241209191258609](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091912806.png)
