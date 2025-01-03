@@ -553,7 +553,7 @@ static PyObject* RelevanceEvaluator_evaluate(RelevanceEvaluator* self, PyObject*
 >       DCG@k = \sum_{i=1}^k \frac{rel_i}{\log_2(i+1)}
 >       $$
 >       $relirel_i$ 是第 ii 个文档的相关性得分。 IDCG@kIDCG@k 是理想排序下的 DCG。
->    
+>                        
 >     - **MAP (Mean Average Precision)**: 衡量多个查询的准确率均值。
 >
 >       
@@ -563,13 +563,13 @@ static PyObject* RelevanceEvaluator_evaluate(RelevanceEvaluator* self, PyObject*
 >       其中：
 >       $$
 >       AP(q) = \frac{\sum_{k=1}^n P(k) \cdot rel(k)}
->           
+>                               
 >       P(k)P(k)
 >       $$
 >       
 >
 >       $P(k) $是前 $k$个结果的精确率，$rel(k)$ 是第 $k $个文档的相关性标注。
->    
+>                        
 >     - **Recall**: 衡量相关文档的检索覆盖率。
 >       $$
 >       Recall@k = \frac{\text{RelevantRetrieved}@k}{\text{Relevant}}
@@ -1231,7 +1231,7 @@ corpus_dict.get("7067032")=
 ```json
  { 
      ‘qid1’:{corpusid:1} ,
-  	 ‘qid2’:{corpusid:1, corpusid:2} ,
+  	 ‘qid2’:{corpusid:1, corpusid:1} ,
      .... 
  }
 ```
@@ -1390,6 +1390,45 @@ corpus_data[0]
 
 ![image-20241209170109581](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091701764.png)
 
+
+
+### encodecorpus 中的 corpus 对应的id 列表
+
+#### 格式
+
+[corpusids1,corousid2,]
+
+
+
+讲过验证 这里的chunk 中的id 和上面的 text 是一一对应的，
+
+那么也就是和下面的编码结果也是一一对应的。
+
+那么就可以将其链接起来，保存在一起
+
+#### 长度  50000
+
+
+
+#### 第一个元素
+
+```python
+corpus_chunk_idslist_data[0]
+'8176722'
+```
+
+
+
+#### 展示
+
+![image-20241210103818981](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412101038199.png)
+
+![image-20241210103828704](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412101038897.png)
+
+
+
+
+
 ###  encodecorpus 后  corpus
 
 #### 格式
@@ -1420,18 +1459,19 @@ corpus_data[0]
 
 ## 3 查看 代码预测的匹配结果
 
-
+MSMARCO_predictions.json
 
 ### 格式
 
 ```python
 {
-qid1:{corpusid1:score, corpusid2:score}
-
+qid1:{corpusid1:score1, corpusid2:score2}
 }
 ```
 
 得分是倒序排列的结果
+
+这里每一个id 都对应这 corpusid 的id , 
 
 
 
@@ -1456,3 +1496,130 @@ qid1:{corpusid1:score, corpusid2:score}
 
 
 ![image-20241209191258609](https://zuti.oss-cn-qingdao.aliyuncs.com/img/202412091912806.png)
+
+
+
+## 合并数据 
+
+由于 corpus 的 embeeding 结果以及对应的 id_list 是分chunk 保存的，所以需要将其合并为一个文件，同时验证合并后是否还能保持text 和 embedding 与 id 的对应关系（只要合并顺序是一致的，结果可肯定也是一致的）
+
+
+
+
+
+查看 
+
+变化
+
+接下来就是通过 corpus 的 id 找到 对应的 embedding 结果
+
+
+
+查看 同一个query 在两个score 得分差异的结果
+
+
+
+变化前后 ，查看哪些query 对应的结果变化更大
+
+由于 corpus 的id list 和 embedding list 的结果是一致的，所以只需要找到 corpus id 在list 中的排列位置，然后根据这个排列位置再在 list 中找到 对应的 embedding 结果即可， 这样就能找到同一个query 在两个不同的 embedding  cropus 对应的scores 的区别 以及  embedding 的区别。
+
+
+
+# 查看 训练代码
+
+
+
+## text_text.py
+
+
+
+### class TextTextTrainer(BaseTrainer):
+
+#### def _forward_step(self, model, batch, logit_scale, matryoshka_dims=None, matroyshka_loss_weights=None, **kwargs):
+
+
+
+### Mathematical Expression and Computational Logic Summary in English:
+
+#### **Mathematical Formulation**
+
+1. **Query and Document Embedding Extraction**:
+   - Extract embeddings for query $Q$ and document $D$ from the model:
+     
+     
+     $$
+     Q = \text{model}(batch[\text{"query\_input\_ids"}], batch[\text{"query\_attention\_mask"}], \text{normalize})
+     $$
+     $$
+     D = \text{model}(batch[\text{"document\_input\_ids"}], batch[\text{"document\_attention\_mask"}], \text{normalize})
+     $$
+   
+2. **Embedding Reduction (if $\text{matryoshka\_dims}$ is provided)**:
+   - For each dimensionality $\dim$ in $\text{matryoshka\_dims}$:
+     - Normalize and reduce dimensions of embeddings:
+       $$
+       Q_{\text{reduced}} = \frac{Q[:, :\dim]}{\|Q[:, :\dim]\|}, \quad D_{\text{reduced}} = \frac{D[:, :\dim]}{\|D[:, :\dim]\|}
+       $$
+     - Compute loss using a contrastive loss function ($\text{clip\_loss}$):
+       $$
+       L_{\text{dim}} = \text{clip\_loss}(Q_{\text{reduced}}, D_{\text{reduced}}, \text{logit\_scale})
+       $$
+     - Accumulate weighted loss:
+       $$
+       L_{\text{matryoshka}} = \sum_{\dim, w} w \cdot L_{\text{dim}}
+       $$
+
+3. **Embedding Consistency with an Old Model**:
+   - Extract old model embeddings $Q_{\text{old}}, D_{\text{old}}$:
+     $$
+     Q_{\text{old}} = \text{old\_model}(batch[\text{"query\_input\_ids"}], batch[\text{"query\_attention\_mask"}])
+     $$
+     $$
+     D_{\text{old}} = \text{old\_model}(batch[\text{"document\_input\_ids"}], batch[\text{"document\_attention\_mask"}])
+     $$
+   - Compute cosine embedding loss for consistency:
+     $$
+     L_{\text{qfd}} = \text{cosine\_embedding\_loss}(Q, Q_{\text{old}}) \cdot \text{qfd\_scale}
+     $$
+     $$
+     L_{\text{dfd}} = \text{cosine\_embedding\_loss}(D, D_{\text{old}}) \cdot \text{dfd\_scale}
+     $$
+
+4. **Final Loss**:
+   - Combine the computed losses:
+     $$
+     L_{\text{final}} = L_{\text{clip}} + L_{\text{qfd}} + L_{\text{dfd}}
+     $$
+     where:
+     - $L_{\text{clip}}$ is the contrastive loss between $Q$ and $D$.
+     - $L_{\text{qfd}}$ and $L_{\text{dfd}}$ enforce embedding consistency with the old model.
+
+---
+
+#### **Computational Logic**
+
+1. **Query and Document Embedding Extraction**:
+   - Pass the input IDs and attention masks from the batch through the model to obtain query and document embeddings. Normalization depends on whether $\text{matryoshka\_dims}$ is provided.
+
+2. **Embedding Aggregation**:
+   - Use distributed training utilities (e.g., $\text{gather\_with\_grad}$) to collect document embeddings from all GPUs if needed.
+
+3. **Dimensionality Reduction and Layered Loss Calculation**:
+   - If $\text{matryoshka\_dims}$ is set, reduce embedding dimensions and calculate a weighted sum of contrastive losses for each specified dimension.
+
+4. **Old Model Consistency**:
+   - If an $\text{old\_model}$ is provided, compute the consistency loss between the embeddings of the current and old models.
+
+5. **Final Loss**:
+   - Combine contrastive loss, dimensionality reduction loss (if applicable), and old model consistency loss to calculate the final training loss. If $\text{old\_model}$ is not provided, $L_{\text{qfd}}$ and $L_{\text{dfd}}$ are set to 0.
+
+---
+
+This code allows flexible control over the loss calculation for training deep learning models, supporting both layered loss with dimensionality reduction and embedding consistency with a previous model.
+
+
+
+## 可能的原因
+
+
+

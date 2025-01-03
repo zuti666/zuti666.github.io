@@ -140,7 +140,7 @@ Studying Catastrophic Forgetting in Neural  Ranking Models
 
 # 文中主要图表
 
-
+![image-20250102220252123](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250102220528375.png)
 
 # AI 问答
 
