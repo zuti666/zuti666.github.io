@@ -62,11 +62,7 @@ keywords: RAG
 
 
 
-
-
-- **GENERALIZATION THROUGH MEMORIZATION:  NEAREST NEIGHBOR LANGUAGE MODELS**  
-
-  kNN-LMs   2019   [`semanticscholar`](https://www.semanticscholar.org/paper/7be8c119dbe065c52125ee7716601751f3116844)  [`Paper`](https://arxiv.org/pdf/1911.00172.pdf)  `arXiv`   ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=$.citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F7be8c119dbe065c52125ee7716601751f3116844%3Ffields%3DcitationCount)
+- 
 
 
 
@@ -78,9 +74,15 @@ keywords: RAG
 
 
 
+- **GENERALIZATION THROUGH MEMORIZATION:  NEAREST NEIGHBOR LANGUAGE MODELS**  
+
+  kNN-LMs   2019   [`semanticscholar`](https://www.semanticscholar.org/paper/7be8c119dbe065c52125ee7716601751f3116844)  [`Paper`](https://arxiv.org/pdf/1911.00172.pdf)  `arXiv`   ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=$.citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F7be8c119dbe065c52125ee7716601751f3116844%3Ffields%3DcitationCount)
+
 
 
 ### Speculative RAG
+
+
 
 
 
