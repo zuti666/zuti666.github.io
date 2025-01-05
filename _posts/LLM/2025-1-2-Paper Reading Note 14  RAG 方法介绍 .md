@@ -22,6 +22,14 @@ keywords: [Paper Reading, RAG, LLM,  ]
 
 Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
 
+
+
+- **Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks**  
+
+  2020   [`semanticscholar`](https://www.semanticscholar.org/paper/58ed1fbaabe027345f7bb3a6312d41c5aac63e22)  [`Paper`](https://arxiv.org/pdf/2005.11401.pdf)  `arXiv`   ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=$.citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F58ed1fbaabe027345f7bb3a6312d41c5aac63e22%3Ffields%3DcitationCount)
+
+
+
 ![image-20250104214422274](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250104214422328.png)
 
 
@@ -29,6 +37,12 @@ Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
 ## Query-based RAG	
 
 REALM  REALM: Retrieval-Augmented Language Model Pre-Training
+
+
+
+- **REALM: Retrieval-Augmented Language Model Pre-Training**  
+
+  2020   [`semanticscholar`](https://www.semanticscholar.org/paper/832fff14d2ed50eb7969c4c4b976c35776548f56)  [`Paper`](https://arxiv.org/pdf/2002.08909.pdf)  `arXiv`   ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F832fff14d2ed50eb7969c4c4b976c35776548f56%3Ffields%3DcitationCount)
 
 ![image-20250104203945122](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250104203945175.png)
 
@@ -40,6 +54,12 @@ REALM  REALM: Retrieval-Augmented Language Model Pre-Training
 
 RETRO  Improving Language Models by Retrieving from Trillions of Tokens
 
+
+
+-  RETRO **Improving Language Models by Retrieving from Trillions of Tokens**  
+
+  None   [`semanticscholar`](https://www.semanticscholar.org/paper/002c256d30d6be4b23d365a8de8ae0e67e4c9641)  [`Paper`](https://www.semanticscholar.org/paper/002c256d30d6be4b23d365a8de8ae0e67e4c9641)     ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F002c256d30d6be4b23d365a8de8ae0e67e4c9641%3Ffields%3DcitationCount)
+
 ![image-20250104204254204](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250104204254266.png)
 
 
@@ -47,6 +67,14 @@ RETRO  Improving Language Models by Retrieving from Trillions of Tokens
 ## Logit-based RAG
 
 kNN-LMs  GENERALIZATION THROUGH MEMORIZATION:  NEAREST NEIGHBOR LANGUAGE MODELS
+
+
+
+- **GENERALIZATION THROUGH MEMORIZATION:  NEAREST NEIGHBOR LANGUAGE MODELS**  
+
+  kNN-LMs   2019   [`semanticscholar`](https://www.semanticscholar.org/paper/7be8c119dbe065c52125ee7716601751f3116844)  [`Paper`](https://arxiv.org/pdf/1911.00172.pdf)  `arXiv`   ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F7be8c119dbe065c52125ee7716601751f3116844%3Ffields%3DcitationCount)
+
+
 
 这里knn 用来检索相似问题的答案，并根据距离转为概率， 然后在最终输出结果的时候，将retrieval的概率输出与generator的概率输出进行融合得到最终结果。由于是在概率层面进行融合，所以不同于上述两种分别基于文本和特征的融合。
 
@@ -64,13 +92,31 @@ kNN-LMs  GENERALIZATION THROUGH MEMORIZATION:  NEAREST NEIGHBOR LANGUAGE MODELS
 
 coG Copy Is All You Need  
 
+
+
+- **Copy Is All You Need**  
+
+  coG 2023   [`semanticscholar`](https://www.semanticscholar.org/paper/8b25d0065d30ed3c9e6a6cae94de53ef132d656d)  [`Paper`](https://arxiv.org/pdf/2307.06962.pdf)  `arXiv`  
+
+  International Conference on Learning Representations  ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F8b25d0065d30ed3c9e6a6cae94de53ef132d656d%3Ffields%3DcitationCount)
+
+
+
 formulate text generation as progressively copying text segments (e.g., words or phrases) from an existing text collection.
 
 ![image-20250104212223008](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250104212223066.png)
 
 这个方法很邪典呀，我们不生产文章，我们只是文字的搬运工，哈哈哈。让我想起了自己写东西的经历，东拼西凑。
 
+
+
 RETRIEVAL IS ACCURATE GENERATION
+
+
+
+- **RETRIEVAL IS ACCURATE GENERATION**  
+
+  2024   [`semanticscholar`](https://www.semanticscholar.org/paper/9bbcc6eb7ab49ebed302118a98c9e28ea88987b2)  [`Paper`](https://arxiv.org/pdf/2402.17532.pdf)  `arXiv`  International Conference on Learning Representations  ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F9bbcc6eb7ab49ebed302118a98c9e28ea88987b2%3Ffields%3DcitationCount)
 
  selects contextaware phrases from a collection of supporting documents. 这个思路和上面是一致的，区别是 训练过程，初始化之后使用强化学习进行训练，我只能说好家伙
 
@@ -92,6 +138,16 @@ RETRIEVAL IS ACCURATE GENERATION
 
 Query2doc: Query Expansion with Large Language Models
 
+
+
+- **Query2doc: Query Expansion with Large Language Models**
+
+  14 March 2023    Conference on Empirical Methods in Natural Language Processing
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/ccc772d88c231275f24c4fac9b28bbe0942e1107)  [`Paper`](https://arxiv.org/pdf/2303.07678.pdf)  `arXiv`   ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fccc772d88c231275f24c4fac9b28bbe0942e1107%3Ffields%3DcitationCount)
+
+
+
 首先根据问题让LLM生成一些文档，然后这些生成文档就可以作为参考，原因是LLM在训练的时候就使用了大量互联网上的信息
 
 ![image-20250104214528234](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250104214528284.png)
@@ -100,6 +156,12 @@ Query2doc: Query Expansion with Large Language Models
 
 **HyDE**  Precise Zero-Shot Dense Retrieval without Relevance Labels
 
+- **Precise Zero-Shot Dense Retrieval without Relevance Labels**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/5c32c653735b43a0a8923ca65ac191bd4bf15311)  [`Paper`](https://www.aclanthology.org/2023.acl-long.99.pdf)       ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F5c32c653735b43a0a8923ca65ac191bd4bf15311%3Ffields%3DcitationCount)
+
+  **HyDE** 20 December 2022  Annual Meeting of the Association for Computational Linguistics
+
 首先 生成 一系列的 伪文档，然后在真文档的特征空间周围搜索相似度高的伪文档 
 
 ![image-20250104233755672](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250104233755723.png)
@@ -107,6 +169,13 @@ Query2doc: Query Expansion with Large Language Models
 
 
 **CoVe**  CHAIN-OF-VERIFICATION REDUCES HALLUCINATION  IN LARGE LANGUAGE MODELS
+
+
+- **CHAIN-OF-VERIFICATION REDUCES HALLUCINATION  IN LARGE LANGUAGE MODELS**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/4b0b56be0ae9479d2bd5c2f0943db1906343c10f)  [`Paper`](https://arxiv.org/pdf/2309.11495.pdf)  `arXiv`     ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F4b0b56be0ae9479d2bd5c2f0943db1906343c10f%3Ffields%3DcitationCount)
+
+  **CoVe** 20 September 2023  Annual Meeting of the Association for Computational Linguistics
 
 The expanded queries undergo validation by LLM to achieve the effect of reducing hallucinations.
 
@@ -124,6 +193,12 @@ The expanded queries undergo validation by LLM to achieve the effect of reducing
 
 Lift Yourself Up: Retrieval-augmented Text Generation with Self-Memory
 
+- **Lift Yourself Up: Retrieval-augmented Text Generation with Self-Memory**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/41b796b026a1d322de6ef0b280d3e2e68eee65bd)  [`Paper`](https://arxiv.org/pdf/2305.02437.pdf)  `arXiv`     ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F41b796b026a1d322de6ef0b280d3e2e68eee65bd%3Ffields%3DcitationCount)
+
+  3 May 2023  Neural Information Processing Systems
+
 既然上面的方法行得通，LLM生成的伪文档包含一些信息，那么把这些信息放在一起岂不就是一个 数据库 。基于上述思路，这篇文章有了一个更大胆的想法，有了那么多伪文档，那可以从中选择一些较好地作为retrieval 的结果提供给后续生成。而上述 生成-挑选的过程可以不断进行，最终会得到一个非常大的数据，来代替固定内容的搜索备选数据库。 生成部分不断生成， 而 选择器是能够训练得到一个好的选择器的。
 
 
@@ -133,6 +208,14 @@ Lift Yourself Up: Retrieval-augmented Text Generation with Self-Memory
 
 
 PROMPTAGATOR : FEW-SHOT DENSE RETRIEVAL  FROM 8 EXAMPLES
+
+
+
+- **PROMPTAGATOR : FEW-SHOT DENSE RETRIEVAL  FROM 8 EXAMPLES**
+
+   [`semanticscholar`](https://www.semanticscholar.org/paper/e86009d9f9b1cdf083a48d087552bc4153784451)  [`Paper`](https://www.semanticscholar.org/paper/e86009d9f9b1cdf083a48d087552bc4153784451)     
+
+  2022  International Conference on Learning Representations
 
 通过给LLM 提示词来创造数据，从而训练一个 retrieval 。 这里创造数据的过程用到了少量示例 所以说是few-shot 的。
 
@@ -154,6 +237,16 @@ PROMPTAGATOR : FEW-SHOT DENSE RETRIEVAL  FROM 8 EXAMPLES
 
 REPLUG: Retrieval-Augmented Black-Box Language Models
 
+
+
+- **REPLUG: Retrieval-Augmented Black-Box Language Models**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/07b14c24833400b79978b0a5f084803337e30a15)  [`Paper`](https://www.semanticscholar.org/paper/07b14c24833400b79978b0a5f084803337e30a15)   
+
+  2023    North American Chapter of the Association for Computational Linguistics 
+
+
+
 treats LM as a black box and update the retriever model based on the final results.
 
 
@@ -172,6 +265,16 @@ treats LM as a black box and update the retriever model based on the final resul
 
 **PKG**  Augmented Large Language Models with Parametric Knowledge Guiding
 
+
+
+**Augmented Large Language Models with Parametric Knowledge Guiding**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/e0dc8e113dbdd2896fb6420ac93e0b976c47f2a2)  [`Paper`](https://www.semanticscholar.org/paper/e0dc8e113dbdd2896fb6420ac93e0b976c47f2a2)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fe0dc8e113dbdd2896fb6420ac93e0b976c47f2a2%3Ffields%3DcitationCount)
+
+PKG 2023    arXiv.org 
+
+
+
 首先在对应领域进行微调，然后 生成对应知识作为背景提供给 generator
 
 
@@ -182,6 +285,14 @@ treats LM as a black box and update the retriever model based on the final resul
 
 Structure-Aware Language Model Pretraining Improves Dense Retrieval on Structured Data
 
+
+
+- **Structure-Aware Language Model Pretraining Improves Dense Retrieval on Structured Data**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/a57b90cfc2eab46b773e65240d4ff910f05f989e)  [`Paper`](https://www.semanticscholar.org/paper/a57b90cfc2eab46b773e65240d4ff910f05f989e)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fa57b90cfc2eab46b773e65240d4ff910f05f989e%3Ffields%3DcitationCount)
+
+  
+
 可以用来检索结构型数据，使用对比学习 和 掩码实体预测来训练 retrieval
 
 ![image-20250105000418033](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250105000418080.png)
@@ -190,7 +301,15 @@ Structure-Aware Language Model Pretraining Improves Dense Retrieval on Structure
 
 ### Re-ranking:
 
+
+
 KARD Knowledge-Augmented Reasoning Distillation for Small Language Models in Knowledge-Intensive Tasks
+
+- **Knowledge-Augmented Reasoning Distillation for Small Language Models in Knowledge-Intensive Tasks**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/ebf3a59aacdd9982283d7f41229ee2a93800d6ef)  [`Paper`](https://www.semanticscholar.org/paper/ebf3a59aacdd9982283d7f41229ee2a93800d6ef)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Febf3a59aacdd9982283d7f41229ee2a93800d6ef%3Ffields%3DcitationCount)
+
+  
 
 ![image-20250105002451444](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250105002451503.png)
 
@@ -204,6 +323,12 @@ KARD Knowledge-Augmented Reasoning Distillation for Small Language Models in Kno
 
 Query Rewriting for Retrieval-Augmented Large Language Models
 
+
+
+- **Query Rewriting for Retrieval-Augmented Large Language Models**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/f743287be3ced6757de7ecb26d03815b22cd737b)  [`Paper`](https://www.semanticscholar.org/paper/f743287be3ced6757de7ecb26d03815b22cd737b)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Ff743287be3ced6757de7ecb26d03815b22cd737b%3Ffields%3DcitationCount)
+
 Rewrite-RetrieveRead
 
 ![image-20250105001458083](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250105001458137.png)
@@ -211,6 +336,12 @@ Rewrite-RetrieveRead
 
 
 Bridging the Preference Gap between Retrievers and LLMs
+
+
+
+**Bridging the Preference Gap between Retrievers and LLMs**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/f65ecb65d00f2e69a49465debfdd78efa0838cec)  [`Paper`](https://www.semanticscholar.org/paper/f65ecb65d00f2e69a49465debfdd78efa0838cec)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Ff65ecb65d00f2e69a49465debfdd78efa0838cec%3Ffields%3DcitationCount)
 
 两头都不动，训练中间的，这要怎么训？强化学习，服了
 
@@ -229,6 +360,14 @@ Bridging the Preference Gap between Retrievers and LLMs
 ### Hybrid Retrieval
 
 ISEEQ: Information Seeking Question Generation Using Dynamic Meta-Information Retrieval and Knowledge Graphs
+
+**ISEEQ: Information Seeking Question Generation Using Dynamic Meta-Information Retrieval and Knowledge Graphs**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/77d2456630d7b22efe84bffcc7d4ad495ce50a6d)  [`Paper`](https://www.semanticscholar.org/paper/77d2456630d7b22efe84bffcc7d4ad495ce50a6d)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F77d2456630d7b22efe84bffcc7d4ad495ce50a6d%3Ffields%3DcitationCount)
+
+2021    AAAI Conference on Artificial Intelligence 
+
+
 
 使用了知识图来进行询问，其次这里提到了一个应用场景就是对话形式来获得有效信息，比如医生对患者的对话。主要结合了两种方法，一种是问题的扩展，另一种是使用知识图来进行搜索
 
@@ -254,6 +393,14 @@ ISEEQ: Information Seeking Question Generation Using Dynamic Meta-Information Re
 
 **KNN-Diffusion:** KNN-Diffusion: Image Generation via Large-Scale Retrieval
 
+
+
+- **KNN-Diffusion: Image Generation via Large-Scale Retrieval**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/a225d5d846ba5110232ed5bb32d54ea742b1c2d4)  [`Paper`](https://www.semanticscholar.org/paper/a225d5d846ba5110232ed5bb32d54ea742b1c2d4)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fa225d5d846ba5110232ed5bb32d54ea742b1c2d4%3Ffields%3DcitationCount)
+
+  
+
  Retrieves similar images or embeddings to condition diffusion models, enabling zero-shot image stylization and diverse outputs.
 
 首先需要注意到的是这个方法的引用场景是图像编辑或者说是图像生成，所以会涉及到一个diffusion模型，这个模型接受原始image的输入 和编辑prompt 的描述。
@@ -276,6 +423,14 @@ ISEEQ: Information Seeking Question Generation Using Dynamic Meta-Information Re
 
 RE-IMAGEN: RETRIEVAL-AUGMENTED  TEXT-TO-IMAGE GENERATOR
 
+
+
+- **RE-IMAGEN: RETRIEVAL-AUGMENTED  TEXT-TO-IMAGE GENERATOR**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/ec1ac8df419a241c3cc6bfd209a38b494af792ee)  [`Paper`](https://www.semanticscholar.org/paper/ec1ac8df419a241c3cc6bfd209a38b494af792ee)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fec1ac8df419a241c3cc6bfd209a38b494af792ee%3Ffields%3DcitationCount)
+
+  
+
 Given a text prompt, Re-Imagen accesses an external multi-modal knowledge base to retrieve relevant (image, text) pairs and uses them as references to generate the image.
 
 ![image-20250104232942323](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250104232942374.png)
@@ -292,6 +447,14 @@ G-Retriever
 
 G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering
 
+
+
+- **G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/a41d4a3b005c8ec4f821e6ee96672d930ca9596c)  [`Paper`](https://www.semanticscholar.org/paper/a41d4a3b005c8ec4f821e6ee96672d930ca9596c)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fa41d4a3b005c8ec4f821e6ee96672d930ca9596c%3Ffields%3DcitationCount)
+
+
+
 ![image-20250105003129747](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250105003129822.png)
 
 
@@ -301,5 +464,11 @@ G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and 
 # Evaluation
 
 Benchmarking Large Language Models in Retrieval-Augmented Generation
+
+**Benchmarking Large Language Models in Retrieval-Augmented Generation**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/28e2ecb4183ebc0eec504b12dddc677f8aef8745)  [`Paper`](https://www.semanticscholar.org/paper/28e2ecb4183ebc0eec504b12dddc677f8aef8745)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F28e2ecb4183ebc0eec504b12dddc677f8aef8745%3Ffields%3DcitationCount)
+
+
 
 ![image-20250105002639987](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250105002640042.png)
