@@ -32,9 +32,9 @@ keywords: RAG
 
 - **Retrieval-Augmented Generation for Large  Language Models: A Survey**  
 
-​	None   [`semanticscholar`](https://www.semanticscholar.org/paper/46f9f7b8f88f72e12cbdb21e3311f995eb6e65c5)  [`Paper`](https://www.semanticscholar.org/paper/46f9f7b8f88f72e12cbdb21e3311f995eb6e65c5)     ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=$.citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F46f9f7b8f88f72e12cbdb21e3311f995eb6e65c5%3Ffields%3DcitationCount)
+  None   [`semanticscholar`](https://www.semanticscholar.org/paper/46f9f7b8f88f72e12cbdb21e3311f995eb6e65c5)  [`Paper`](https://www.semanticscholar.org/paper/46f9f7b8f88f72e12cbdb21e3311f995eb6e65c5)     ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=$.citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F46f9f7b8f88f72e12cbdb21e3311f995eb6e65c5%3Ffields%3DcitationCount)
 
-​	[Paper Reading 7 LLM-RAG(Retrieval-Augmented Generation)-survey — 英飞](https://zuti666.github.io/2024/11/27/Paper-Reading-Note-7-LLM-RAG/)
+  [Paper Reading 7 LLM-RAG(Retrieval-Augmented Generation)-survey — 英飞](https://zuti666.github.io/2024/11/27/Paper-Reading-Note-7-LLM-RAG/)
 
 **2023**
 
@@ -42,7 +42,7 @@ keywords: RAG
 
   2023   [`Paper`](https://arxiv.org/pdf/2308.07107.pdf)  `arXiv`   ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=$.citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F0b220041eb83c23b7b10d32a5d08c0309d528071%3Ffields%3DcitationCount)
 
-​	[Paper Reading 8 LLM-IR(Information Retrieval) — 英飞](https://zuti666.github.io/2024/11/29/Paper-Reading-Note-8-LLM-Information-Retrieval-IR/)
+  [Paper Reading 8 LLM-IR(Information Retrieval) — 英飞](https://zuti666.github.io/2024/11/29/Paper-Reading-Note-8-LLM-Information-Retrieval-IR/)
 
 ## RAG  model
 
@@ -173,9 +173,9 @@ keywords: RAG
 
 - **L2R: Lifelong Learning for First-stage Retrieval with Backward-Compatible Representations**  
 
-​	2023   [`semanticscholar`](https://www.semanticscholar.org/paper/a48e65a66dce30e1d4533b9e2be60207d4a89525)  [`Paper`](http://dl.acm.org/citation.cfm?id=3614947)     ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=$.citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fa48e65a66dce30e1d4533b9e2be60207d4a89525%3Ffields%3DcitationCount)
+  2023   [`semanticscholar`](https://www.semanticscholar.org/paper/a48e65a66dce30e1d4533b9e2be60207d4a89525)  [`Paper`](http://dl.acm.org/citation.cfm?id=3614947)     ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=$.citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fa48e65a66dce30e1d4533b9e2be60207d4a89525%3Ffields%3DcitationCount)
 
-​	[Paper Reading 9 LLM- First-stage Retrieval L2R — 英飞](https://zuti666.github.io/2024/11/30/Paper-Reading-Note-9-First-stage-Retrieval-L2R/)
+  [Paper Reading 9 LLM- First-stage Retrieval L2R — 英飞](https://zuti666.github.io/2024/11/30/Paper-Reading-Note-9-First-stage-Retrieval-L2R/)
 
 
 
@@ -183,7 +183,7 @@ keywords: RAG
 
   2022   [`semanticscholar`](https://www.semanticscholar.org/paper/0385e1986160069417c3fa497b08441c45ad150a)  [`Paper`](https://arxiv.org/pdf/2201.03356.pdf)  `arXiv`   ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F0385e1986160069417c3fa497b08441c45ad150a%3Ffields%3DcitationCount)
 
-​	[Paper Reading 10 LLM- Continual Learning of Long Topic Sequences in Neural Information Retrieval — 英飞](https://zuti666.github.io/2024/12/01/Paper-Reading-Note-10-Continual-Learning-of-Long-Topic-Sequences-in-Neural-Information-Retrieval/)
+  [Paper Reading 10 LLM- Continual Learning of Long Topic Sequences in Neural Information Retrieval — 英飞](https://zuti666.github.io/2024/12/01/Paper-Reading-Note-10-Continual-Learning-of-Long-Topic-Sequences-in-Neural-Information-Retrieval/)
 
 
 
@@ -217,7 +217,7 @@ keywords: RAG
 
   2021   [`semanticscholar`](https://www.semanticscholar.org/paper/2e705d4a374ca3d5f0a0f6062646eaec2337200d)  [`Paper`](https://arxiv.org/pdf/2101.06984.pdf)  `arXiv`   ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F2e705d4a374ca3d5f0a0f6062646eaec2337200d%3Ffields%3DcitationCount)
 
-[Paper Reading 11 LLM- Studying Catastrophic Forgetting in Neural Ranking Models — 英飞](https://zuti666.github.io/2024/12/01/Paper-Reading-Note-11-Studying-Catastrophic-Forgetting-in-Neural-Ranking-Modelsl/)
+  [Paper Reading 11 LLM- Studying Catastrophic Forgetting in Neural Ranking Models — 英飞](https://zuti666.github.io/2024/12/01/Paper-Reading-Note-11-Studying-Catastrophic-Forgetting-in-Neural-Ranking-Modelsl/)
 
 
 
