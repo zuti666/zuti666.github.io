@@ -181,7 +181,7 @@ Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Model
 
 
 
-##  different classifier
+##  different classifier Performance
 
 接下来详细介绍，作者在探究四种不同的分类器的设置
 
@@ -261,7 +261,7 @@ Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Model
 
   - 每个类别 $c$ 的特征中心 $p_c$ 计算如下：
     $$
-    p_c=1 \frac{1}{N_c} \sum_{i \in C_c} h_i
+    p_c= \frac{1}{N_c} \sum_{i \in C_c} h_i
     $$
     
 
@@ -367,15 +367,19 @@ Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Model
 
 ### 实验条件与结果概述
 
-| **图编号**    | **实验任务**                                  | **数据集**     | **模型类型**         | **分类器类型**                                     | **评估指标** |
-| ------------- | --------------------------------------------- | -------------- | -------------------- | -------------------------------------------------- | ------------ |
-| **Figure 8**  | 意图分类（Intent Classification）             | CLINC150       | Generative Model     | Linear, Cosine Linear, Prototype, Cosine Prototype | Accuracy     |
-| **Figure 9**  | 关系提取（Relation Extraction）               | FewRel         | Generative Model     | 同上                                               | Accuracy     |
-| **Figure 10** | 关系提取（Relation Extraction）               | FewRel         | Discriminative Model | 同上                                               | Accuracy     |
-| **Figure 11** | 命名实体识别（Named Entity Recognition, NER） | Ontonotes5     | Discriminative Model | 同上                                               | Accuracy     |
-| **Figure 12** | 命名实体识别（NER）                           | I2B2           | Discriminative Model | 同上                                               | Accuracy     |
-| **Figure 13** | 文本分类（Text Classification）               | Topic3Datasets | Generative Model     | 同上                                               | Accuracy     |
-| **Figure 14** | 文本分类（Text Classification）               | Topic3Datasets | Discriminative Model | 同上                                               | Accuracy     |
+
+
+| **图编号**    | **实验任务 task type**                        | **数据集 dataset** | **模型类型 backbone model** | **分类器类型 calssifier**                          | **评估指标** |
+| ------------- | --------------------------------------------- | ------------------ | --------------------------- | -------------------------------------------------- | ------------ |
+| **Figure 8**  | 意图分类（Intent Classification）             | CLINC150           | Generative Model            | Linear, Cosine Linear, Prototype, Cosine Prototype | Accuracy     |
+| **Figure 9**  | 关系提取（Relation Extraction）               | FewRel             | Generative Model            | 同上                                               | Accuracy     |
+| **Figure 10** | 关系提取（Relation Extraction）               | FewRel             | Discriminative Model        | 同上                                               | Accuracy     |
+| **Figure 11** | 命名实体识别（Named Entity Recognition, NER） | Ontonotes5         | Discriminative Model        | 同上                                               | Accuracy     |
+| **Figure 12** | 命名实体识别（NER）                           | I2B2               | Discriminative Model        | 同上                                               | Accuracy     |
+| **Figure 13** | 文本分类（Text Classification）               | Topic3Datasets     | Generative Model            | 同上                                               | Accuracy     |
+| **Figure 14** | 文本分类（Text Classification）               | Topic3Datasets     | Discriminative Model        | 同上                                               | Accuracy     |
+
+
 
 ### 对四种分类器效果的对比
 
@@ -730,3 +734,916 @@ Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Model
 
 
 ## Understand  the classifier  
+
+
+
+
+
+### 实验结果
+
+![image-20250107135815110](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107135815233.png)
+
+
+
+![image-20250107135842563](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107135842693.png)
+
+
+
+![image-20250107135939624](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107135939741.png)
+
+
+
+![image-20250107135958369](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107135958489.png)
+
+
+
+![image-20250107140013911](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107140014039.png)
+
+
+
+### 不同 Embedding 的定义
+
+1. **Features (特征)**:
+   - **定义**: 这是预训练语言模型 (PLM) 输出的隐藏状态（hidden states）。
+   - **计算方式**: 对于输入样本，通过模型前向传播后，在最后一层提取特定位置的隐藏状态：
+     - **句子任务**: 提取 `[CLS]` token 的隐藏状态。
+     - **单词任务**: 提取目标单词的隐藏状态。
+   - **用途**: 表示输入样本的语义信息，作为分类任务的输入。
+
+2. **Word Embeddings (词嵌入)**:
+   - **定义**: 模型词表中的嵌入向量，表示词汇的语义信息。
+   - **计算方式**: 直接从模型的嵌入矩阵中读取（通常是第一层 embedding layer）。
+   - **用途**: 用于模型的初始输入层，将词语转换为向量形式。
+
+3. **Class Embeddings (类别嵌入)**:
+   - **定义**: 线性分类器中权重矩阵的行向量。
+   - **计算方式**: 假设线性分类器的权重矩阵为 $W \in \mathbb{R}^{C \times d}$，其中 $C$ 是类别数量，$d$ 是特征的维度。每一行 $W[c] \in \mathbb{R}^d$ 表示类别 $c$ 的向量表示。
+   - **示例矩阵划分**:
+     
+     - 假设有 6 个类别 ($C=3$) 和 768 维特征 ($d=768$)，权重矩阵为：
+       $$
+       W = 
+       \begin{bmatrix}
+       w_{1,1} & w_{1,2} & \cdots & w_{1,768} \\
+       w_{2,1} & w_{2,2} & \cdots & w_{2,768} \\
+       w_{3,1} & w_{3,2} & \cdots & w_{3,768} \\
+       \end{bmatrix}
+       $$
+       - 第一行 $W[1]$ 表示类别1的向量嵌入。
+       - 第二行 $W[2]$ 表示类别2的向量嵌入。
+   
+4. **Prototypes (原型嵌入)**:
+   
+   - **定义**: 每个类别中样本特征的平均向量。
+   - **计算方式**: 对每个类别 $c$，计算该类别所有样本特征的平均值：
+     $$
+     p_c = \frac{1}{N_c} \sum_{i \in C_c} h_i
+     $$
+     - $N_c$: 类别 $c$ 的样本数量。
+     - $h_i$: 样本 $i$ 的特征向量。
+   - **用途**: 用于基于特征中心的分类。
+
+---
+
+### 2. Cosine Similarity 和 L2-Norm 的计算及意义
+
+#### 计算方式
+
+1. **Cosine Similarity (余弦相似度)**:
+   
+   - **公式**:
+     $$
+     \text{cos}(x, y) = \frac{x \cdot y}{\|x\| \|y\|}
+     $$
+     - $x, y$: 两个向量。
+     - $x \cdot y$: 向量内积。
+     - $\|x\|, \|y\|$: 向量的 L2 范数。
+   - **在图中的计算**:
+     - **Feature 和 Word Embedding**: 比较隐藏状态与词嵌入之间的方向相似性。
+     - **Feature 和 Class Embedding**: 比较隐藏状态与类别权重向量之间的方向相似性。
+     - **Feature 和 Prototype**: 比较隐藏状态与类别特征中心的方向相似性。
+   
+2. **L2-Norm (L2 范数)**:
+   - **公式**:
+     $$
+     \|x\| = \sqrt{\sum_{i=1}^d x_i^2}
+     $$
+     - $x$: 向量。
+   - **在图中的计算**:
+     - 每个向量（Feature、Word Embedding、Class Embedding、Prototype）的 L2 范数直接表示向量的大小。
+
+#### 代表的含义
+
+1. **Cosine Similarity**:
+   - **方向信息**: 衡量两个向量在高维空间中的方向是否一致。$\text{cos}(x, y) = 1$ 表示完全一致，$\text{cos}(x, y) = 0$ 表示完全不相关。
+   - **在实验中的作用**:
+     - 测试隐藏特征是否与类别权重、词嵌入或类别中心对齐。
+     - 更高的相似度表明特征更倾向于某个类别或词。
+
+2. **L2-Norm**:
+   - **大小信息**: 向量的大小反映了其在特征空间中的强度。
+   - **在实验中的作用**:
+     - 探索特征向量是否在特定任务中增大或减小。
+     - 比较特征与词嵌入、类别嵌入之间的范数差异，分析模型训练的效果。
+
+---
+
+### 3. 图中结果解读
+
+1. **Feature 和 Word Embedding**:
+   - **Cosine Similarity**: 特征与词嵌入的相似度很低（接近正交），表明特征方向经过预训练已经与词嵌入显著分离。
+   - **L2-Norm**: Word Embedding 的范数比 Feature 小，这可能是预训练过程中设计的目标（减少词嵌入的权重偏置）。
+
+2. **Feature 和 Class Embedding**:
+   - **Cosine Similarity**: 特征与分类权重的相似度也较低，表明分类器可能未充分利用特征方向。
+   - **L2-Norm**: Class Embedding 的范数比 Feature 略大，表明分类器在权重训练中倾向于增加范数。
+
+3. **Feature 和 Prototypes**:
+   - **Cosine Similarity**: 特征与类别中心的相似度较高，说明特征在一定程度上对类别进行了聚集。
+   - **L2-Norm**: Prototypes 的范数最大，表明它们可能代表了更广泛的类别特征。
+
+---
+
+#### 总结
+
+1. **Embedding 的定义**:
+   - Feature 表示输入特征，Word Embedding 表示词的初始表示，Class Embedding 表示分类权重向量，Prototype 表示类别特征中心。
+2. **Cosine Similarity 和 L2-Norm**:
+   - Cosine Similarity 衡量方向相似性，L2-Norm 衡量向量强度。
+   - 在实验中揭示了特征如何与词嵌入、类别权重及类别中心对齐。
+3. **实验意义**:
+   - 分析特征在分类任务中的对齐程度，揭示了 Linear Probing 优于其他分类器的内在原因。
+
+### Feature Sim 详细解释
+
+**Feature Sim 并不是同一个样本的特征相似度结果，而是所有样本特征两两之间的相似度分布的结果。** 以下是详细的解释：
+
+------
+
+#### **1. 为什么 Feature Sim 不是 1**
+
+- 如果 Feature Sim 仅计算同一个样本的特征与自身的相似度，那么结果必然是 1，因为： 
+  $$
+  \text{cos}(h, h) = \frac{h \cdot h}{\|h\| \cdot \|h\|} = \frac{\|h\|^2}{\|h\|^2} = 1
+  $$
+   这是因为向量与自身的方向完全一致。
+
+- 然而，图中的 Feature Sim 并不是针对单个样本的特征与自身的相似度，而是 **不同样本的特征两两之间的余弦相似度分布**。
+
+------
+
+#### **2. 如何计算 Feature Sim**
+
+Feature Sim 的计算方式是对数据集中所有样本的特征向量 hih_i 和 hjh_j 进行两两组合，计算余弦相似度：
+$$
+\text{cos}(h_i, h_j) = \frac{h_i \cdot h_j}{\|h_i\| \|h_j\|}, \quad \forall i \neq j
+$$
+
+
+- $h_i, h_j$: 两个不同样本的特征向量。
+- 计算结果是一个分布，反映数据集中所有样本特征向量之间的方向关系。
+
+**结果不是 1 的原因**
+
+- 样本特征向量之间并非完全一致，因此余弦相似度通常小于 1。
+- 特征的分布可能受任务或模型的影响。例如：
+  - 如果特征向量高度聚集在某个方向，相似度分布会较高，接近 1。
+  - 如果特征向量分布较分散，相似度会较低，甚至接近 0。
+
+------
+
+#### **3. Feature Sim 分布的意义**
+
+1. **反映特征的全局分布**:
+   - 如果相似度接近 1，说明特征在向量空间中高度集中，方向差异小。
+   - 如果相似度较低，说明特征在向量空间中较分散，方向差异大。
+2. **揭示模型的特征表示能力**:
+   - 高度集中:
+     - 表明模型可能将特征压缩到一个窄锥形空间（cone of features），如论文中提到的现象。
+     - 优点：对任务类别有较好的分离能力。
+     - 缺点：可能限制模型的泛化能力。
+   - 较为分散:
+     - 表明模型特征具有较高的多样性。
+     - 优点：模型可能对复杂任务具有更好的泛化能力。
+     - 缺点：可能导致类别之间的区分度降低。
+3. **对增量学习的影响**:
+   - 如果特征集中且方向保持一致，增量学习时旧任务特征可能较难被遗忘。
+   - 如果特征分布分散，新任务可能会覆盖旧任务的特征，从而引发灾难性遗忘。
+
+------
+
+#### **4. 从图中得出的观察**
+
+- 图中的 Feature Sim 分布并不是完全接近 1，主要因为特征向量之间有方向差异。
+- **特征的高相似性（分布接近 1）** 表明模型在特定任务上提取的特征高度一致，这通常是预训练语言模型的一个特性，尤其是在特定领域的任务中。
+- **特征的低相似性（分布偏离 1）** 可能表明任务之间的特征分布差异较大，或模型需要区分更多细粒度的类别。
+
+------
+
+#### **5. 总结**
+
+- Feature Sim 计算的是 **所有样本之间特征向量的余弦相似度分布**，而不是单个样本特征的自相似度。
+- 结果不是 1 的原因是样本特征向量之间存在方向差异。
+- 这种分布揭示了特征在向量空间中的全局性质，为分析特征的表示能力和增量学习效果提供了直观依据。
+
+
+
+
+
+
+
+## 文中使用的任务，数据库，和增量学习过程中的类别设置
+
+
+
+### 数据库介绍
+
+以下是带有原始定义的数据库的详细信息，包括其来源、组织形式、任务领域等。
+
+------
+
+#### **1. 文本分类（Text Classification）**
+
+##### **1.1 Topic3Datasets**
+
+- **来源**: 由 AGNews、DBPedia 和 Yahoo 三个数据集组成。
+- 组织形式:
+  - AGNews:
+    - 数据量: 包括 120,000 条训练样本和 7,600 条测试样本。
+    - 类别: 4 个（World, Sports, Business, Science/Technology）。
+    - 任务: 对新闻主题分类。
+    - 来源: 从 AGNews 新闻源获取文本内容。
+  - DBPedia:
+    - 数据量: 包括 560,000 条训练样本和 70,000 条测试样本。
+    - 类别: 14 个（如 Company, Educational Institution, Artist）。
+    - 任务: 从 DBPedia 提取结构化数据，并将其应用于分类。
+  - Yahoo:
+    - 数据量: 包括 140,000 条训练样本和 60,000 条测试样本。
+    - 类别: 10 个（如 Society/Culture, Education, Health）。
+    - 任务: 对用户在 Yahoo Answers 上提出的问题进行分类。
+- **任务领域**: 新闻分类、知识库分类、用户问题分类。
+- **目标**: 对不同领域文本进行主题分类。
+
+------
+
+#### **2. 意图分类（Intent Classification）**
+
+##### **2.1 CLINC150**
+
+- **来源**: CLINC AI 实验室。
+- 组织形式:
+  - 数据量: 包括 15,000 条训练数据，4,500 条测试数据。
+  - 类别: 150 个（如 “余额查询”，“航班预订”，“天气信息”）。
+  - 任务: 识别用户在对话系统中的意图。
+- **任务领域**: 对话系统中的意图识别。
+- **目标**: 提高人机交互的准确性，优化用户体验。
+
+##### **2.2 Banking77**
+
+- **来源**: 银行业相关应用数据。
+- 组织形式:
+  - 数据量: 包括 7,191 条训练样本和 2,800 条测试样本。
+  - 类别: 77 个（如 “转账失败”，“账户冻结”）。
+  - 任务: 识别银行领域的用户意图。
+- **任务领域**: 金融领域对话中的意图分类。
+- **目标**: 提供更精确的银行客户服务。
+
+------
+
+#### **3. 关系抽取（Relation Extraction）**
+
+##### **3.1 FewRel**
+
+- **来源**: 清华大学 NLP 组。
+- 组织形式:
+  - 数据量: 包括 80 个类别，每类 700 条训练样本，100 条测试样本。
+  - 类别: 关系类型（如 “位于”，“创立者”，“产品”）。
+  - 任务: 从句子中抽取实体之间的关系。
+- **任务领域**: 知识图谱构建、信息抽取。
+- **目标**: 自动化生成结构化关系数据。
+
+##### **3.2 TACRED**
+
+- **来源**: 斯坦福大学 NLP 小组。
+- 组织形式:
+  - 数据量: 包括 106,264 条句子，每条句子带有关系标签。
+  - 类别: 40 个（如 “机构-创立者”，“人员-雇主”）。
+  - 任务: 提取句子中两个标注实体的关系。
+- **任务领域**: 信息抽取。
+- **目标**: 提高自动化信息系统的关系识别能力。
+
+------
+
+#### **4. 命名实体识别（Named Entity Recognition, NER）**
+
+##### **4.1 Few-NERD**
+
+- **来源**: 清华大学 Few-Shot NER 数据集。
+- 组织形式:
+  - 数据量: 66 个实体类别（如 “地名”，“企业”），包括细粒度实体类别。
+  - 数据形式: 使用 BIO 格式标注。
+  - 任务: 从句子中标注实体。
+- **任务领域**: 实体识别、知识图谱扩展。
+- **目标**: 支持少样本学习下的命名实体识别。
+
+##### **4.2 OntoNotes5**
+
+- **来源**: OntoNotes 项目，由多个机构合作开发。
+- 组织形式:
+  - 数据量: 包括 59922 条训练样本，23836 条测试样本。
+  - 类别: 18 个实体类型（如 “人名”，“地名”，“机构名”）。
+  - 数据形式: 涵盖新闻、网络评论、对话等多种语料。
+- **任务领域**: 广义的命名实体识别。
+- **目标**: 提供多领域、多语言的标注数据。
+
+##### **4.3 I2B2**
+
+- **来源**: I2B2 (Informatics for Integrating Biology & the Bedside) 项目。
+- 组织形式:
+  - 数据量: 59376 条训练样本，41397 条测试样本。
+  - 类别: 医学实体类型（如“疾病名称”，“药物名称”）。
+  - 数据形式: 医学记录文本。
+- **任务领域**: 医学文本的实体识别。
+- **目标**: 支持医学知识的提取和应用。
+
+------
+
+#### **总结表**
+
+| **数据集** | **任务领域** | **类别数量** | **数据量**     | **目标**       | **来源**               |
+| ---------- | ------------ | ------------ | -------------- | -------------- | ---------------------- |
+| AGNews     | 新闻分类     | 4            | 120,000+7,600  | 新闻主题分类   | 新闻源                 |
+| DBPedia    | 知识库分类   | 14           | 560,000+70,000 | 结构化知识分类 | DBPedia 知识库         |
+| Yahoo      | 用户问题分类 | 10           | 140,000+60,000 | 用户提问分类   | Yahoo Answers          |
+| CLINC150   | 对话意图分类 | 150          | 15,000+4,500   | 优化对话系统   | CLINC AI 实验室        |
+| Banking77  | 金融意图分类 | 77           | 7,191+2,800    | 银行业对话分类 | 银行业应用             |
+| FewRel     | 关系抽取     | 80           | 每类 700+100   | 实体关系抽取   | 清华大学 NLP 组        |
+| TACRED     | 关系抽取     | 40           | 106,264        | 高精度关系分类 | 斯坦福 NLP 组          |
+| Few-NERD   | 实体识别     | 66           | 不详           | 少样本实体识别 | 清华大学 Few-Shot 项目 |
+| OntoNotes5 | 广义实体识别 | 18           | 59,922+23,836  | 多领域实体标注 | OntoNotes 项目         |
+| I2B2       | 医学实体识别 | 16           | 59,376+41,397  | 医学文本标注   | I2B2 项目              |
+
+如果需要更具体的某个数据集的分析或详细信息，请继续提出！
+
+
+
+### 文中的增量学习设置
+
+![image-20250107144029885](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107144030032.png)
+
+
+
+
+
+### 更加详细的代码实现
+
+#### **Topic3Datasets 数据集分类与划分的实现过程**
+
+##### **1. 数据来源与总体设置**
+
+`Topic3Datasets` 由 AGNews、DBPedia 和 Yahoo 数据集组成，用于文本分类任务。在增量学习中，该数据集被划分为 5 个任务，每个任务包含 5 个类别，共 25 个类别。
+
+------
+
+##### **2. 数据集类别的来源与处理**
+
+**2.1 类别的来源**
+
+- AGNews: 包含 4 个类别，原始类别是：
+  - World, Sports, Business, Science/Technology。
+- DBPedia: 包含 14 个类别，原始类别是：
+  - Company, Educational Institution, Artist, Athlete, Office Holder, Mean Of Transportation, Building, Natural Place, Village, Animal, Plant, Album, Film, Written Work。
+- Yahoo: 包含 10 个类别，原始类别是：
+  - Society & Culture, Science & Mathematics, Health, Education, Computers & Internet, Sports, Business & Finance, Entertainment & Music, Family & Relationships, Politics & Government。
+
+**2.2 类别筛选与清理**
+
+文中提到，部分类别存在重叠或意义模糊，为保证类别的独立性，作者对类别进行了筛选：
+
+- 从 Yahoo 中移除了以下类别：
+  - Sports, Business & Finance, Science & Mathematics（因为这些类别与 AGNews 类别重叠）。
+- 剩余的类别和 AGNews、DBPedia 的类别共同构成 25 个类别。
+
+**2.3 类别语义化处理**
+
+- 对生成式模型，部分类别名称被重命名为更直观的语义表达：
+  - 如 "Sci/Tech" 被替换为 "Science and Technology"。
+  - "EducationalInstitution" 被替换为 "Educational Institution"。
+  - 类别名称的语义化处理在代码中通过字符串替换实现【33†source】。
+
+------
+
+##### **3. 数据的增量学习划分**
+
+**3.1 划分规则**
+
+在代码中，数据集的类别被划分为 5 个任务，每个任务包含 5 个类别：
+
+- 25 个类别按任务顺序分配，每个任务的类别集合为：
+  - 任务 1: 类别 1 至 5。
+  - 任务 2: 类别 6 至 10。
+  - 任务 3: 类别 11 至 15。
+  - 任务 4: 类别 16 至 20。
+  - 任务 5: 类别 21 至 25。
+
+划分逻辑通过以下代码实现：
+
+```python
+NUM_TASK = 5
+NUM_CLASS = 25
+continual_config = {
+    'CUR_CLASS': [list(range(task_id * (NUM_CLASS // NUM_TASK), (task_id + 1) * (NUM_CLASS // NUM_TASK))) for task_id in range(NUM_TASK)]
+}
+```
+
+**3.2 数据划分**
+
+在每个任务中：
+
+- 每个类别分配固定数量的训练和测试样本：
+  - 训练集：每个类别 3,000 条。
+  - 测试集：每个类别 2,000 条。
+- 数据集样本按随机种子打乱，确保划分一致性。
+
+代码实现：
+
+```python
+def preprocess_topic3datasets(num_sample_train_per_class=3000, num_sample_test_per_class=2000):
+    # 遍历子数据集
+    for subdataset in subdataset_list:
+        # 加载类别信息
+        with open(os.path.join(src_path, subdataset, 'classes.txt')) as f:
+            for line in f.readlines():
+                _label = line.strip()
+                # 移除 Yahoo 中的重叠类别
+                if subdataset == 'yahoo' and _label in ['Sports', 'Business & Finance', 'Science & Mathematics']:
+                    continue
+                label2idx[_label] = global_cnt
+                global_cnt += 1
+
+        # 加载训练集
+        for i, row in df.iterrows():
+            if _tmp_label_idx not in subdatasets_label_idx[subdataset]:
+                continue
+            train_x.append(input_text)
+            train_y.append(label2idx[_label])
+
+        # 类别下采样
+        if num_sample_train_per_class != -1:
+            for _label_idx in set(train_y):
+                _class_sample_idx = np.where(np.array(train_y) == _label_idx)[0]
+                random.shuffle(_class_sample_idx)
+                train_x = [train_x[_i] for _i in _select_idx_all]
+                train_y = [train_y[_i] for _i in _select_idx_all]
+```
+
+------
+
+##### **4. 增量学习过程**
+
+增量学习过程依次加载各个任务的数据：
+
+- 每次仅加载当前任务的类别数据，并将其添加到模型中。
+
+- 模型在任务间累积类别，但训练时仅能访问当前任务的数据。
+
+- 数据存储结构示例：
+
+  ```json
+  {
+      "task_0": {
+          "train": {
+              "input": ["文本1", "文本2"],
+              "target": ["类别1", "类别2"],
+              "label_idx_cil": [0, 1]
+          }
+      },
+      "task_1": { ... },
+      ...
+  }
+  ```
+
+------
+
+##### **5. 总结**
+
+1. **类别来源**: 通过筛选 AGNews、DBPedia 和 Yahoo 的类别，共生成 25 个类别。
+
+2. **数据划分**: 每个任务引入 5 个类别，每个类别包含固定数量的训练和测试实例。
+
+3. 实现细节
+
+   :
+
+   - 使用随机种子和下采样确保每个任务的数据一致性。
+   - 将类别按任务顺序分配，逐步引入新类别。
+
+如果需要更具体的某部分代码解析或逻辑说明，请随时告知！
+
+
+
+### **代码解析：Topic3Datasets 增量学习的分类与划分实现**
+
+以下是对 `preprocess_topic3datasets` 函数的逐步解析，解释如何对 `Topic3Datasets` 数据集进行分类和增量学习划分。
+
+------
+
+#### **1. 数据集来源与结构**
+
+#### **1.1 数据来源**
+
+`Topic3Datasets` 包含三个子数据集：
+
+- **AGNews**: 新闻分类任务，包含类别如 `World`, `Sports`, `Business`, `Science/Technology`。
+- **DBPedia**: 知识库分类任务，包含类别如 `Company`, `Educational Institution`, `Artist`。
+- **Yahoo**: 用户问题分类任务，包含类别如 `Society/Culture`, `Health`, `Politics/Government`。
+
+#### **1.2 数据集文件结构**
+
+每个子数据集包含以下文件：
+
+- **`classes.txt`**: 定义数据集中的类别名称。
+- **`train.csv`** 和 **`test.csv`**: 包含输入文本及其对应的类别标签。
+
+------
+
+#### **2. 类别的清理与处理**
+
+#### **2.1 清理重叠类别**
+
+- 从 Yahoo 数据集中移除与 AGNews 重叠的类别：
+  - `Sports`, `Business & Finance`, `Science & Mathematics`。
+- 目的是避免类别间语义重叠。
+
+#### **2.2 类别语义化**
+
+- 为生成式模型重命名类别，例如：
+
+  - `Sci/Tech` → `Science and Technology`。
+  - `EducationalInstitution` → `Educational Institution`。
+
+- 代码实现：
+
+  ```python
+  if _label == 'Sci/Tech':
+      _label = 'Science and Technology'
+  elif _label == 'EducationalInstitution':
+      _label = 'Educational Institution'
+  ```
+
+#### **2.3 类别索引的生成**
+
+- 每个类别被赋予一个全局唯一索引 `label2idx`。
+
+- `idx2label` 用于反向映射索引到类别名称。
+
+- 实现：
+
+  ```python
+  subdatasets_label_list[subdataset].append(_label)
+  subdatasets_label_idx[subdataset].append(_cnt)
+  label2idx[_label] = global_cnt
+  global_cnt += 1
+  ```
+
+------
+
+#### **3. 数据划分与预处理**
+
+#### **3.1 数据划分**
+
+- 每个子数据集中的样本按照类别读取，并分为训练集、验证集、测试集。
+
+- 输入文本处理：
+
+  - 对于 Yahoo 数据集，拼接多个字段作为输入：
+
+    ```python
+    input_text = '%s %s %s' % (row[1], row[2], row[3])
+    ```
+
+  - 对于 AGNews 和 DBPedia 数据集：
+
+    ```python
+    input_text = '%s %s' % (row[1], row[2])
+    ```
+
+#### **3.2 类别下采样**
+
+- 限制每个类别的样本数量，避免类别不平衡：
+
+  ```python
+  if num_sample_train_per_class != -1:
+      for _label_idx in set(train_y):
+          _class_sample_idx = np.where(np.array(train_y) == _label_idx)[0]
+          random.shuffle(_class_sample_idx)
+          _select_idx_all.extend(_class_sample_idx[:num_sample_train_per_class])
+  ```
+
+#### **3.3 类别顺序的随机化**
+
+- 打乱类别的顺序，确保实验的一致性：
+
+  ```python
+  shuffle_class_order = list(range(NUM_CLASS))
+  random.shuffle(shuffle_class_order)
+  train_y_all = [shuffle_class_order[_y] for _y in train_y_all]
+  ```
+
+------
+
+#### **4. 增量学习任务划分**
+
+#### **4.1 划分规则**
+
+- 数据集被划分为 5 个任务，每个任务包含 5 个类别。
+
+- 每个任务中仅引入当前任务的类别，任务间类别不重叠。
+
+- 实现：
+
+  ```python
+  NUM_TASK = 5
+  continual_config = {
+      'CUR_CLASS': [
+          list(range(task_id * (NUM_CLASS // NUM_TASK), (task_id + 1) * (NUM_CLASS // NUM_TASK)))
+          for task_id in range(NUM_TASK)
+      ]
+  }
+  ```
+
+#### **4.2 数据组织**
+
+- 每个任务的数据包括：
+
+  - 输入文本（`input`）
+  - 类别标签索引（`label_idx_cil` 和 `label_idx_til`）
+
+- 数据结构：
+
+  ```json
+  "task_0": {
+      "train": {
+          "input": ["文本1", "文本2"],
+          "target": ["类别1", "类别2"],
+          "label_idx_cil": [0, 1]
+      },
+      "test": {
+          "input": ["文本3", "文本4"],
+          "target": ["类别1", "类别2"],
+          "label_idx_cil": [0, 1]
+      }
+  }
+  ```
+
+------
+
+#### **5. 数据存储**
+
+- 最终的处理结果保存为 
+
+  ```
+  continual_data.json
+  ```
+
+   和 
+
+  ```
+  continual_config.json
+  ```
+
+  ：
+
+  - **`continual_data.json`**: 每个任务的训练、验证、测试数据。
+  - **`continual_config.json`**: 包含任务和类别信息。
+
+- 保存代码：
+
+  ```python
+  with open(os.path.join(tgt_path, 'continual_data.json'), 'w') as f:
+      json.dump(continual_data, f)
+  
+  with open(os.path.join(tgt_path, 'continual_config.json'), 'w') as f:
+      json.dump(continual_config, f)
+  ```
+
+------
+
+#### **6. 总结**
+
+1. **类别来源与清理**:
+   - 合并 AGNews、DBPedia、Yahoo 的类别，移除重叠类别。
+   - 类别语义化处理提高了生成式模型的适配性。
+2. **数据划分与预处理**:
+   - 按任务逐步引入新类别，每个任务的类别不重叠。
+   - 通过下采样和平衡类别分布，确保数据质量。
+3. **增量学习实现**:
+   - 数据以任务为单位存储，任务间类别独立。
+   - 实验结果的随机性通过固定类别顺序实现一致性。
+
+如果您需要更具体的实现细节或其他部分的代码解析，请告诉我！
+
+##   PLM 预训练过程 中不同 checkpoint 对应的模型的表现
+
+![image-20250107164233591](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107164233775.png)
+
+
+
+![image-20250107164326070](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107164326248.png)
+
+
+
+文中通过之前的 probing 的实验表明， 预训练大模型有着充足的能力和知识储备来直接进行下游任务，那么作者想要进一步探究，这个能力或者说是知识是在大模型的预训练过程逐渐积累的吗？
+
+所以作者直接加载了在预训练过程不同阶段的预训练模型,然后对这些模型也进行 SEQ ，然后查看前后效果对比。
+
+令人惊奇的是，即使是随机初始化的大模型，也能够在下游任务做得很好，很神奇。
+
+而且总体来说，这些预训练阶段的模型在 SEQ 之后，都能达到很好的效果。
+
+但就按着表现来看，第一个阶段是训练一段时间的大模型效果反而不如随机初始化的效果，并且表现还越越差。
+
+但好在，随着训练的进行，效果逐渐得到了提高。
+
+然后效果进入了瓶颈，最后又出现了下降。作者认为这一阶段的下降是由于预训练阶段的文本和下游任务的数据的差异造成的，然后通过SEQ，能够显著减小这个间隔。
+
+## 为什么最开始的随机初始化大模型就能做到很好的效果
+
+作者进一步探究了，为什么最开始的随机初始化大模型就能做到很好的效果，作者使用tsne进行了可视化。
+
+
+
+![image-20250107171152562](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107171152743.png)
+
+
+
+![image-20250107171217007](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107171217202.png)
+
+
+
+可以看到 SEQ 增大了不同类别的区分度。 pretraining 也增大了不同类别的区分度。
+
+当随机初始化大模型，然后经过SEQ之后，模型也能对不同类别的大部分内容进行区分。作者认为这是由于 transformer的结构导致的。
+
+综合上面两点，结论就是 transformer 和预训练都影响了PLM的能力。
+
+
+
+## 讨论 SEQ 过程 中，效果下降，是由于什么呢
+
+首先 在SEQ的过程中，新出现的类别有着更大的logit ，那么原因会是什么呢，由于最后是一个简单的线性层，$y= W \cdot h$
+
+所以结果要不然就是新出现的类别的类embdding$W[C]$更大，
+
+要不然就是 新的类别的特征向量和对应的类embdding(就是分类器矩阵对应的那一行)相似度更高,既即$W[C] \cdot h$的值更大。
+
+
+
+![image-20250107174345006](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107174345199.png)
+
+
+
+
+
+![image-20250107175115863](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107175116040.png)
+
+
+
+![image-20250107175136588](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107175136780.png)
+
+
+
+![image-20250107175154829](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250107175155004.png)
+
+
+
+### **观察分类器和探测分类器在 SEQ（顺序微调）中的差异**
+
+在论文中，观察分类器和探测分类器的训练与评估方式存在显著差异，这体现在数据访问、模型设置以及评估目标等方面。以下是基于代码和论文内容的详细对比与分析。
+
+------
+
+### **1. 观察分类器（Observed Classifier）**
+
+#### **定义**
+
+观察分类器是在 SEQ 过程中实时训练的分类器，旨在反映模型在真实增量学习场景中的性能。其主要关注点是评估任务序列下知识的保留与遗忘。
+
+#### **训练设置**
+
+- 仅使用当前任务数据：
+  - 每次训练仅访问当前任务的类别数据。
+  - 无法接触到之前任务的数据，因此无法进行联合训练，容易引发灾难性遗忘。
+- 任务间的独立性：
+  - 每次训练时，分类器仅更新当前任务的类别权重，而不会调整旧任务类别的权重。
+
+#### **评估方式**
+
+- 现实场景表现：
+  - 对所有已学习任务进行测试，但通常旧任务的性能较差。
+- 偏差问题：
+  - 新任务类别因模型偏向当前任务而具有较大的权重或范数，旧任务类别的预测准确率显著下降。
+
+#### **代码实现**
+
+在 SEQ 中，分类器随着每个任务的学习不断更新：
+
+```python
+logits = classifier(extracted_features)
+loss = loss_fct(logits, labels)
+optimizer.step()
+```
+
+在评估时，仅使用当前任务的分类器进行预测：
+
+```python
+logits = classifier_list[cur_task_id](extracted_features)
+```
+
+【64†source】【66†source】
+
+------
+
+### **2. 探测分类器（Probing Classifier）**
+
+#### **定义**
+
+探测分类器用于评估冻结的 PLM 的表示能力，通过重新训练分类器来测量模型隐藏特征的分类上界性能。
+
+#### **训练设置**
+
+- 接触所有任务数据：
+  - 探测分类器访问所有任务的数据（包括旧任务和当前任务），以评估主干模型的整体特征能力。
+- 冻结主干模型：
+  - 仅重新训练分类器部分，主干 PLM 的参数保持冻结，从而避免任务间的权重干扰。
+
+#### **评估方式**
+
+- 理论上的最佳性能：
+  - 测量冻结的隐藏特征在所有任务上的分类性能，作为模型的理论上界。
+- 无遗忘影响：
+  - 探测分类器不受灾难性遗忘的影响，因为它可以重新访问所有数据。
+
+#### **代码实现**
+
+探测分类器通过访问所有任务的数据进行训练：
+
+```python
+train_features_all = torch.cat(train_feature_list, dim=0)
+train_label_idx_all = torch.cat(train_label_idx_list, dim=0)
+
+logits_linear = linear_layer(train_features_all)
+loss = loss_fct(logits_linear, train_label_idx_all)
+optimizer.step()
+```
+
+在冻结模型后，通过不同的探测方法（如线性探测）进行评估：
+
+```python
+prob_result_dict = probing_on_all_task(params, task_id, ...)
+```
+
+【65†source】【66†source】
+
+------
+
+### **3. 关键差异对比**
+
+
+
+| **对比维度** | **观察分类器**                       | **探测分类器**                           |
+| ------------ | ------------------------------------ | ---------------------------------------- |
+| **数据访问** | 仅使用当前任务数据                   | 访问所有任务数据                         |
+| **主干模型** | 主干模型随着任务逐步微调             | 主干模型冻结，特征不变                   |
+| **遗忘现象** | 受灾难性遗忘影响，旧任务性能显著下降 | 不受遗忘影响，评估模型隐藏特征的表示能力 |
+| **评估目标** | 测试实际场景中的模型表现             | 测试理论上的特征分类上界性能             |
+| **偏向问题** | 新任务类别偏向明显                   | 类别分布均衡，无明显偏向                 |
+
+------
+
+
+
+### **4. 实验结果分析**
+
+#### **Figure 6 的结论**
+
+- 观察分类器:
+  - 旧任务类别的嵌入向量（class embeddings）偏离初始位置，导致遗忘。
+  - 旧任务类别的范数减小，说明分类器对旧类别的表示能力减弱。
+- 探测分类器:
+  - 冻结的隐藏特征仍然能够很好地支持所有任务的分类，表现稳定。
+
+------
+
+### **5. 总结**
+
+1. 观察分类器:
+   - 反映了 SEQ 增量学习中的现实表现，但受到灾难性遗忘的影响，旧任务类别表现较差。
+2. 探测分类器:
+   - 用于分析 PLM 的特征表示能力，提供模型在理想条件下的分类性能上界。
+3. 启示:
+   - 通过探测分类器的高性能表明，遗忘的主要原因在于分类器的偏差，而非主干模型特征的退化。
+
+如果需要更详细的分析或代码细节解释，请随时告知！
+
+，
