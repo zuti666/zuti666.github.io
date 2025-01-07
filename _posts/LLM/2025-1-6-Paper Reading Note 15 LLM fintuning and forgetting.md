@@ -46,6 +46,10 @@ large, pretrained ResNets and Transformers are significantly more resistant to f
 
 
 
+
+
+
+
 - 是否存在规模临界点（如10亿参数以上），遗忘率会显著降低？
 
 
@@ -92,7 +96,57 @@ large, pretrained ResNets and Transformers are significantly more resistant to f
 
 ### **架构复杂性对遗忘的作用**
 
+
+
 - Transformer相较于RNN是否更具抗遗忘能力？
+
+
+
+CAN BERT REFRAIN FROM FORGETTING ON SEQUENTIAL TASKS? A PROBING STUDY
+
+
+
+**CAN BERT REFRAIN FROM FORGETTING ON SEQUENTIAL TASKS? A PROBING STUDY**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/201047e827ed9587158fc71256c576c8544e3dfc)  [`Paper`](https://www.semanticscholar.org/paper/201047e827ed9587158fc71256c576c8544e3dfc)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F201047e827ed9587158fc71256c576c8544e3dfc%3Ffields%3DcitationCount)
+
+2023    International Conference on Learning Representations 
+
+
+
+论文指出，BERT 模型具有持续学习的潜能。作者提到在训练完旧的任务之后进行训练新的任务，旧的任务中的不同类别仍然保持区别，且整体的变换保持一定的拓扑结构。而旧的任务的类别与新的任务的类别在特征层面出现了重叠，使用 experience relay 特征层回放，能够减轻重叠。
+
+![image-20250106133153486](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250106133153624.png)
+
+
+
+这一点可以进行实验探究一下
+
+
+
+Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models
+
+
+
+- **Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/9e2a811a6f5d1c5352ce19ac24303810eb1867f7)  [`Paper`](https://www.semanticscholar.org/paper/9e2a811a6f5d1c5352ce19ac24303810eb1867f7)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F9e2a811a6f5d1c5352ce19ac24303810eb1867f7%3Ffields%3DcitationCount)
+
+  2023    Annual Meeting of the Association for Computational Linguistics 
+
+
+
+这篇论文指出 SEQ sequence fine-tuning 下， PLMs 的遗忘现象主要由于分类器的偏移而不是 PLM遗忘了旧的知识。
+
+
+
+
+
+
+
+
+
+
 
 
 
