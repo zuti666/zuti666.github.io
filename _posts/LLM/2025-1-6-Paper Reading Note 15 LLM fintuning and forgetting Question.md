@@ -20,7 +20,39 @@ keywords: [Paper Reading,  LLM, Continual Learning, ]
 
 
 
-EFFECT OF MODEL AND PRETRAINING SCALE ON CATASTROPHIC FORGETTING IN NEURAL NETWORKS
+- 是否存在规模临界点（如10亿参数以上），遗忘率会显著降低？
+
+
+
+- 更大的模型参数是否本质上只是增加了存储能力，而非记忆的质量？
+
+
+
+
+
+
+
+### **预训练规模对遗忘的影响？**
+
+- 数据集覆盖度：是否覆盖更多的概念，减少需要迁移的部分？
+
+
+
+- 训练时间的影响：长时间训练的模型是否更容易产生知识冲突？
+
+
+
+
+
+
+
+
+
+
+
+### 相关参考论文
+
+#### 1  EFFECT OF MODEL AND PRETRAINING SCALE ON CATASTROPHIC FORGETTING IN NEURAL NETWORKS
 
 - **EFFECT OF MODEL AND PRETRAINING SCALE ON  CATASTROPHIC FORGETTING IN NEURAL NETWORKS**
 
@@ -44,29 +76,35 @@ large, pretrained ResNets and Transformers are significantly more resistant to f
 
 
 
+#### 2 Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models
+
+
+
+- **Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/9e2a811a6f5d1c5352ce19ac24303810eb1867f7)  [`Paper`](https://www.semanticscholar.org/paper/9e2a811a6f5d1c5352ce19ac24303810eb1867f7)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F9e2a811a6f5d1c5352ce19ac24303810eb1867f7%3Ffields%3DcitationCount)
+
+  2023    Annual Meeting of the Association for Computational Linguistics 
+
+预训练对模型的影响： 
+
+即使是随机初始化的大模型，在zero-shot 和经过finetuning也能到的一个很好的效果，
+
+在预训练初期阶段，预训练后的大模型 在下游任务的 zero-shot 能力变差，经过finetuning的效果也变差
+
+在预训练后期，预训练的大模型 在下游任务的 zero-shot 能力变强，经过finetuning的效果也变强
+
+继续预训练，预训练的大模型 在下游任务的 zero-shot 能力又变差，作者推断这可能是由于预训练的文本和下游任务的文本不一致所致的，在下游任务finetune之后同样能够实现很好的效果
+
+还有就是模型的大小不一样，但出现拐点的时间是类似的，也就是说经过同样轮数的训练
+
+
+
+![image-20250111092446465](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250111092446534.png)
 
 
 
 
-
-
-- 是否存在规模临界点（如10亿参数以上），遗忘率会显著降低？
-
-
-
-- 更大的模型参数是否本质上只是增加了存储能力，而非记忆的质量？
-
-
-
-
-
-### **预训练规模对遗忘的影响？**
-
-- 数据集覆盖度：是否覆盖更多的概念，减少需要迁移的部分？
-
-
-
-- 训练时间的影响：长时间训练的模型是否更容易产生知识冲突？
 
 
 
@@ -92,6 +130,18 @@ large, pretrained ResNets and Transformers are significantly more resistant to f
 
 
 
+
+
+训练顺序的不同会影响大模型的效果
+
+
+
+
+
+
+
+
+
 ## **1.3 网络架构与遗忘**
 
 ### **架构复杂性对遗忘的作用**
@@ -102,41 +152,15 @@ large, pretrained ResNets and Transformers are significantly more resistant to f
 
 
 
-CAN BERT REFRAIN FROM FORGETTING ON SEQUENTIAL TASKS? A PROBING STUDY
 
 
 
-**CAN BERT REFRAIN FROM FORGETTING ON SEQUENTIAL TASKS? A PROBING STUDY**
-
-[`semanticscholar`](https://www.semanticscholar.org/paper/201047e827ed9587158fc71256c576c8544e3dfc)  [`Paper`](https://www.semanticscholar.org/paper/201047e827ed9587158fc71256c576c8544e3dfc)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F201047e827ed9587158fc71256c576c8544e3dfc%3Ffields%3DcitationCount)
-
-2023    International Conference on Learning Representations 
 
 
 
-论文指出，BERT 模型具有持续学习的潜能。作者提到在训练完旧的任务之后进行训练新的任务，旧的任务中的不同类别仍然保持区别，且整体的变换保持一定的拓扑结构。而旧的任务的类别与新的任务的类别在特征层面出现了重叠，使用 experience relay 特征层回放，能够减轻重叠。
-
-![image-20250106133153486](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250106133153624.png)
 
 
 
-这一点可以进行实验探究一下
-
-
-
-Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models
-
-
-
-- **Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models**
-
-  [`semanticscholar`](https://www.semanticscholar.org/paper/9e2a811a6f5d1c5352ce19ac24303810eb1867f7)  [`Paper`](https://www.semanticscholar.org/paper/9e2a811a6f5d1c5352ce19ac24303810eb1867f7)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F9e2a811a6f5d1c5352ce19ac24303810eb1867f7%3Ffields%3DcitationCount)
-
-  2023    Annual Meeting of the Association for Computational Linguistics 
-
-
-
-这篇论文指出 SEQ sequence fine-tuning 下， PLMs 的遗忘现象主要由于分类器的偏移而不是 PLM遗忘了旧的知识。
 
 
 
@@ -161,6 +185,64 @@ Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Model
 
 
 - 是否可以通过增加外部记忆模块（如RAG框架中的检索模块）减少遗忘？
+
+
+
+
+
+### 相关参考论文
+
+
+
+#### CAN BERT REFRAIN FROM FORGETTING ON SEQUENTIAL TASKS? A PROBING STUDY
+
+**CAN BERT REFRAIN FROM FORGETTING ON SEQUENTIAL TASKS? A PROBING STUDY**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/201047e827ed9587158fc71256c576c8544e3dfc)  [`Paper`](https://www.semanticscholar.org/paper/201047e827ed9587158fc71256c576c8544e3dfc)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F201047e827ed9587158fc71256c576c8544e3dfc%3Ffields%3DcitationCount)
+
+2023    International Conference on Learning Representations 
+
+
+
+论文指出，BERT 模型具有持续学习的潜能。作者提到在训练完旧的任务之后进行训练新的任务，旧的任务中的不同类别仍然保持区别，且整体的变换保持一定的拓扑结构。而旧的任务的类别与新的任务的类别在特征层面出现了重叠，使用 experience relay 特征层回放，能够减轻重叠。
+
+![image-20250106133153486](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250106133153624.png)
+
+
+
+
+
+#### Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models
+
+
+
+- **Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/9e2a811a6f5d1c5352ce19ac24303810eb1867f7)  [`Paper`](https://www.semanticscholar.org/paper/9e2a811a6f5d1c5352ce19ac24303810eb1867f7)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F9e2a811a6f5d1c5352ce19ac24303810eb1867f7%3Ffields%3DcitationCount)
+
+  2023    Annual Meeting of the Association for Computational Linguistics 
+
+
+
+这篇论文指出 在文本分类任务下 SEQ sequence fine-tuning 下， PLMs 的遗忘现象主要由于分类器的偏移而不是 PLM遗忘了旧的知识。
+
+ PLM 在经过预训练之后就已经具备区分不同类别文本的能力和知识，这主要来源于PLM的 transformer 结构和预训练过程。
+
+在固定PLM的情况下，应当也固定旧类别的classifer，否则classifier经过训练会导致就旧类别对应的 分类权重得到更新，造成 分类权重的漂移，这是表现下降的原因。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -276,3 +358,25 @@ Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Model
 
   - 多模态任务（如视频+文本）中的遗忘是否存在跨模态影响？
 
+
+
+# 应用领域
+
+## 1 判断隐私数据是否被大模型训练使用
+
+
+
+LLM Dataset Inference  Did you train on my dataset?
+
+
+
+- **LLM Dataset Inference  Did you train on my dataset?**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/34e40d61b093ea3620ef76abebb8053c8038be10)  [`Paper`](https://www.semanticscholar.org/paper/34e40d61b093ea3620ef76abebb8053c8038be10)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F34e40d61b093ea3620ef76abebb8053c8038be10%3Ffields%3DcitationCount)
+
+  2024    arXiv.org 
+
+这个设定就很想是continual learning 设置。
+设置两个数据集，用PLMs提取特征，然后训练一个分类器，这个分类器用来区分不同的类别。然后测试在这两个数据集上的表现。
+区别就是这里的两个数据库不是分类类别，而是数据库是来自同一部分的不同数据，大概可以类比为 迪士尼中的布鲁斯 和 高迪的概念。
+背后的逻辑是大模型的表征能力来自于训练集，训练集和测试集对于大模型来说是不一致的，但最终效果并不显著

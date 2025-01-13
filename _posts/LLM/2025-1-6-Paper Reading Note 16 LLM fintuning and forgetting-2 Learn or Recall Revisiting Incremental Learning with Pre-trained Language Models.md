@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Paper Reading 16 LLM finetuning and forgetting
+title:  Paper Reading 16 LLM finetuning and forgetting - 2 Probing Performance
 categories: [Paper Reading,  LLM, Continual Learning,] 
 description:  [Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models]
 keywords: [Paper Reading,  LLM, Continual Learning, ] 
@@ -8,7 +8,45 @@ keywords: [Paper Reading,  LLM, Continual Learning, ]
 
 
 
-# Paper Reading 16  Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models
+# Paper Reading 16  
+
+
+
+这两篇论文都使用了 Probing Performance 和 tsne来进行可视化 BERT在论文中的遗忘现象，第二篇论文在第一篇论文的基础上进行了进一步的扩展。
+
+
+
+
+
+
+
+**CAN BERT REFRAIN FROM FORGETTING ON SEQUENTIAL TASKS? A PROBING STUDY**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/201047e827ed9587158fc71256c576c8544e3dfc)  [`Paper`](https://www.semanticscholar.org/paper/201047e827ed9587158fc71256c576c8544e3dfc)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F201047e827ed9587158fc71256c576c8544e3dfc%3Ffields%3DcitationCount)
+
+2023    International Conference on Learning Representations 
+
+
+
+论文指出，BERT 模型具有持续学习的潜能。作者提到在训练完旧的任务之后进行训练新的任务，旧的任务中的不同类别仍然保持区别，且整体的变换保持一定的拓扑结构。而旧的任务的类别与新的任务的类别在特征层面出现了重叠，使用 experience relay 特征层回放，能够减轻重叠。
+
+![image-20250106133153486](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250112123805652.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
