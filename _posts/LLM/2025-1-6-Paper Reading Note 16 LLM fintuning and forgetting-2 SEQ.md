@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Paper Reading 16 LLM finetuning and forgetting - 2 Probing Performance
+title:  Paper Reading 16 LLM finetuning and forgetting - 2 Probing Performance SEQ*
 categories: [Paper Reading,  LLM, Continual Learning,] 
 description:  [Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models]
 keywords: [Paper Reading,  LLM, Continual Learning, ] 
@@ -8,7 +8,7 @@ keywords: [Paper Reading,  LLM, Continual Learning, ]
 
 
 
-# Paper Reading 16  
+# Paper Reading 16 LLM finetuning and forgetting - 2 Probing Performance SEQ*
 
 
 
