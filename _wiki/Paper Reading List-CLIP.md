@@ -14,11 +14,11 @@ keywords: LLM and forgetting
 
 
 
-- **AN IMAGE IS WORTH 16X16 WORDS:  TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE**
+## **AN IMAGE IS WORTH 16X16 WORDS:  TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/268d347e8a55b5eb82fb5e7d2f800e33c75ab18a)  [`Paper`](https://www.semanticscholar.org/paper/268d347e8a55b5eb82fb5e7d2f800e33c75ab18a)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F268d347e8a55b5eb82fb5e7d2f800e33c75ab18a%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/268d347e8a55b5eb82fb5e7d2f800e33c75ab18a)  [`Paper`](https://www.semanticscholar.org/paper/268d347e8a55b5eb82fb5e7d2f800e33c75ab18a)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F268d347e8a55b5eb82fb5e7d2f800e33c75ab18a%3Ffields%3DcitationCount)
 
-  2020    International Conference on Learning Representations 
+2020    International Conference on Learning Representations 
 
 ​	Vit  使用 Transfoirmer  结构代替 cnn 结果
 
@@ -30,11 +30,11 @@ keywords: LLM and forgetting
 
  
 
-- **Learning Transferable Visual Models From Natural Language Supervision**
+## **Learning Transferable Visual Models From Natural Language Supervision**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/6f870f7f02a8c59c3e23f407f3ef00dd1dcf8fc4)  [`Paper`](https://www.semanticscholar.org/paper/6f870f7f02a8c59c3e23f407f3ef00dd1dcf8fc4)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F6f870f7f02a8c59c3e23f407f3ef00dd1dcf8fc4%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/6f870f7f02a8c59c3e23f407f3ef00dd1dcf8fc4)  [`Paper`](https://www.semanticscholar.org/paper/6f870f7f02a8c59c3e23f407f3ef00dd1dcf8fc4)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F6f870f7f02a8c59c3e23f407f3ef00dd1dcf8fc4%3Ffields%3DcitationCount)
 
-  2021    International Conference on Machine Learning 
+2021    International Conference on Machine Learning 
 
 ![image-20250130213357520](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250130213357585.png)
 
@@ -44,7 +44,7 @@ CLIP 将文本与图像进行对齐
 
 
 
-- **Image-based CLIP-Guided Essence Transfer、**
+## **Image-based CLIP-Guided Essence Transfer**
 
 ​	[`semanticscholar`](https://www.semanticscholar.org/paper/61432c11c359f6abb38a62a674fa4fdbc8be94d3)  [`Paper`](https://www.semanticscholar.org/paper/61432c11c359f6abb38a62a674fa4fdbc8be94d3)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F61432c11c359f6abb38a62a674fa4fdbc8be94d3%3Ffields%3DcitationCount)
 
@@ -62,10 +62,8 @@ CLIP 将文本与图像进行对齐
 
 
 
->
->
->
->
+
+
 >### **📌 这张图描述了三个步骤：**
 >
 >论文的方法需要在 **StyleGAN 和 CLIP** 的潜在空间中进行计算，以确保 Essence Transfer 过程是稳定的。  图 2 通过 **三个步骤** 展示了这个过程：
@@ -75,16 +73,16 @@ CLIP 将文本与图像进行对齐
 >**翻译：对源图像进行反演 (Inversion) 并添加 Essence 向量。** ✅ **通俗解释：**
 >
 >- **先把源图像  $I_s$ 转换成 StyleGAN 的“潜在向量”  $z_s$ **。
->  - 这个过程叫做 **GAN Inversion（GAN 反演）**，可以让 StyleGAN 重新生成源图像。
->  - 你可以理解为把 **一张脸“编码”到 StyleGAN** 里，这样后续可以修改它。
+> - 这个过程叫做 **GAN Inversion（GAN 反演）**，可以让 StyleGAN 重新生成源图像。
+> - 你可以理解为把 **一张脸“编码”到 StyleGAN** 里，这样后续可以修改它。
 >- **再在这个潜在空间里加上 Essence Vector  $b$**。
->  - $b$  代表 **目标图像  $I_t$  和源图像  $I_s$  之间的语义差异**，比如年龄、性别、发型等特征。
+> - $b$  代表 **目标图像  $I_t$  和源图像  $I_s$  之间的语义差异**，比如年龄、性别、发型等特征。
 >  - 💡 **打比方：**想象 StyleGAN 是一个会画画的机器人，而 **GAN 反演** 就像是让机器人记住你的一张照片（像素 → 数字代码）。
 >    然后，我们加上 Essence Vector  $b$ ，就像是在这张照片的代码里 **加上一点点目标图像的感觉**，比如变老、变年轻、变换发型。
 >
->------
->
->### **🔹 Step 2: Decode with StyleGAN**
+> ------
+> 
+> ### **🔹 Step 2: Decode with StyleGAN**
 >
 >**翻译：使用 StyleGAN 生成变换后的图像。** 
 >
@@ -92,12 +90,12 @@ CLIP 将文本与图像进行对齐
 >
 >- 通过 **StyleGAN** 生成新的图像 ** $I_{s,t}$ **：$I_{s,t} = G(z_s + b)$
 >- 这意味着：
->  - **原图  $I_s$  仍然保留了主要的面部身份信息**。
->  - **但它开始带有目标图像  $I_t$  的语义特征**（比如发型、年龄、性别）。
+> - **原图  $I_s$  仍然保留了主要的面部身份信息**。
+> - **但它开始带有目标图像  $I_t$  的语义特征**（比如发型、年龄、性别）。
 >- 这个阶段完成后，我们已经得到一个初步的 Essence Transfer 结果，但还需要进一步优化。💡 **打比方：**你给机器人说：“记住这张脸（源图像），然后给他加上目标图像的一点点感觉。” 机器人画出的新图像 **看起来像源图像，但带有目标的特征**。
 >
->------
->
+> ------
+> 
 >### **🔹 Step 3: Encode with CLIP & Calculate Loss**
 >
 >**翻译：用 CLIP 编码并计算损失。** ✅ **通俗解释：**
@@ -106,16 +104,16 @@ CLIP 将文本与图像进行对齐
 >
 >- 计算两个关键的损失：
 >
->  1. Lsimilarity（相似性损失）：
->     - 确保变换后的图像 ** $I_{s,t}$ ** 在 CLIP 语义空间里**接近目标图像**  $I_t$ 。
->  2. Lconsistency（一致性损失）：
->     - 确保 Essence Transfer 过程在 **不同源图像上是一致的**，不会因不同人脸导致风格不稳定。
->
+> 1. Lsimilarity（相似性损失）：
+>    - 确保变换后的图像 ** $I_{s,t}$ ** 在 CLIP 语义空间里**接近目标图像**  $I_t$ 。
+> 2. Lconsistency（一致性损失）：
+>    - 确保 Essence Transfer 过程在 **不同源图像上是一致的**，不会因不同人脸导致风格不稳定。
+> 
 >  💡 **打比方：**让 CLIP 充当“智能审查官”，它会检查：
->
->1. 这个变换后的图像 **有没有成功吸收目标的语义**？
+> 
+> 1. 这个变换后的图像 **有没有成功吸收目标的语义**？
 >2. 这个变换 **是不是在所有源图像上都表现一致**？如果效果不理想，就调整 **Essence Vector  $b$ **，再试一次，直到损失最小化。
->
+> 
 >------
 >
 >### **📌 总结**
@@ -148,45 +146,45 @@ CLIP 将文本与图像进行对齐
 >
 >✅ **方法本质上是利用** **StyleGAN 作为一个固定的生成器**，**CLIP 作为一个固定的评估器**。
 >
->## **📌 训练时优化的部分**
+>**📌 训练时优化的部分**
 >
 >在 **训练时，论文优化的是 Essence Vector  $b^*$ **，具体来说：
 >
 >- StyleGAN ( $G$ ) 是固定的 ❌ 不训练
->  - 论文的方法不会修改 StyleGAN 生成器的参数，而是直接在 **StyleGAN 预训练的潜在空间** 进行操作。
->  - 也就是说，**StyleGAN 只是一个“变换函数”**，它根据 **输入的潜在向量  $z$ ** 生成图像，但自身不变。
+> - 论文的方法不会修改 StyleGAN 生成器的参数，而是直接在 **StyleGAN 预训练的潜在空间** 进行操作。
+> - 也就是说，**StyleGAN 只是一个“变换函数”**，它根据 **输入的潜在向量  $z$ ** 生成图像，但自身不变。
 >- CLIP ( $C$ ) 也是固定的❌ 不训练
->  - CLIP 的 Image Encoder 只是用来提取目标图像和源图像的语义嵌入（feature embeddings）。
+> - CLIP 的 Image Encoder 只是用来提取目标图像和源图像的语义嵌入（feature embeddings）。
 >  - 论文的方法使用 CLIP **计算语义相似度**，但不会修改 CLIP 的参数。
->- **优化的变量是 Essence Vector  $b^*$** ✅ 要训练
->  - 论文的方法训练的是 **一个偏移向量  $b$  ，它位于 StyleGAN 的潜在空间**，使得：$G(z_s + b^*) = I_{s,t}$
+> - **优化的变量是 Essence Vector  $b^*$** ✅ 要训练
+> - 论文的方法训练的是 **一个偏移向量  $b$  ，它位于 StyleGAN 的潜在空间**，使得：$G(z_s + b^*) = I_{s,t}$
 >  - 目标是找到最优的  $b^*$ ，使得 **StyleGAN 生成的图像** 既保留源图像的身份，又具有目标图像的语义特征。
->
+> 
 >------
->
->## **📌 为什么不更新 StyleGAN？**
+> 
+> **📌 为什么不更新 StyleGAN？**
 >
 >1. StyleGAN 已经是一个强大的生成器
->   - StyleGAN 本身已经在大规模人脸数据上训练好，它的潜在空间已经包含丰富的语义信息（年龄、性别、发型、表情等）。
->   - 直接在潜在空间调整  $b$  比重新训练 StyleGAN 更高效。
+>  - StyleGAN 本身已经在大规模人脸数据上训练好，它的潜在空间已经包含丰富的语义信息（年龄、性别、发型、表情等）。
+>  - 直接在潜在空间调整  $b$  比重新训练 StyleGAN 更高效。
 >2. 修改 StyleGAN 可能会破坏生成能力
->   - 如果重新训练 StyleGAN，会导致整个模型偏向某些特定目标，不再适用于所有输入图像。
+>  - 如果重新训练 StyleGAN，会导致整个模型偏向某些特定目标，不再适用于所有输入图像。
 >   - 论文的方法希望 Essence Transfer **对不同目标图像都适用**，所以让 StyleGAN 作为一个通用模型，而不做调整。
->
+> 
 >------
->
->## **📌 为什么不更新 CLIP？**
+> 
+> **📌 为什么不更新 CLIP？**
 >
 >1. CLIP 是一个通用的语义评估器
->   - CLIP 通过大规模图像-文本匹配训练，已经学习到丰富的高层语义信息。
->   - 论文的方法利用 CLIP 来衡量图像的语义特征，而不是让 CLIP 学习新的特征。
+>  - CLIP 通过大规模图像-文本匹配训练，已经学习到丰富的高层语义信息。
+>  - 论文的方法利用 CLIP 来衡量图像的语义特征，而不是让 CLIP 学习新的特征。
 >2. 不修改 CLIP 确保方法的泛化性
->   - CLIP 提供的语义评估是通用的，适用于不同类型的图像和编辑任务。
+>  - CLIP 提供的语义评估是通用的，适用于不同类型的图像和编辑任务。
 >   - 如果训练 CLIP，可能会让它过拟合于特定数据集，降低泛化能力。
->
+> 
 >------
->
->## **📌 训练流程**
+> 
+> **📌 训练流程**
 >
 >### **1️⃣ 计算目标图像与源图像的语义偏移**
 >
@@ -198,26 +196,26 @@ CLIP 将文本与图像进行对齐
 >- **在 StyleGAN 潜在空间优化**  $b$ ，使得：$G(z_s + b^*) \approx I_{s,t}$
 >- 其中  $I_{s,t}$  是变换后的图像。
 >- 优化目标：
->  - $L_{\text{similarity}}$ ：确保变换后的图像语义接近目标图像  $I_t$ 。
->  - $L_{\text{consistency}}$ ：确保 Essence Transfer 在不同源图像上表现一致。
->  - $L_{L2}$ ：正则化，防止  $b$  过度变化导致图像失真。
+> - $L_{\text{similarity}}$ ：确保变换后的图像语义接近目标图像  $I_t$ 。
+> - $L_{\text{consistency}}$ ：确保 Essence Transfer 在不同源图像上表现一致。
+> - $L_{L2}$ ：正则化，防止  $b$  过度变化导致图像失真。
 >
->### **3️⃣ 反向传播 & 迭代优化**
->
->- **更新  $b$ ，而不是 StyleGAN 或 CLIP**：$b^* = \arg\min (L_{\text{similarity}} + \lambda_{\text{consistency}} L_{\text{consistency}} + \lambda_{L2} \|b\|^2)$
+> ### **3️⃣ 反向传播 & 迭代优化**
+> 
+> - **更新  $b$ ，而不是 StyleGAN 或 CLIP**：$b^* = \arg\min (L_{\text{similarity}} + \lambda_{\text{consistency}} L_{\text{consistency}} + \lambda_{L2} \|b\|^2)$
 >- 通过 **梯度下降（Adam 优化器）** 迭代优化  $b$ ，直到生成的图像符合要求。
 >
 >------
 >
->## **📌 总结**
+>**📌 总结**
 >
 >​    ✅ **训练时不会更新 StyleGAN 或 CLIP，只优化 Essence Vector  $b^*$ **
-> ​	✅ **StyleGAN 作为固定生成器，CLIP 作为固定评估器**
-> ​	✅ **优化的目标是找到最优的  $b^\*$ ，让 StyleGAN 生成符合目标语义的图像** 这种方法的 **最大优势是计算高效，避免了对大模型的额外训练，同时确保泛化性强**！ 🚀
+>​	✅ **StyleGAN 作为固定生成器，CLIP 作为固定评估器**
+>​	✅ **优化的目标是找到最优的  $b^\*$ ，让 StyleGAN 生成符合目标语义的图像** 这种方法的 **最大优势是计算高效，避免了对大模型的额外训练，同时确保泛化性强**！ 🚀
 
 
 
-- **Scaling Autoregressive Models for Content-Rich Text-to-Image Generation**
+## **Scaling Autoregressive Models for Content-Rich Text-to-Image Generation**
 
 [`semanticscholar`](https://www.semanticscholar.org/paper/1243e13254bb4ea1f71b4be8a3e4e54ffd02d2fe)  [`Paper`](https://www.semanticscholar.org/paper/1243e13254bb4ea1f71b4be8a3e4e54ffd02d2fe)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F1243e13254bb4ea1f71b4be8a3e4e54ffd02d2fe%3Ffields%3DcitationCount)
 
@@ -241,25 +239,25 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **Data Determines Distributional Robustness  in Contrastive Language-Image Pre-training (CLIP)**
+## **Data Determines Distributional Robustness  in Contrastive Language-Image Pre-training (CLIP)**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/0b73a37c06f3d79a1cb5fd61e3556676634b9d2f)  [`Paper`](https://www.semanticscholar.org/paper/0b73a37c06f3d79a1cb5fd61e3556676634b9d2f)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F0b73a37c06f3d79a1cb5fd61e3556676634b9d2f%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/0b73a37c06f3d79a1cb5fd61e3556676634b9d2f)  [`Paper`](https://www.semanticscholar.org/paper/0b73a37c06f3d79a1cb5fd61e3556676634b9d2f)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F0b73a37c06f3d79a1cb5fd61e3556676634b9d2f%3Ffields%3DcitationCount)
 
-  ​     
+​     
 
-  The robustness of CLIP is determined by dataset diversity—not by contrastive learning or language supervision.
-
-
+The robustness of CLIP is determined by dataset diversity—not by contrastive learning or language supervision.
 
 
 
-- **DINO: DETR with Improved DeNoising Anchor  Boxes for End-to-End Object Detection**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/9dc481ec44178e797466bbad968071917842156b)  [`Paper`](https://www.semanticscholar.org/paper/9dc481ec44178e797466bbad968071917842156b)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F9dc481ec44178e797466bbad968071917842156b%3Ffields%3DcitationCount)
 
-  ​     
+## **DINO: DETR with Improved DeNoising Anchor  Boxes for End-to-End Object Detection**
 
-  ![image-20250131122802813](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131122802929.png)
+[`semanticscholar`](https://www.semanticscholar.org/paper/9dc481ec44178e797466bbad968071917842156b)  [`Paper`](https://www.semanticscholar.org/paper/9dc481ec44178e797466bbad968071917842156b)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F9dc481ec44178e797466bbad968071917842156b%3Ffields%3DcitationCount)
+
+​     
+
+![image-20250131122802813](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131122802929.png)
 
 结合 Transformer 和 对比去噪进行学习 
 
@@ -267,11 +265,11 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **GLEAN: Generative Latent Bank for Image  Super-Resolution and Beyond**
+## **GLEAN: Generative Latent Bank for Image  Super-Resolution and Beyond**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/3bb06c310573ad3749ae855e0b9ebdb4322918f8)  [`Paper`](https://www.semanticscholar.org/paper/3bb06c310573ad3749ae855e0b9ebdb4322918f8)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F3bb06c310573ad3749ae855e0b9ebdb4322918f8%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/3bb06c310573ad3749ae855e0b9ebdb4322918f8)  [`Paper`](https://www.semanticscholar.org/paper/3bb06c310573ad3749ae855e0b9ebdb4322918f8)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F3bb06c310573ad3749ae855e0b9ebdb4322918f8%3Ffields%3DcitationCount)
 
-  ​     
+​     
 
 ![image-20250131123820365](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131123820488.png)
 
@@ -281,37 +279,37 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **VQGAN-CLIP: Open Domain Image Generation  and Editing with Natural Language Guidance**
+## **VQGAN-CLIP: Open Domain Image Generation  and Editing with Natural Language Guidance**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/6979ce65b9f657672cd3a0b9217ead51511c1838)  [`Paper`](https://www.semanticscholar.org/paper/6979ce65b9f657672cd3a0b9217ead51511c1838)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F6979ce65b9f657672cd3a0b9217ead51511c1838%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/6979ce65b9f657672cd3a0b9217ead51511c1838)  [`Paper`](https://www.semanticscholar.org/paper/6979ce65b9f657672cd3a0b9217ead51511c1838)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F6979ce65b9f657672cd3a0b9217ead51511c1838%3Ffields%3DcitationCount)
 
-  ​     
+​     
 
-  论文的核心思路是 **利用已经训练好的 CLIP 作为“图像-文本匹配评分器”，来指导 VQGAN 生成符合文本描述的图像**。
+论文的核心思路是 **利用已经训练好的 CLIP 作为“图像-文本匹配评分器”，来指导 VQGAN 生成符合文本描述的图像**。
 
-  ![image-20250131124908519](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131124908616.png)
-
-
-
-- **Language Driven Image Editing via Transformers**
-
-  [`semanticscholar`](https://www.semanticscholar.org/paper/753b96c3251c68b515ccab71dd7e6f775bccbb12)  [`Paper`](https://www.semanticscholar.org/paper/753b96c3251c68b515ccab71dd7e6f775bccbb12)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F753b96c3251c68b515ccab71dd7e6f775bccbb12%3Ffields%3DcitationCount)
-
-  ✅ **输入：** **文本指令 + 源图像 token**
-  ✅ **模型处理方式：** **GPT-2 作为 Seq2Seq 模型，预测目标图像 token**
-  ✅ **输出：** **目标图像的 token，经过 VQ-VAE 反向解码成最终的图像**
-
-     **GPT-2 作为 Transformer 不直接生成像素，而是生成图像 token，VQ-VAE 负责最终的图像重建。**   
+![image-20250131124908519](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131124908616.png)
 
 
 
-- **Towards Counterfactual Image Manipulation via CLIP**
+## **Language Driven Image Editing via Transformers**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/9c7ec94901efcbc22656cb0d9924d1716578bfb1)  [`Paper`](https://www.semanticscholar.org/paper/9c7ec94901efcbc22656cb0d9924d1716578bfb1)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F9c7ec94901efcbc22656cb0d9924d1716578bfb1%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/753b96c3251c68b515ccab71dd7e6f775bccbb12)  [`Paper`](https://www.semanticscholar.org/paper/753b96c3251c68b515ccab71dd7e6f775bccbb12)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F753b96c3251c68b515ccab71dd7e6f775bccbb12%3Ffields%3DcitationCount)
 
-  ​     
+✅ **输入：** **文本指令 + 源图像 token**
+✅ **模型处理方式：** **GPT-2 作为 Seq2Seq 模型，预测目标图像 token**
+✅ **输出：** **目标图像的 token，经过 VQ-VAE 反向解码成最终的图像**
 
-  ![image-20250131170254533](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131170254765.png)
+   **GPT-2 作为 Transformer 不直接生成像素，而是生成图像 token，VQ-VAE 负责最终的图像重建。**   
+
+
+
+## **Towards Counterfactual Image Manipulation via CLIP**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/9c7ec94901efcbc22656cb0d9924d1716578bfb1)  [`Paper`](https://www.semanticscholar.org/paper/9c7ec94901efcbc22656cb0d9924d1716578bfb1)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F9c7ec94901efcbc22656cb0d9924d1716578bfb1%3Ffields%3DcitationCount)
+
+​     
+
+![image-20250131170254533](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131170254765.png)
 
 ![image-20250131170348551](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131170348665.png)
 
@@ -424,15 +422,15 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **CLIP4IDC: CLIP for Image Difference Captioning**
+## **CLIP4IDC: CLIP for Image Difference Captioning**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/cb01ca278cac5fd924f2180ff4dff8be34d14083)  [`Paper`](https://www.semanticscholar.org/paper/cb01ca278cac5fd924f2180ff4dff8be34d14083)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fcb01ca278cac5fd924f2180ff4dff8be34d14083%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/cb01ca278cac5fd924f2180ff4dff8be34d14083)  [`Paper`](https://www.semanticscholar.org/paper/cb01ca278cac5fd924f2180ff4dff8be34d14083)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fcb01ca278cac5fd924f2180ff4dff8be34d14083%3Ffields%3DcitationCount)
 
-  ​     
+​     
 
-  ![image-20250131173300682](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131173300828.png)
+![image-20250131173300682](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250131173300828.png)
 
-  
+
 
 ># **CLIP4IDC: Training and Inference Details**
 >
@@ -533,21 +531,21 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **Matryoshka Representation Learning**
+## **Matryoshka Representation Learning**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/020b09bd0757bf41a8b3c99300feb223404035ed)  [`Paper`](https://www.semanticscholar.org/paper/020b09bd0757bf41a8b3c99300feb223404035ed)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F020b09bd0757bf41a8b3c99300feb223404035ed%3Ffields%3DcitationCount)
-
-
+[`semanticscholar`](https://www.semanticscholar.org/paper/020b09bd0757bf41a8b3c99300feb223404035ed)  [`Paper`](https://www.semanticscholar.org/paper/020b09bd0757bf41a8b3c99300feb223404035ed)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F020b09bd0757bf41a8b3c99300feb223404035ed%3Ffields%3DcitationCount)
 
 
 
 
 
-- **Alpha-CLIP: A CLIP Model Focusing on Wherever You Want**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/d198a5a1a0c6e31bd0ad70658c8c2a74b8753aed)  [`Paper`](https://www.semanticscholar.org/paper/d198a5a1a0c6e31bd0ad70658c8c2a74b8753aed)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fd198a5a1a0c6e31bd0ad70658c8c2a74b8753aed%3Ffields%3DcitationCount)
 
-  2023    Computer Vision and Pattern Recognition 
+## **Alpha-CLIP: A CLIP Model Focusing on Wherever You Want**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/d198a5a1a0c6e31bd0ad70658c8c2a74b8753aed)  [`Paper`](https://www.semanticscholar.org/paper/d198a5a1a0c6e31bd0ad70658c8c2a74b8753aed)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fd198a5a1a0c6e31bd0ad70658c8c2a74b8753aed%3Ffields%3DcitationCount)
+
+2023    Computer Vision and Pattern Recognition 
 
 
 
@@ -694,11 +692,11 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **Tune-An-Ellipse: CLIP Has Potential to Find What You Want**
+## **Tune-An-Ellipse: CLIP Has Potential to Find What You Want**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/490b8fb5e9bc36d82ec2748c2347df7a17f76bda)  [`Paper`](https://www.semanticscholar.org/paper/490b8fb5e9bc36d82ec2748c2347df7a17f76bda)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F490b8fb5e9bc36d82ec2748c2347df7a17f76bda%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/490b8fb5e9bc36d82ec2748c2347df7a17f76bda)  [`Paper`](https://www.semanticscholar.org/paper/490b8fb5e9bc36d82ec2748c2347df7a17f76bda)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F490b8fb5e9bc36d82ec2748c2347df7a17f76bda%3Ffields%3DcitationCount)
 
-  ​     
+​     
 
 ![](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250201102638723.png)
 
@@ -715,11 +713,17 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **GUIDING INSTRUCTION-BASED IMAGE EDITING VIA  MULTIMODAL LARGE LANGUAGE MODELS**
+## **GUIDING INSTRUCTION-BASED IMAGE EDITING VIA  MULTIMODAL LARGE LANGUAGE MODELS**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/092245d86b77181c36f972b1b7a17a59cd989c4a)  [`Paper`](https://www.semanticscholar.org/paper/092245d86b77181c36f972b1b7a17a59cd989c4a)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F092245d86b77181c36f972b1b7a17a59cd989c4a%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/092245d86b77181c36f972b1b7a17a59cd989c4a)  [`Paper`](https://www.semanticscholar.org/paper/092245d86b77181c36f972b1b7a17a59cd989c4a)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F092245d86b77181c36f972b1b7a17a59cd989c4a%3Ffields%3DcitationCount)
 
-  ​     
+​     
+
+![image-20250202162148345](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202162148554.png)
+
+
+
+
 
 ![image-20250202120904808](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202120904978.png)
 
@@ -754,7 +758,7 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 >     $$
 >     L_{ins} = \sum_{t=1}^{l} CELoss(w'_t, w_t)
 >     $$
->     
+>         
 >     $$
 >     L_{edit} = \mathbb{E}[||\epsilon - \epsilon_\theta(z_t, t, V, \{u\})||^2]
 >     $$
@@ -769,7 +773,7 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 >     
 >
 >     Updates occur in:
->
+>    
 >     - **MLLM:** Trains the word embeddings and LM head to refine instruction generation.
 >     - **Edit Head:** Learns to map textual instructions to latent visual representations.
 >     - **Diffusion Model:** Fine-tunes parameters for image editing based on guidance.
@@ -791,35 +795,33 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **CLIP is Also a Good Teacher: A New Training  Framework for Inductive Zero-shot Semantic  Segmentation**
+## **CLIP is Also a Good Teacher: A New Training  Framework for Inductive Zero-shot Semantic  Segmentation**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/c9242e402a8c12d616b793661d22ed0d56a9f5e1)  [`Paper`](https://www.semanticscholar.org/paper/c9242e402a8c12d616b793661d22ed0d56a9f5e1)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fc9242e402a8c12d616b793661d22ed0d56a9f5e1%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/c9242e402a8c12d616b793661d22ed0d56a9f5e1)  [`Paper`](https://www.semanticscholar.org/paper/c9242e402a8c12d616b793661d22ed0d56a9f5e1)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fc9242e402a8c12d616b793661d22ed0d56a9f5e1%3Ffields%3DcitationCount)
 
-     
+   
 
-  ![image-20250202122244995](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202122245205.png)
-  
-    
-  
-  ![image-20250202122855065](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202122855270.png)
-
-
-
-
-
-- **CONTROLLING VISION-LANGUAGE MODELS FOR  MULTI-TASK IMAGE RESTORATION**
-
-  [`semanticscholar`](https://www.semanticscholar.org/paper/5e7d9e031c7eeaaad102627a9894bf14bf240a63)  [`Paper`](https://www.semanticscholar.org/paper/5e7d9e031c7eeaaad102627a9894bf14bf240a63)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F5e7d9e031c7eeaaad102627a9894bf14bf240a63%3Ffields%3DcitationCount)
-
-  ​     
+![image-20250202122244995](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202122245205.png)
 
   
-  
-     
-  
-    ![image-20250202124545090](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202124545295.png)
-  
-  
+
+![image-20250202122855065](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202122855270.png)
+
+
+
+
+
+## **CONTROLLING VISION-LANGUAGE MODELS FOR  MULTI-TASK IMAGE RESTORATION**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/5e7d9e031c7eeaaad102627a9894bf14bf240a63)  [`Paper`](https://www.semanticscholar.org/paper/5e7d9e031c7eeaaad102627a9894bf14bf240a63)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F5e7d9e031c7eeaaad102627a9894bf14bf240a63%3Ffields%3DcitationCount)
+
+​     
+
+
+
+   
+
+  ![image-20250202124545090](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202124545295.png)
 
 
 
@@ -829,11 +831,13 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **HQ-Edit: A High-Quality Dataset for  Instruction-based Image Editing**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/09609bd28855fd9b27f043b4dbf509615229bd08)  [`Paper`](https://www.semanticscholar.org/paper/09609bd28855fd9b27f043b4dbf509615229bd08)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F09609bd28855fd9b27f043b4dbf509615229bd08%3Ffields%3DcitationCount)
 
-  ​     
+## **HQ-Edit: A High-Quality Dataset for  Instruction-based Image Editing**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/09609bd28855fd9b27f043b4dbf509615229bd08)  [`Paper`](https://www.semanticscholar.org/paper/09609bd28855fd9b27f043b4dbf509615229bd08)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F09609bd28855fd9b27f043b4dbf509615229bd08%3Ffields%3DcitationCount)
+
+​     
 
 ![image-20250202124809045](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202124809271.png)
 
@@ -843,11 +847,11 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **FastEdit: Fast Text-Guided Single-Image Editing via  Semantic-Aware Diffusion Fine-Tuning**
+## **FastEdit: Fast Text-Guided Single-Image Editing via  Semantic-Aware Diffusion Fine-Tuning**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/c2e5ebe5959a3aa96fd9ca65339e1d0df6b68120)  [`Paper`](https://www.semanticscholar.org/paper/c2e5ebe5959a3aa96fd9ca65339e1d0df6b68120)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fc2e5ebe5959a3aa96fd9ca65339e1d0df6b68120%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/c2e5ebe5959a3aa96fd9ca65339e1d0df6b68120)  [`Paper`](https://www.semanticscholar.org/paper/c2e5ebe5959a3aa96fd9ca65339e1d0df6b68120)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fc2e5ebe5959a3aa96fd9ca65339e1d0df6b68120%3Ffields%3DcitationCount)
 
-  2024    arXiv.org 
+2024    arXiv.org 
 
 ![image-20250202125218573](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202125218769.png)
 
@@ -855,11 +859,11 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **InstructIR: High-Quality Image Restoration  Following Human Instructions**
+## **InstructIR: High-Quality Image Restoration  Following Human Instructions**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/03ad1a40a4399c8b77bbeaa389fcd14b10b322c0)  [`Paper`](https://www.semanticscholar.org/paper/03ad1a40a4399c8b77bbeaa389fcd14b10b322c0)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F03ad1a40a4399c8b77bbeaa389fcd14b10b322c0%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/03ad1a40a4399c8b77bbeaa389fcd14b10b322c0)  [`Paper`](https://www.semanticscholar.org/paper/03ad1a40a4399c8b77bbeaa389fcd14b10b322c0)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F03ad1a40a4399c8b77bbeaa389fcd14b10b322c0%3Ffields%3DcitationCount)
 
-  2024    European Conference on Computer Vision 
+2024    European Conference on Computer Vision 
 
 
 
@@ -885,11 +889,11 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **GG-Editor: Locally Editing 3D Avatars with Multimodal Large Language Model Guidance**
+## **GG-Editor: Locally Editing 3D Avatars with Multimodal Large Language Model Guidance**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/2b6bf85a297e7d5586d46984247782e7279627f1)  [`Paper`](https://www.semanticscholar.org/paper/2b6bf85a297e7d5586d46984247782e7279627f1)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F2b6bf85a297e7d5586d46984247782e7279627f1%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/2b6bf85a297e7d5586d46984247782e7279627f1)  [`Paper`](https://www.semanticscholar.org/paper/2b6bf85a297e7d5586d46984247782e7279627f1)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F2b6bf85a297e7d5586d46984247782e7279627f1%3Ffields%3DcitationCount)
 
-  2024    ACM Multimedia 
+2024    ACM Multimedia 
 
 ![image-20250202132232266](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202132232483.png)
 
@@ -899,11 +903,11 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **CorrCLIP: Reconstructing Correlations in CLIP with Off-the-Shelf Foundation  Models for Open-Vocabulary Semantic Segmentation**
+## **CorrCLIP: Reconstructing Correlations in CLIP with Off-the-Shelf Foundation  Models for Open-Vocabulary Semantic Segmentation**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/af2cb49fe124efd87b0cfce991dfb206e04cada5)  [`Paper`](https://www.semanticscholar.org/paper/af2cb49fe124efd87b0cfce991dfb206e04cada5)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Faf2cb49fe124efd87b0cfce991dfb206e04cada5%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/af2cb49fe124efd87b0cfce991dfb206e04cada5)  [`Paper`](https://www.semanticscholar.org/paper/af2cb49fe124efd87b0cfce991dfb206e04cada5)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Faf2cb49fe124efd87b0cfce991dfb206e04cada5%3Ffields%3DcitationCount)
 
-  2024    arXiv.org 
+2024    arXiv.org 
 
 
 
@@ -911,10 +915,132 @@ Parti proves that autoregressive models remain competitive in text-to-image gene
 
 
 
-- **UltraEdit: Instruction-based Fine-Grained Image Editing at Scale**
+## **UltraEdit: Instruction-based Fine-Grained Image Editing at Scale**
 
-  [`semanticscholar`](https://www.semanticscholar.org/paper/90c383413af5334f5d406b8c2fa4ca6c7fcaa97e)  [`Paper`](https://www.semanticscholar.org/paper/90c383413af5334f5d406b8c2fa4ca6c7fcaa97e)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F90c383413af5334f5d406b8c2fa4ca6c7fcaa97e%3Ffields%3DcitationCount)
+[`semanticscholar`](https://www.semanticscholar.org/paper/90c383413af5334f5d406b8c2fa4ca6c7fcaa97e)  [`Paper`](https://www.semanticscholar.org/paper/90c383413af5334f5d406b8c2fa4ca6c7fcaa97e)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F90c383413af5334f5d406b8c2fa4ca6c7fcaa97e%3Ffields%3DcitationCount)
 
-  2024    arXiv.org 
+2024    arXiv.org 
 
 ![image-20250202133412894](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202133413101.png)
+
+
+
+
+
+## **TeD-Loc: Text Distillation for Weakly Supervised Object Localization**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/061d4d21628ff865d7ab7f0b48d2328a03dc82fc)  [`Paper`](https://www.semanticscholar.org/paper/061d4d21628ff865d7ab7f0b48d2328a03dc82fc)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F061d4d21628ff865d7ab7f0b48d2328a03dc82fc%3Ffields%3DcitationCount)
+
+2025     
+
+
+
+![image-20250202140836586](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202140836800.png)
+
+
+
+## **EchoLM: Accelerating LLM Serving with Real-time Knowledge Distillation**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/5f41df027907a7e4241fb937d8280722b6a01bcd)  [`Paper`](https://www.semanticscholar.org/paper/5f41df027907a7e4241fb937d8280722b6a01bcd)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F5f41df027907a7e4241fb937d8280722b6a01bcd%3Ffields%3DcitationCount)
+
+​     
+
+
+
+## **Chat-Edit-3D: Interactive 3D Scene Editing  via Text Prompts**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/c3033708bba45a64916732506afbeb51d602425b)  [`Paper`](https://www.semanticscholar.org/paper/c3033708bba45a64916732506afbeb51d602425b)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fc3033708bba45a64916732506afbeb51d602425b%3Ffields%3DcitationCount)
+
+2024    European Conference on Computer Vision 
+
+
+
+![image-20250202141110373](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202141110592.png)
+
+
+
+
+
+![image-20250202145532166](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202145532416.png)
+
+
+
+## **InstructGIE: Towards Generalizable Image  Editing**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/03c36f01ba2150955e1928e408143dfa6e6bd489)  [`Paper`](https://www.semanticscholar.org/paper/03c36f01ba2150955e1928e408143dfa6e6bd489)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F03c36f01ba2150955e1928e408143dfa6e6bd489%3Ffields%3DcitationCount)
+
+2024    European Conference on Computer Vision 
+
+
+
+![image-20250202150629250](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202150629474.png)
+
+
+
+
+
+ 
+
+
+
+
+
+## **TurboEdit: Instant text-based image editing**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/33584b9023c4cddc74c9925e33f6b89b99ff4eb6)  [`Paper`](https://www.semanticscholar.org/paper/33584b9023c4cddc74c9925e33f6b89b99ff4eb6)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F33584b9023c4cddc74c9925e33f6b89b99ff4eb6%3Ffields%3DcitationCount)
+
+2024    European Conference on Computer Vision 
+
+![image-20250202151350134](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202151350375.png)
+
+
+
+
+
+## **CLIP-DINOiser: Teaching CLIP a few DINO tricks for open-vocabulary  semantic segmentation**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/d38a00348487b02dad98782506fb8ebe31aef477)  [`Paper`](https://www.semanticscholar.org/paper/d38a00348487b02dad98782506fb8ebe31aef477)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fd38a00348487b02dad98782506fb8ebe31aef477%3Ffields%3DcitationCount)
+
+2023    European Conference on Computer Vision 
+
+
+
+![image-20250202152815371](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202152815590.png)
+
+
+
+## **InstructPix2Pix: Learning to Follow Image Editing Instructions**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/a2d2bbe4c542173662a444b33b76c66992697830)  [`Paper`](https://www.semanticscholar.org/paper/a2d2bbe4c542173662a444b33b76c66992697830)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fa2d2bbe4c542173662a444b33b76c66992697830%3Ffields%3DcitationCount)
+
+​     ![image-20250202153529226](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202153529455.png)
+
+
+
+## **Adding Conditional Control to Text-to-Image Diffusion Models**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/efbe97d20c4ffe356e8826c01dc550bacc405add)  [`Paper`](https://www.semanticscholar.org/paper/efbe97d20c4ffe356e8826c01dc550bacc405add)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fefbe97d20c4ffe356e8826c01dc550bacc405add%3Ffields%3DcitationCount)
+
+​     ![image-20250202153608611](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202153608825.png)
+
+
+
+## **Segment Anything**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/7470a1702c8c86e6f28d32cfa315381150102f5b)  [`Paper`](https://www.semanticscholar.org/paper/7470a1702c8c86e6f28d32cfa315381150102f5b)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F7470a1702c8c86e6f28d32cfa315381150102f5b%3Ffields%3DcitationCount)
+
+2023    IEEE International Conference on Computer Vision 
+
+
+
+![image-20250202153915698](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202153915915.png)
+
+
+
+## **CLIP is Also an Efficient Segmenter: A Text-Driven Approach for  Weakly Supervised Semantic Segmentation**
+
+[`semanticscholar`](https://www.semanticscholar.org/paper/3a27dfb4b87f74c3c663cc42cec83ccd58f72f23)  [`Paper`](https://www.semanticscholar.org/paper/3a27dfb4b87f74c3c663cc42cec83ccd58f72f23)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2F3a27dfb4b87f74c3c663cc42cec83ccd58f72f23%3Ffields%3DcitationCount)
+
+2022    Computer Vision and Pattern Recognition 
+
+![image-20250202154239293](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250202154239538.png)
