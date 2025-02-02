@@ -305,6 +305,715 @@ If you'd like more details on why gradients are the focus or how embeddings migh
 
 LoRA 的论文这里就不展开介绍，可以看另一篇论文
 
+# 论文前序 LoRA
+
+- **LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS**
+
+  [`semanticscholar`](https://www.semanticscholar.org/paper/a8ca46b171467ceb2d7652fbfb67fe701ad86092)  [`Paper`](https://www.semanticscholar.org/paper/a8ca46b171467ceb2d7652fbfb67fe701ad86092)    ![citation](https://img.shields.io/badge/dynamic/json?label=citation&query=citationCount&url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2Fa8ca46b171467ceb2d7652fbfb67fe701ad86092%3Ffields%3DcitationCount)
+
+  2021    International Conference on Learning Representations 
+
+![image-20250120153437450](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250120153437706.png)
+
+## AI QA1  **Summary of the Paper: LoRA - Low-Rank Adaptation of Large Language Models**
+
+#### **Main Content Analysis**
+
+1. **Scope/Setting**:
+   - Focuses on efficient adaptation of large pre-trained language models (e.g., GPT-3) to downstream tasks without full fine-tuning.
+   - Applicable to dense layers in neural networks, particularly in Transformer-based architectures.
+   
+2. **Purpose**:
+   - To reduce the computational and memory overhead associated with fine-tuning large models.
+   - Introduces a parameter-efficient method called **LoRA** (Low-Rank Adaptation), which minimizes the number of trainable parameters while maintaining model performance.
+   
+3. **Key Idea**:
+   - Instead of updating all model parameters, LoRA freezes the pre-trained weights and injects trainable **low-rank matrices** into the model to capture task-specific adaptations.
+   
+4. **Method**:
+   - **Low-Rank Decomposition**: The weight update $\Delta W$ is represented as the product of two low-rank matrices: 
+     $$
+     \Delta W = W_0 + BA 
+     $$
+     
+   
+     where $W_0$ is the pre-trained weight, and $B$ and $A$ are trainable matrices with a rank $r$ such that $r \ll d$.
+   
+   - **No Additional Latency**: The method merges $B$ and $A$ into $W_0$ during inference, eliminating additional computation compared to fine-tuned models.
+   
+5. **Contributions**:
+   - Significantly reduces the number of trainable parameters (e.g., by up to 10,000× compared to full fine-tuning).
+   - Enables parameter-efficient task switching with low memory and computational costs.
+   - Provides theoretical insights and empirical evidence supporting the low-rank nature of weight updates in large language models.
+   
+6. **Difference and Innovation**:
+   - Unlike adapter-based methods, LoRA does not introduce inference latency as it integrates task-specific parameters directly into the original weights.
+   - Orthogonal to existing approaches, allowing potential integration with other techniques (e.g., prefix tuning).
+   
+7. **Results**:
+   - LoRA matches or outperforms full fine-tuning and adapter-based methods on benchmarks like GLUE, WikiSQL, SAMSum, and the E2E NLG Challenge.
+   - Demonstrates scalability and task performance across RoBERTa, DeBERTa, GPT-2, and GPT-3.
+   
+8. **Conclusion**:
+   - LoRA offers an efficient and practical solution for adapting large pre-trained models to multiple tasks without the need for full fine-tuning.
+   
+9. **Discussion**:
+   - Highlights potential for combining LoRA with other parameter-efficient techniques.
+   - Encourages further exploration into low-rank structures in deep learning.
+
+------
+
+### **Comparison with Other Methods**
+
+| **Aspect**            | **Full Fine-Tuning**          | **Adapters**              | **LoRA**                         |
+| --------------------- | ----------------------------- | ------------------------- | -------------------------------- |
+| **Trainable Params**  | 100%                          | <1% (added layers)        | 0.01% to 0.1%                    |
+| **Inference Latency** | No additional latency         | Increases latency         | No additional latency            |
+| **Storage Cost**      | High (one copy per task)      | Moderate (adapter layers) | Very low (small matrices $A, B$) |
+| **Scalability**       | Limited by task-specific size | Limited                   | Highly scalable                  |
+| **Performance**       | High                          | Varies                    | Matches or exceeds fine-tuning   |
+
+------
+
+### **Base Model and Dataset Summary**
+
+| **Aspect**      | **Details**                                                  |
+| --------------- | ------------------------------------------------------------ |
+| **Base Models** | - RoBERTa (125M and 355M parameters)                         |
+|                 | - DeBERTa (1.5B parameters)                                  |
+|                 | - GPT-2 (354M and 774M parameters)                           |
+|                 | - GPT-3 (175B parameters)                                    |
+| **Datasets**    | - GLUE Benchmark: MNLI, SST-2, MRPC, CoLA, QNLI, QQP, RTE, STS-B. |
+|                 | - WikiSQL: Generate SQL queries from natural language questions. |
+|                 | - SAMSum: Dialogue summarization dataset.                    |
+|                 | - E2E NLG Challenge: End-to-end natural language generation. |
+|                 | - DART and WebNLG: Structured data-to-text generation.       |
+| **Metrics**     | - Accuracy (e.g., on MNLI, WikiSQL).                         |
+|                 | - ROUGE (e.g., for summarization tasks).                     |
+|                 | - BLEU, METEOR, CIDEr (e.g., for NLG tasks).                 |
+| **Results**     | - Matches or exceeds fine-tuning on most tasks with fewer trainable parameters. |
+
+Let me know if you need further clarification or detailed insights into specific sections!
+
+
+
+
+
+## 代码实现查看
+
+LoRA 代码地址  [LoRA/examples/NLG at main · microsoft/LoRA](https://github.com/microsoft/LoRA/tree/main/examples/NLG)
+
+
+
+### gpt2.py main 函数主要代码
+
+```python
+ """配置 LoRA 参数：
+
+        lora_attn_dim：低秩矩阵的秩。
+        lora_attn_alpha：缩放因子。
+        lora_dropout：dropout 概率。
+    """
+    if args.model_card == 'gpt2.sm':
+        config = GPT2Config(
+            n_embd=768, n_layer=12, n_head=12, 
+            lora_attn_dim=args.lora_dim, 
+            lora_attn_alpha=args.lora_alpha, 
+            lora_dropout=args.lora_dropout,
+        )
+    elif args.model_card == 'gpt2.md':
+        config = GPT2Config(
+            n_embd=1024, n_layer=24, n_head=16, 
+            lora_attn_dim=args.lora_dim, 
+            lora_attn_alpha=args.lora_alpha, 
+            lora_dropout=args.lora_dropout,
+        )
+    elif args.model_card == 'gpt2.lg':
+        config = GPT2Config(
+            n_embd=1280, n_layer=36, n_head=20, 
+            lora_attn_dim=args.lora_dim, 
+            lora_attn_alpha=args.lora_alpha, 
+            lora_dropout=args.lora_dropout,
+        )
+
+    """
+    创建模型实例：
+        在创建模型时，这些 LoRA 参数会被传递给模型配置，并在模型内部进行相应的权重分解。
+    """
+    lm_net = GPT2LMModel(config)
+    if args.init_checkpoint is not None:
+        print('loading model pretrained weight.')
+        lm_net.load_weight(torch.load(args.init_checkpoint))    
+
+    lm_net = lm_net.cuda()
+
+    """这个函数会将模型中的 LoRA 参数标记为可训练，
+        而其他参数则设置为不可训练。
+        这样在训练过程中，只有这些低秩矩阵会被更新，从而实现参数的有效减少。"""
+    if args.lora_dim > 0:
+        lora.mark_only_lora_as_trainable(lm_net)
+```
+
+
+
+### gpt2.py  class GPT2LMModel(config) 代码
+
+
+
+__init__()
+
+```python
+def __init__(self, config):
+        super(GPT2LMModel, self).__init__()
+        self.transformer = GPT2Model(config)
+        self.lm_head = GPT2LMHead(self.transformer.wte.weight, config)
+        self.apply(self._init_weights)
+```
+
+
+
+
+
+
+
+### gpt2.py  class GPT2Model 
+
+
+
+```python
+def forward(
+        self, 
+        input_ids, 
+        position_ids=None, 
+        token_type_ids=None, 
+        past=None, 
+        len_past=None
+    ):
+        """
+        Forward pass of the GPT2Model.
+
+        Args:
+        input_ids (torch.Tensor): Input token indices.
+        position_ids (torch.Tensor, optional): Position indices. Defaults to None.
+        token_type_ids (torch.Tensor, optional): Token type indices. Defaults to None.
+        past (list, optional): Past hidden states for caching. Defaults to None.
+        len_past (int, optional): Length of past hidden states. Defaults to None.
+
+        Returns:
+        tuple: A tuple containing the final hidden states and a list of present hidden states.
+
+    """
+        # 初始化 past 和 past_length
+        if past is None:
+            past_length = 0
+            past = [None] * len(self.h)# 如果 past 为 None，则初始化为 None 列表
+        elif len_past is None:
+            # 如果 len_past 为 None，则从 past 中获取 past_length
+            # equal size for past. []
+            past_length = past[0][0].size(-2)
+
+        # 生成 position_ids
+        if position_ids is None and len_past is None:
+            # 如果 position_ids 和 len_past 都为 None，则生成 position_ids
+            position_ids = torch.arange(
+                past_length, input_ids.size(-1) + past_length, 
+                dtype=torch.long, device=input_ids.device
+            )
+            position_ids = position_ids.unsqueeze(0).expand_as(input_ids)
+        elif len_past is not None:
+            # 如果 len_past 不为 None，则生成 position_ids
+            position_ids = (len_past).unsqueeze(1) #.long()
+
+        # 获取输入张量的形状，并展平 input_ids 和 position_ids
+        input_shape = input_ids.size()
+        input_ids = input_ids.view(-1, input_ids.size(-1))
+        position_ids = position_ids.view(-1, position_ids.size(-1))
+
+        # 使用词嵌入层将 input_ids 转换为词嵌入张量
+        inputs_embeds = self.wte(input_ids)     
+
+        # 使用位置嵌入层将 position_ids 转换为位置嵌入张量
+        position_embeds = self.wpe(position_ids)
+
+        # 处理 token_type_ids
+        if token_type_ids is not None:
+            token_type_ids = token_type_ids.view(-1, token_type_ids.size(-1))
+            token_type_embeds = self.wte(token_type_ids)  # 使用词嵌入层将 token_type_ids 转换为 token 类型嵌入张量
+        else:
+            token_type_embeds = 0 # 如果 token_type_ids 为 None，则 token_type_embeds 设为 0
+
+        # 将词嵌入、位置嵌入和 token 类型嵌入相加，得到初始的隐藏状态
+        hidden_states = inputs_embeds + position_embeds + token_type_embeds
+
+        # 初始化 presents 列表，用于存储每个 Block 的隐藏状态
+        presents = []
+        for block, layer_past in zip(self.h, past):
+            # 将当前的隐藏状态传递给 Block，并获取更新后的隐藏状态和新的隐藏状态
+            hidden_states, present = block(hidden_states, layer_past = layer_past, len_past=len_past)
+            presents.append(present)# 将新的隐藏状态添加到 presents 列表中
+       
+        # 使用层归一化层对最终的隐藏状态进行归一化
+        hidden_states = self.ln_f(hidden_states)
+
+        # 计算输出张量的形状
+        output_shape = input_shape + (hidden_states.size(-1),)
+
+        # 将隐藏状态重塑为原始输入形状，并返回隐藏状态和 presents 列表
+        return hidden_states.view(*output_shape), presents
+
+```
+
+
+
+
+
+
+
+```mermaid
+graph TD
+    %% 输入层
+    A1["input_ids"] --> B1["Flatten"]
+    A2["position_ids"] --> B2["Flatten"]
+    A3["token_type_ids"] --> B3["Flatten"]
+    
+    %% 嵌入层
+    B1 --> C1["Word Embedding"]
+    B2 --> C2["Position Embedding"]
+    B3 --> C3["Word Embedding"]
+    
+    %% 嵌入相加
+    C1 --> D1["inputs_embeds"]
+    C2 --> D2["position_embeds"]
+    C3 --> D3["token_type_embeds"]
+    D1 --> E1["hidden_states"]
+    D2 --> E1
+    D3 --> E1
+
+    %% Block 模块
+    E1 --> F1["Block 1"]
+    F1 --> G1["present_1"]
+    F1 --> H1["hidden_states"]
+
+    H1 --> F2["Block 2"]
+    F2 --> G2["present_2"]
+    F2 --> H2["hidden_states"]
+
+    H2 --> F3["Block n"]
+    F3 --> G3["present_n"]
+    F3 --> H3["hidden_states"]
+
+    %% 最终处理
+    H3 --> I1["LayerNorm"]
+    I1 --> J1["hidden_states"]
+    J1 --> K1["Reshape"]
+    K1 --> L1["output"]
+    G1 --> M1["presents"]
+    G2 --> M1
+    G3 --> M1
+    
+
+    %% 定义样式
+    classDef input fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef embed fill:#9ff,stroke:#333,stroke-width:2px;
+    classDef block fill:#ff9,stroke:#333,stroke-width:2px;
+    classDef final fill:#9f9,stroke:#333,stroke-width:2px;
+    classDef LayerNorm fill:#f99,stroke:#333,stroke-width:2px;
+
+    %% 应用样式
+    class A1,A2,A3 input;
+    class B1,B2,B3,C1,C2,C3,D1,D2,D3 embed;
+    class F1,F2,F3,H1,H2,H3 block;
+    class I1,J1,K1,L1,M1,G1,G2,G3, final;
+    class I1 LayerNorm;
+
+```
+
+
+
+
+
+
+
+### gpt2.py   class Block(nn.Module):
+
+
+
+def forward 
+
+```python
+def forward(self, x, layer_past=None, len_past=None):
+        """
+        Forward pass of the Block module.
+
+        Args:
+            x (torch.Tensor): Input tensor.
+            layer_past (torch.Tensor, optional): Past hidden states for caching. Defaults to None.
+            len_past (int, optional): Length of past hidden states. Defaults to None.
+
+        Returns:
+            tuple: A tuple containing the final hidden state and the present hidden state.
+
+        """
+
+        # 使用 LayerNorm 对输入张量 x 进行归一化
+        normalized_x = self.ln_1(x)  # LayerNorm (ln_1)
+
+        # 使用 Attention 模块处理归一化后的张量
+        a, present = self.attn(normalized_x, layer_past=layer_past, len_past=len_past)  # Attention (attn)
+
+        # 残差连接：将输入张量 x 和注意力输出 a 相加
+        x = x + a  # x + a
+
+        # 使用 LayerNorm 对新的隐藏状态 x 进行归一化
+        normalized_x = self.ln_2(x)  # LayerNorm (ln_2)
+
+        # 使用 MLP 模块处理归一化后的张量
+        m = self.mlp(normalized_x)  # MLP (mlp)
+
+        # 残差连接：将新的隐藏状态 x 和前馈网络输出 m 相加
+        x = x + m  # x + m
+
+        # 返回最终的隐藏状态 x 和新的隐藏状态 present
+        return x, present  # output x, present
+```
+
+
+
+```mermaid
+graph TD
+    A["输入 x"] --> B["LayerNorm ln_1 ()"]
+    B --> B0["normalized_x"]
+    B1["layer_past"] --> C1["Attention (attn)"]
+    B2["len_past"] --> C1["Attention (attn)"]
+    B0 --> C1["Attention (attn)"]
+    C1 --> D1["a"]
+    C1 --> D2["present"]
+    A --> E["残差连接: x = x + a"]
+    D1 --> E
+    E --> F["normalized_x = LayerNorm ln_2()"]
+    
+    F --> G["m=MLP (normalized_x)"]
+    E --> H["残差连接: x = x + m"]
+    G --> H
+    H --> I["输出 x 和 present"]
+
+%% 定义样式
+    classDef function fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef norm fill:#ff9,stroke:#333,stroke-width:2px;
+    classDef attn fill:#9ff,stroke:#333,stroke-width:2px;
+    classDef residual fill:#9f9,stroke:#333,stroke-width:2px;
+    classDef output fill:#f99,stroke:#333,stroke-width:2px;
+
+    %% 应用样式
+    class C1,G function;
+    class B,F norm;
+    
+    class E,H residual;
+    class D2,I output;
+
+```
+
+
+
+
+
+
+
+### model.py   class Attention
+
+
+
+```python
+def forward(self, x, history=None, layer_past=None, len_past=None):
+        hidden_states = x
+
+        x = self.c_attn(x)
+        query, key, value = x.split(self.split_size, dim=2)
+
+        query = self.split_heads(query)
+        key = self.split_heads(key, k=True)
+        value = self.split_heads(value)
+
+        #_input_msk = None
+
+        len_kv = None
+
+        if layer_past is not None:
+            # key : (batch, head, head_features, seq_length)
+            # value : (batch, head, seq_length, head_features)
+            # layer_past, key : (batch, head, seq_length, head_features)
+            if len_past is None:
+                past_key, past_value = layer_past[0].transpose(-2, -1), layer_past[1]  # transpose back cf below
+                key = torch.cat((past_key, key), dim=-1)
+                value = torch.cat((past_value, value), dim=-2)
+            else:
+                key_seq = key.shape[-1]
+                assert key_seq == 1
+
+                _batch = torch.arange(0, key.shape[0], dtype=torch.long, device=key.device)
+
+                past_key, past_value = layer_past[0], layer_past[1]
+
+                past_key[_batch,:,len_past,:] = key.squeeze(-1)
+                past_value[_batch,:,len_past,:] = value.squeeze(-2)
+
+                key = past_key.transpose(-2, -1)
+                value = past_value
+
+                len_kv = len_past + 1
+
+        present = torch.stack((key.transpose(-2, -1), value))  # transpose to have same shapes for stacking
+        a = self._attn(query, key, value, len_kv = len_kv)
+        a = self.merge_heads(a)
+        a = self.c_proj(a)
+        return a, present
+```
+
+
+
+
+
+```mermaid
+graph TD
+    A["输入张量 x"] --> B["c_attn: 线性变换（包括 LoRA）"]
+    B --> C["拆分为 query, key, value"]
+    C --> D["query, key, value: 进行多头分解（split_heads）"]
+    D --> E{是否有 layer_past?}
+    E -- "否" --> G["直接使用当前 key 和 value"]
+    E -- "是" --> F{len_past 是否为 None?}
+    F -- "是" --> H["拼接 past_key 和当前 key, value"]
+    F -- "否" --> I["更新特定位置的 past_key 和 past_value"]
+    I --> J["更新后的 key 和 value"]
+    H --> J
+    G --> J
+    J --> K["调用 _attn: 计算注意力得分"]
+    K --> L["merge_heads: 合并多头结果"]
+    L --> M["c_proj: 投影回输出空间"]
+    M --> N["返回注意力输出 a 和 present"]
+
+	classDef function fill:#f9f,stroke:#333,stroke-width:2px;
+	%% 应用样式
+    class B function;
+
+```
+
+
+
+### loralib layers.py    lora.MergedLinear
+
+
+
+```python
+def forward(self, x: torch.Tensor):
+        """
+        The forward pass of the MergedLinear layer.
+        MergedLinear 层的前向传播。
+
+        Args:
+            x (torch.Tensor): Input tensor with shape (batch_size, seq_len, in_features).
+                              输入张量，形状为 (batch_size, seq_len, in_features)。
+
+        Returns:
+            torch.Tensor: Output tensor with shape (batch_size, seq_len, out_features).
+                          输出张量，形状为 (batch_size, seq_len, out_features)。
+        """
+        def T(w):
+            # Transpose the weight matrix if fan_in_fan_out is True; otherwise, return as is.
+            # 如果 fan_in_fan_out 为 True，则转置权重矩阵；否则按原样返回。
+            return w.transpose(0, 1) if self.fan_in_fan_out else w
+
+        # Check if LoRA is enabled (r > 0) and weights are not merged
+        # 检查是否启用了 LoRA (r > 0) 且权重未合并
+        if self.r > 0 and not self.merged:
+            # Perform standard linear transformation: result = x @ W^T + bias
+            # 执行标准线性变换：result = x @ W^T + bias
+            result = F.linear(x, T(self.weight), bias=self.bias)
+
+            # Compute LoRA-specific weight update: ΔW = B @ A
+            # 计算 LoRA 特定的权重更新：ΔW = B @ A
+            # Inject task-specific updates into the result
+            # 将任务特定更新注入到结果中
+            result += (self.lora_dropout(x) @ self.lora_A.transpose(0, 1) @ self.lora_B.transpose(0, 1)) * self.scaling
+
+            # Return the final result with LoRA updates
+            # 返回包含 LoRA 更新的最终结果
+            return result
+        else:
+            # If LoRA is disabled or weights are merged, perform only the standard linear transformation
+            # 如果 LoRA 被禁用或权重已合并，仅执行标准线性变换
+            return F.linear(x, T(self.weight), bias=self.bias)
+
+```
+
+
+
+```mermaid
+graph TD
+    A["输入张量 x"] --> B{权重是否已合并? self.merged}
+    B -- "是" --> C["标准线性变换: result = x @ T(weight) + bias"]
+    C --> F["返回 result"]
+    B -- "否" --> D["标准线性变换: result = x @ T(weight) + bias"]
+    D --> E{是否启用 LoRA r > 0}
+    E -- "否" --> F
+    E -- "是" --> G["计算低秩更新: self.merge_AB() ΔW = B @ A"]
+    G --> H["注入任务特定更新: task_update = Dropout(x) @ ΔW"]
+    H --> I["缩放更新: scaled_update = task_update * scaling"]
+    I --> J["叠加任务特定更新: result += scaled_update"]
+    D --> J
+    
+    J --> F1
+    F1["返回 result"]
+    
+    classDef function fill:#f9f,stroke:#333,stroke-width:2px;
+	%% 应用样式
+    class E function;
+
+```
+
+
+
+**代码片段介绍**
+
+```python
+x = self.c_attn(x)
+```
+
+这句代码调用了 `self.c_attn`，在本实现中，`self.c_attn` 被定义为 LoRA 的 `MergedLinear` 类的实例，用于替代标准的 `nn.Linear` 层。在调用 `forward` 方法时，`self.c_attn` 对输入张量 `x` 进行处理，完成以下核心功能：
+
+------
+
+**作用详解**
+
+1. **标准线性变换**
+
+   MergedLinear的核心功能类似于标准的 nn.Linear，执行如下线性变换：
+
+   
+   $$
+   \text{output} = x \cdot W^T + b
+   $$
+   
+
+   - $x$: 输入张量，形状为$ (\text{batch\_size}, \text{seq\_len}, \text{in\_features})$。
+   - $W$: 权重矩阵，形状为 $(\text{out\_features}, \text{in\_features})$。
+   - $b$: 偏置向量，形状为 $(\text{out\_features})$。
+
+2. **LoRA 的低秩权重更新**
+
+   - 如果启用了 LoRA（即 $r > 0$ 且未合并权重），则会动态计算任务特定的权重更新：
+
+     
+     $$
+     \Delta W = B \cdot A
+     $$
+     
+
+     - $A$: 低秩矩阵，形状为 $(r, \text{in\_features})$。
+     - $B$: 低秩矩阵，形状为 $(\text{out\_features}, r)$。
+     - $r$: 低秩维度，远小于权重矩阵的维度。
+
+   - 将计算出的权重更新 $\Delta W$ 注入到标准线性变换中：
+     $$
+     \text{output} = x \cdot W^T + b + x \cdot \Delta W^T
+     $$
+     
+
+3. **任务特定更新的缩放**
+
+   - 通过 `self.scaling` 对低秩更新进行缩放控制： 
+
+     
+
+   $$
+   \Delta W_{\text{scaled}} = \Delta W \cdot \frac{\text{lora\_alpha}}{r}
+   $$
+
+   
+
+4. **正则化与防止过拟合**
+
+   - 对输入张量 $x$ 应用 `Dropout`，随机屏蔽部分输入，增强模型的泛化能力。
+
+5. **权重合并机制**
+
+   - 如果权重已合并（`self.merged = True`），直接使用合并后的权重执行标准线性变换，避免额外的计算。
+
+------
+
+**总结作用**
+
+这行代码的作用是通过 `self.c_attn` 完成以下两部分：
+
+1. **标准线性变换**：基于冻结的预训练权重 $W$执行基础的输入映射。
+2. **LoRA 低秩更新注入**：根据任务需求动态计算并注入额外的权重更新，提升模型的任务适配能力，同时减少参数量。
+
+通过这行代码，输入张量 `x` 被映射到新的特征空间，生成了任务特定的上下文表示。这是 LoRA 在 Attention 模块中实现参数高效适配的关键步骤。
+
+
+
+
+
+### gpt2.py   class LayerNorm() 
+
+
+
+```python
+class LayerNorm(nn.Module):
+    def __init__(self, hidden_size, eps=1e-12):
+        """Construct a layernorm module in the TF style (epsilon inside the square root)."""
+        super(LayerNorm, self).__init__()
+        self.weight = nn.Parameter(torch.ones(hidden_size))
+        self.bias = nn.Parameter(torch.zeros(hidden_size))
+        self.variance_epsilon = eps
+
+    def forward(self, x):
+        u = x.mean(-1, keepdim=True)
+        s = (x - u).pow(2).mean(-1, keepdim=True)
+        x = (x - u) / torch.sqrt(s + self.variance_epsilon)
+        return self.weight * x + self.bias
+```
+
+
+
+```mermaid
+graph TD
+    %% 输入
+    A["输入 x"] --> B["计算均值 u: u = x.mean(-1, keepdim=True)"]
+
+    %% 均值处理
+    B --> C["计算方差 s: s = (x - u)^2.mean(-1, keepdim=True)"]
+    A  --> C
+    
+    C --> D["归一化 x: x = (x - u) / sqrt(s + epsilon)"]
+    A --> D
+    B --> D
+    A3["self.variance_epsilon = eps"]--> D
+
+    %% 权重与偏置
+    D --> E["应用权重和偏置: output = weight * x + bias"]
+    A1["self.weight = nn.Parameter(torch.ones(hidden_size))"]--> E
+    A2["self.bias = nn.Parameter(torch.zeros(hidden_size))"]--> E
+    
+
+    %% 输出
+    E --> F["输出结果 output"]
+
+    %% 样式定义
+    classDef calculation fill:#9ff,stroke:#333,stroke-width:2px;
+    classDef input fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef output fill:#9f9,stroke:#333,stroke-width:2px;
+
+    %% 应用样式
+    class A input;
+    class B,C,D,E calculation;
+    class F output;
+
+```
+
+
+
+
+
 
 
 # 论文介绍 -- O-LoRA
@@ -893,7 +1602,59 @@ In N-LoRA, **collision** refers to the overlap of non-zero task-specific paramet
 
 
 
-## AI  QA 4 metric in thsi paper
+## 代码实现查看
+
+
+
+[PKU-YuanGroup/N-LoRA: 【COLING 2025🔥】Code for the paper "Is Parameter Collision Hindering Continual Learning in LLMs?".](https://github.com/PKU-YuanGroup/N-LoRA)
+
+
+
+### run_N_lora def main()
+
+
+
+加载模型
+
+
+
+### **不同模型输入的矩阵表示**
+
+| `'adapter' in model_args.model_name_or_path` | `'llama' in model_args.model_name_or_path.lower()` | **最终加载的模型**                                           |
+| -------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------ |
+| 0                                            | 0                                                  | 标准模型：加载 `AutoConfig` 和 `AutoTokenizer`，模型类为 `AutoModelForSeq2SeqLM` |
+| 0                                            | 1                                                  | LLaMA 模型：加载 `AutoConfig` 和 `LlamaTokenizer`，模型类为 `LlamaForCausalLM_with_lossmask` |
+| 1                                            | 0                                                  | LoRA 适配模型（非 LLaMA）：加载 LoRA 配置 `PeftConfig` 和基础模型，分词器为 `AutoTokenizer` |
+| 1                                            | 1                                                  | LoRA 适配模型（LLaMA）：加载 LoRA 配置 `PeftConfig` 和基础模型，分词器为 `LlamaTokenizer`，配置特殊 token |
+
+
+
+|                                                     | adapter' in  model_args.model_name_or_path: 1                | adapter' in  model_args.model_name_or_path: 0                |
+| --------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| llama'  in model_args.model_name_or_path.lower(): 1 | config = PeftConfig.from_pretrained(model_args.model_name_or_path) | config = AutoConfig.from_pretrained(             model_args.model_name_or_path,             cache_dir=model_args.cache_dir,           revision=model_args.model_revision,           use_auth_token=True if  model_args.use_auth_token else None,         ) |
+|                                                     | tokenizer = transformers.LlamaTokenizer.from_pretrained(config.base_model_name_or_path) tokenizer.padding_side = 'left' | tokenizer =  transformers.LlamaTokenizer.from_pretrained(             model_args.model_name_or_path,           cache_dir =  model_args.cache_dir,           use_fast =  model_args.use_fast_tokenizer,           revision =  model_args.model_revision,           use_auth_token = True if  model_args.use_auth_token else None,         ) tokenizer.padding_side = 'left' |
+|                                                     | model_class =  LlamaForCausalLM_with_lossmask                | model_class =  LlamaForCausalLM_with_lossmask                |
+|                                                     | model =  model_class.from_pretrained(config.base_model_name_or_path) | model =  model_class.from_pretrained(             model_args.model_name_or_path,             from_tf=bool(".ckpt" in model_args.model_name_or_path),           config=config,             cache_dir=model_args.cache_dir,             revision=model_args.model_revision,           use_auth_token=True if  model_args.use_auth_token else None         ) |
+|                                                     | model =  PeftModel.from_pretrained(model,  model_args.model_name_or_path) | peft_config =  LoraConfig(             task_type=TaskType.CAUSAL_LM, inference_mode=False,  r=model_args.lora_dim, lora_alpha=32, lora_dropout=0.1         ) |
+|                                                     |                                                              | model = get_peft_model(model,  peft_config)                  |
+| llama'  in model_args.model_name_or_path.lower(): 0 | config = PeftConfig.from_pretrained(model_args.model_name_or_path) | config =  AutoConfig.from_pretrained(             model_args.model_name_or_path,             cache_dir=model_args.cache_dir,           revision=model_args.model_revision,           use_auth_token=True if  model_args.use_auth_token else None,         ) |
+|                                                     | tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path) | tokenizer = AutoTokenizer.from_pretrained(           model_args.tokenizer_name  if model_args.tokenizer_name else model_args.model_name_or_path,             cache_dir=model_args.cache_dir,             use_fast=model_args.use_fast_tokenizer,             revision=model_args.model_revision,           use_auth_token=True if  model_args.use_auth_token else None,         ) |
+|                                                     | model_class = AutoModelForSeq2SeqLM                          | model_class =  AutoModelForSeq2SeqLM                         |
+|                                                     | model =  model_class.from_pretrained(config.base_model_name_or_path) | model =  model_class.from_pretrained(             model_args.model_name_or_path,             from_tf=bool(".ckpt" in model_args.model_name_or_path),           config=config,             cache_dir=model_args.cache_dir,             revision=model_args.model_revision,           use_auth_token=True if  model_args.use_auth_token else None,         ) |
+|                                                     | model = PeftModel.from_pretrained(model, model_args.model_name_or_path) | peft_config = LoraConfig(             task_type=TaskType.SEQ_2_SEQ_LM, inference_mode=False,  r=model_args.lora_dim, lora_alpha=32, lora_dropout=0.1         ) |
+|                                                     |                                                              | model = get_peft_model(model,  peft_config)                  |
+
+
+
+
+
+
+
+
+
+
+
+# AI  QA 4 metric in thsi paper
 
 ### **Comparison of Metrics Across the Papers**
 
@@ -932,6 +1693,7 @@ O-LoRA evaluates **orthogonality** at the subspace level using LoRA parameters, 
   $$
   where $A_i$ is the LoRA parameter matrix for task $i$.
 - **Purpose**:
+  
   - Quantifies the degree of interference between subspaces; lower values indicate better orthogonality.
 
 #### **Average Accuracy (AA)**
@@ -1158,3 +1920,269 @@ In essence, the approach used in the **O-LoRA** paper (and similar continual lea
 ### **Conclusion**
 
 Yes, the O-LoRA framework essentially **reformats all tasks into a classification problem**, even for inherently more complex tasks like QA and NLI. This approach capitalizes on the strengths of pre-trained language models while simplifying task adaptation and evaluation in continual learning settings.
+
+
+
+# Simarity with  Math theory
+
+# Q1 Compare with 矩阵论方法
+
+
+
+## **LoRA、O-LoRA 和 N-LoRA 与矩阵论方法的对比**
+
+以下是与 **LoRA** 和 **O-LoRA**（正交分解）以及 **N-LoRA**（稀疏分解）相关的矩阵论方法与理论的对比分析，以及这些方法与论文中方法的相似性对比。
+
+---
+
+## **矩阵论中相关方法与理论**
+
+### **1. 奇异值分解（Singular Value Decomposition, SVD）**
+- **定义**: 任意矩阵 $A \in \mathbb{R}^{m \times n}$ 可以分解为：
+  $$
+  A = U \Sigma V^\top
+  $$
+  其中：
+  - $U \in \mathbb{R}^{m \times m}$ 和 $V \in \mathbb{R}^{n \times n}$ 为正交矩阵；
+  - $\Sigma \in \mathbb{R}^{m \times n}$ 是对角矩阵，包含奇异值。
+
+- **与论文方法的联系**:
+  - LoRA 和 O-LoRA 都通过引入低秩矩阵对权重更新进行约束。虽然 LoRA 没有明确使用 SVD，它隐含地利用了矩阵的低秩性质来减少参数量。
+  - **O-LoRA** 的正交分解思路和 $U$ 或 $V^\top$ 的正交性类似，强调子空间的正交性，确保不同任务的权重更新互不干扰。
+
+---
+
+### **2. 稀疏矩阵分解（Sparse Matrix Decomposition）**
+- **定义**: 对矩阵 $A$ 表示为稀疏形式的组合，例如：
+  $$
+  A = A_1 + A_2 + \dots + A_k
+  $$
+  其中 $A_i$ 是稀疏矩阵（大部分元素为零）。
+
+- **稀疏正则化**:
+  - 使用 $\ell_1$ 正则化约束来迫使矩阵稀疏性，例如：
+    $$
+    \min_X \|A - X\|_F^2 + \lambda \|X\|_1
+    $$
+  - $\ell_1$ 范数作为正则化项鼓励解中许多元素为零。
+
+- **与 N-LoRA 的联系**:
+  - N-LoRA 使用 $\ell_1$ 正则化约束 LoRA 参数 $\Delta W = AB$，从而减少参数间的冲突。
+  - 稀疏分解方法中的目标和 N-LoRA 在稀疏性上的目标一致，即通过稀疏性减少冲突和干扰。
+
+---
+
+### **3. 正交投影（Orthogonal Projection）**
+- **定义**: 将一个向量投影到另一个子空间上，满足：
+  $$
+  P = UU^\top, \quad U^\top U = I
+  $$
+  - 投影矩阵 $P$ 满足对称性 $P^\top = P$ 和幂等性 $P^2 = P$。
+
+- **与 O-LoRA 的联系**:
+  - O-LoRA 通过正交约束（如 $A_t^\top A_{t-1} = 0$）确保任务间子空间正交，从而避免任务干扰。这与矩阵论中的正交投影思想一致。
+
+---
+
+### **4. 低秩近似（Low-Rank Approximation）**
+- **定义**: 给定矩阵 $A$，通过低秩矩阵 $B$ 和 $C$ 近似 $A$：
+  $$
+  A \approx BC, \quad \text{rank}(BC) \leq r
+  $$
+  - 典型方法：截断 SVD（Truncated SVD）。
+
+- **与 LoRA 的联系**:
+  - LoRA 本质上是一种低秩近似方法，使用 $A \approx W + \Delta W = W + AB$ 来高效地学习模型的参数更新。
+
+---
+
+### **5. 稀疏编码（Sparse Coding）**
+- **定义**: 给定信号 $X$ 和字典矩阵 $D$，通过稀疏系数 $S$ 表示 $X$：
+  $$
+  X \approx DS, \quad \|S\|_0 \text{或} \|S\|_1 \text{最小化}
+  $$
+
+- **与 N-LoRA 的联系**:
+  - N-LoRA 的稀疏分解目标类似于稀疏编码的思想。通过 $\ell_1$ 正则化约束，N-LoRA 强迫 LoRA 参数稀疏化，从而实现任务参数的解耦和冲突减少。
+
+---
+
+## **论文方法与矩阵理论的相似性对比**
+
+| **矩阵理论方法**     | **LoRA 的联系**                                              | **O-LoRA 的联系**                                            | **N-LoRA 的联系**                                            |
+| -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **奇异值分解 (SVD)** | 隐含利用低秩性质来减少参数量，类似于将权重矩阵分解为两个低秩矩阵 $AB$。 | 强调任务子空间的正交性，类似于 SVD 中的正交矩阵 $U$ 和 $V^\top$。 | 稀疏分解可结合 SVD，以提高稀疏低秩分解效果。                 |
+| **稀疏矩阵分解**     | 无显式稀疏性约束。                                           | 没有直接稀疏性，但通过正交性减少任务参数的干扰。             | 使用 $\ell_1$ 正则化引入稀疏性，显式减少参数间冲突。         |
+| **正交投影**         | 无正交性约束。                                               | 明确要求任务间子空间正交，类似正交投影矩阵的思想。           | 无直接正交性约束，但通过稀疏性减少任务间的冲突，从而隐式提高子空间正交性。 |
+| **低秩近似**         | 本质上是一种低秩分解方法，直接利用 $W + AB$ 形式来近似权重矩阵。 | 同样是低秩方法，但附加了子空间间的正交性约束，强调任务间的解耦。 | 是低秩方法的扩展，引入稀疏性约束，从而减少参数冲突，同时保持低秩表示的有效性。 |
+| **稀疏编码**         | 不涉及稀疏性。                                               | 无显式稀疏编码的目标，但通过正交性减小任务干扰。             | 与稀疏编码思想高度一致，通过 $\ell_1$ 正则化使 LoRA 参数更加稀疏化，增强任务间的独立性和分离性。 |
+
+---
+
+## **总结**
+
+1. **LoRA**:
+   - 类似矩阵低秩分解，重点在于减少参数量，同时高效地学习模型更新。
+   - 与矩阵论中的 **SVD** 和 **低秩近似** 方法关系密切。
+
+2. **O-LoRA**:
+   - 强调任务参数子空间的正交性，类似矩阵论中的 **正交投影** 和 **正交矩阵性质**。
+   - 引入正交性约束，使任务间的干扰最小化。
+
+3. **N-LoRA**:
+   - 结合稀疏分解和低秩近似，通过稀疏正则化 ($\ell_1$) 强化参数的稀疏性，从而显式减少冲突。
+   - 与矩阵论中的 **稀疏矩阵分解** 和 **稀疏编码** 方法相似。
+
+从数学视角来看，这三种方法都借鉴了矩阵论中的经典理论，但各自有不同的改进和侧重点，使得它们能够在深度学习的不同场景中高效发挥作用。
+
+
+
+# Q2 改进与提升方向
+
+## **矩阵论中更多的空间分解方法与理论及其对 N-LoRA 的改进方向**
+
+以下是矩阵论中更多与 **空间分解** 相关的方法与理论，以及这些方法是否能结合 **N-LoRA** 进一步改进的分析。
+
+---
+
+## **矩阵论中的空间分解方法与理论**
+
+### **1. 稀疏正交分解（Sparse Orthogonal Decomposition）**
+- **定义**: 将一个矩阵分解为多个子空间，使得子空间既稀疏又正交：
+  $$
+  A = \sum_{i=1}^k S_i, \quad S_i^\top S_j = 0 \ (i \neq j)
+  $$
+  - 每个子空间 $S_i$ 是稀疏矩阵，且子空间之间互相正交。
+  - 这种方法结合了稀疏分解和正交投影的特点。
+
+- **可能对 N-LoRA 的改进**:
+  - 在 N-LoRA 中，稀疏性和正交性是独立的目标。如果结合稀疏正交分解，可以同时优化这两个性质，减少稀疏性与正交性之间的潜在冲突，提高任务解耦能力。
+
+---
+
+### **2. 稀疏低秩分解（Sparse Low-Rank Factorization）**
+- **定义**: 对矩阵进行低秩分解，同时施加稀疏性约束：
+  $$
+  A \approx BC, \quad \|B\|_1 \text{ or } \|C\|_1 \text{最小化}
+  $$
+  - $B$ 和 $C$ 可以是稀疏的，也可以通过 $\ell_1$ 正则化实现稀疏性。
+
+- **可能对 N-LoRA 的改进**:
+  - 当前的 N-LoRA 使用 $\ell_1$ 正则化使参数稀疏化，但没有显式地优化低秩性。如果将稀疏性和低秩性联合优化，可能进一步减少冗余参数并提高任务隔离效果。
+
+---
+
+### **3. 非负矩阵分解（Non-Negative Matrix Factorization, NMF）**
+- **定义**: 对矩阵进行非负分解，即所有因子矩阵的元素非负：
+  $$
+  A \approx BC, \quad B_{ij} \geq 0, \ C_{ij} \geq 0
+  $$
+  - 非负约束可解释为加性模型，更适合某些需要解释性或非负权重的场景。
+
+- **可能对 N-LoRA 的改进**:
+  - 在某些任务（如概率模型）中，参数的非负性可能有助于提高模型的稳定性。如果结合 NMF 和 N-LoRA，可以探索非负稀疏正则化，减少参数的过拟合。
+
+---
+
+### **4. 稀疏主成分分析（Sparse Principal Component Analysis, Sparse PCA）**
+- **定义**: 在传统 PCA 的基础上加入稀疏性约束：
+  $$
+  \max \|A w\|_2^2, \quad \text{s.t. } \|w\|_0 \leq k
+  $$
+  - 稀疏性约束确保主成分向量中仅少数分量非零。
+
+- **可能对 N-LoRA 的改进**:
+  - N-LoRA 当前只对 LoRA 参数施加 $\ell_1$ 稀疏约束。如果结合 Sparse PCA 的思想，可以优化任务相关的稀疏主方向，从而提高任务分解的解释性。
+
+---
+
+### **5. 核矩阵分解（Kernel Matrix Factorization）**
+- **定义**: 在核空间中进行矩阵分解：
+  $$
+  K = \Phi(A)\Phi(A)^\top
+  $$
+  - 通过非线性核函数 $\Phi$ 将数据映射到高维空间后再进行分解。
+
+- **可能对 N-LoRA 的改进**:
+  - 如果在 LoRA 分解中引入核方法，可以捕获参数的非线性特征。这可能对复杂任务（如跨模态学习或多任务学习）有所帮助。
+
+---
+
+### **6. 共享稀疏分解（Shared Sparse Decomposition）**
+- **定义**: 对多个矩阵同时进行分解，确保分解共享某些稀疏结构：
+  $$
+  A_i = B_i C + E_i, \quad \|B_i\|_1 \text{或} \|C\|_1 \text{最小化}
+  $$
+  - $B_i$ 是稀疏矩阵，$C$ 是共享的稀疏结构。
+
+- **可能对 N-LoRA 的改进**:
+  - 在 N-LoRA 中，任务间是完全独立的。如果引入共享稀疏分解，可以提取任务间的公共结构，从而提高任务间知识共享能力，同时减少参数开销。
+
+---
+
+### **7. 张量分解（Tensor Decomposition）**
+- **定义**: 将多维数据（张量）分解为低秩形式，例如 CANDECOMP/PARAFAC（CP）分解：
+  $$
+  T \approx \sum_{r=1}^R u_r \otimes v_r \otimes w_r
+  $$
+  - 将张量表示为多个低秩向量的外积和。
+
+- **可能对 N-LoRA 的改进**:
+  - 如果将 LoRA 参数扩展为张量，可以在时间、任务和参数维度上联合建模。例如，通过张量分解优化任务参数与时间相关性，进一步减少冲突。
+
+---
+
+## **改进 N-LoRA 的潜在方向**
+
+### **1. 稀疏正交分解**
+- 将稀疏性和正交性联合优化，从而同时减少冲突和提升任务解耦性。
+- **公式**:
+  $$
+  A = \sum_{i=1}^k S_i, \quad S_i^\top S_j = 0, \quad \|S_i\|_1 \text{最小化}
+  $$
+- **可能优势**:
+  - 解决 N-LoRA 中稀疏性和正交性独立优化的不足。
+
+---
+
+### **2. 联合稀疏与低秩分解**
+- 同时优化稀疏性和低秩性，以进一步提高参数利用效率：
+  $$
+  \Delta W = AB, \quad \|A\|_1 + \|B\|_1 \text{最小化}, \quad \text{rank}(\Delta W) \leq r
+  $$
+- **可能优势**:
+  - 在减少参数冲突的同时，进一步压缩模型规模。
+
+---
+
+### **3. 核稀疏分解**
+- 在参数分解中引入核方法，捕获非线性特征。
+- **公式**:
+  $$
+  K = \Phi(A)\Phi(A)^\top, \quad \Phi \text{为核映射}
+  $$
+- **可能优势**:
+  - 提高模型在非线性任务中的表现。
+
+---
+
+### **4. 多任务共享分解**
+- 对任务间参数分解加入共享结构：
+  $$
+  A_i = B_i C, \quad \|B_i\|_1 + \|C\|_1 \text{最小化}
+  $$
+- **可能优势**:
+  - 提取任务间共享知识，同时保持稀疏性和解耦性。
+
+---
+
+## **总结**
+
+矩阵论中的多种空间分解方法（如稀疏正交分解、稀疏低秩分解、核分解）可以结合 N-LoRA 的方法进一步改进。潜在的改进方向包括：
+
+1. 联合优化稀疏性和正交性。
+2. 将低秩性和稀疏性结合，提高参数利用率。
+3. 在分解中引入核方法，捕获非线性关系。
+4. 提取任务间的共享结构，实现更高效的多任务学习。
+
+这些改进方向可以在 N-LoRA 的基础上，进一步减少参数冲突，提升任务解耦能力，同时增强模型的表达能力和适应性。
