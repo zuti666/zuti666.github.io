@@ -1,9 +1,9 @@
 ---
 layout: wiki
-title: Diffusion Model 
+title: Code -Diffusion Model 
 categories: Diffusion Model 
 description: Diffusion Model  相关算法
-keywords: Diffusion Model 
+keywords: Diffusion Model, code 
 ---
 
 

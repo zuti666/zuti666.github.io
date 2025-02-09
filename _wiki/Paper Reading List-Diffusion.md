@@ -170,7 +170,7 @@ Couairon, G., Verbeek, J., Schwenk, H., Cord, M., 2022. DiffEdit: Diffusion-base
 
 
 
-
+![image-20250209132132431](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250209132132502.png)
 
 
 
@@ -541,3 +541,4 @@ Zhang, Z., Zheng, J., Fang, J.Z., Plummer, B.A., 2024. Text-to-image Editing by 
 
 
 ![img](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250209121017699.png)
+
