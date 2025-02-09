@@ -758,7 +758,7 @@ The robustness of CLIP is determined by dataset diversity—not by contrastive l
 >     $$
 >     L_{ins} = \sum_{t=1}^{l} CELoss(w'_t, w_t)
 >     $$
->         
+>             
 >     $$
 >     L_{edit} = \mathbb{E}[||\epsilon - \epsilon_\theta(z_t, t, V, \{u\})||^2]
 >     $$
@@ -773,7 +773,7 @@ The robustness of CLIP is determined by dataset diversity—not by contrastive l
 >     
 >
 >     Updates occur in:
->    
+>        
 >     - **MLLM:** Trains the word embeddings and LM head to refine instruction generation.
 >     - **Edit Head:** Learns to map textual instructions to latent visual representations.
 >     - **Diffusion Model:** Fine-tunes parameters for image editing based on guidance.
@@ -899,7 +899,7 @@ The robustness of CLIP is determined by dataset diversity—not by contrastive l
 
 
 
- 	infer **reasonable local editing regions**.
+infer **reasonable local editing regions**.
 
 
 
