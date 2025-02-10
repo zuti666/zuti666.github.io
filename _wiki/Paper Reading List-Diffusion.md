@@ -90,6 +90,24 @@ Avrahami, O., Lischinski, D., Fried, O., 2022. Blended Diffusion for Text-driven
 
 
 
+
+
+## GLIDE: Towards Photorealistic Image Generation and Editing with  Text-Guided Diffusion Models
+
+
+
+Nichol, A., Dhariwal, P., Ramesh, A., Shyam, P., Mishkin, P., McGrew, B., Sutskever, I., Chen, M., 2022. GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models. https://doi.org/10.48550/arXiv.2112.10741
+
+
+
+![image-20250209133005802](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250209133005913.png)
+
+
+
+
+
+
+
 ## The Stable Artist: Steering Semantics in Diffusion Latent Space
 
 - **The Stable Artist: Steering Semantics in Diffusion Latent Space**
