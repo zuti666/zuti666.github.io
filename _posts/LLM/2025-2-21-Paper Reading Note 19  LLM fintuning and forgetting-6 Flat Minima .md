@@ -287,7 +287,7 @@ Flat minima 在多个深度学习任务中被广泛应用，如：
 
 ### **总结**
 
-Flat minima 是神经网络优化的重要概念，代表了泛化能力更强、鲁棒性更好的解。数学上可以通过 Hessian 矩阵的特征值衡量，研究方法包括 SGD、Entropy-SGD 和 SAM 等。Flat minima 影响深度学习模型的训练、优化和泛化能力，在计算机视觉、NLP、强化学习等多个领域有重要应用。
+Flat minima 是神经网络优化的重要概念，代表了泛化能力更强、鲁棒性更好的解。数学上可以通过 Hessian 矩阵的特征值衡量，研究方法 Hessian 矩阵包括 SGD、Entropy-SGD 和 SAM 等。Flat minima 影响深度学习模型的训练、优化和泛化能力，在计算机视觉、NLP、强化学习等多个领域有重要应用。
 
 🚀 **希望这篇介绍对你有所帮助！如果你对某个具体方向感兴趣，可以深入讨论！**
 
@@ -307,11 +307,214 @@ Flat minima 是神经网络优化的重要概念，代表了泛化能力更强�
 
 # 不同的度量方式
 
+# **Filter Normalization Method: Step-by-Step Process**
+
+## **Overview**
+
+The **Filter Normalization** method is a technique proposed to enhance the visualization of neural network loss landscapes by eliminating scale invariance issues. This method allows for fair comparisons of loss landscapes across different network architectures and training settings.
+
+------
+
+## **Step-by-Step Process of Filter Normalization**
+
+### **Step 1: Generate a Random Direction Vector**
+
+- Create a random Gaussian direction vector $d$ with the same dimensions as the neural network parameters  $\theta$:
+  $$
+  d \sim \mathcal{N}(0, I)
+  $$
+   $I$ is the identity matrix representing a Gaussian distribution with zero mean and unit variance.
+
+------
+
+### **Step 2: Normalize Each Filter Individually**
+
+- For each layer in the neural network:
+
+  - Identify the **filters** (sets of weights that operate over input channels).
+
+  - Compute the Frobenius norm of each filter in the parameter tensor $\theta$:
+    $$
+    \|\theta_{i,j}\| = \sqrt{\sum_{k} \theta_{i,j,k}^2}
+    $$
+
+  - Scale the corresponding filter in the direction vector $d$:
+    $$
+    d_{i,j} \gets \frac{d_{i,j}}{\|d_{i,j}\|} \cdot \|\theta_{i,j}\|
+    $$
+    
+- This ensures that the perturbation maintains the relative scale of each filter, removing artificial differences in visualization due to weight magnitude variations.
+
+------
+
+### **Step 3: Construct the Loss Landscape Projection**
+
+- Define two independent **random direction vectors** $\xi$ and $\eta$ after applying filter-wise normalization.
+
+- Perturb the original network parameters in these directions:
+  $$
+  \theta(\alpha, \beta) = \theta^* + \alpha \xi + \beta \eta
+  $$
+  where:
+
+  - $\theta^*$ is the reference set of parameters (e.g., a trained model),
+  - $\alpha, \beta$ are scalar coefficients controlling the magnitude of the perturbation.
+
+- Compute the loss function values over a grid of $(\alpha, \beta)$ values:
+  $$
+  f(\alpha, \beta) = L(\theta(\alpha, \beta))
+  $$
+  
+
+------
+
+### **Step 4: Visualize the Loss Landscape**
+
+- Generate **2D contour plots** based on $f(\alpha, \beta)$, ensuring that the normalization method is applied consistently across different architectures and training methods.
+
+  
+
+- This visualization allows for a **fair comparison of sharpness and flatness** between different minimizers.
+
+------
+
+## **Advantages of Filter Normalization**
+
+| Feature                                | Traditional Visualization                  | Filter Normalization                   |
+| -------------------------------------- | ------------------------------------------ | -------------------------------------- |
+| **Effect of Weight Scaling**           | Distorted due to varying weight magnitudes | Eliminates scale dependence            |
+| **Comparability Across Architectures** | Limited due to varying norms               | Standardized comparisons across models |
+| **Accuracy of Sharpness Estimation**   | Can be misleading                          | Correlates well with generalization    |
+
+------
+
+## **Final Notes**
+
+- **Batch normalization layers should not be perturbed** to avoid instability in visualization.
+- **Applicable to both convolutional and fully connected layers**, treating FC layers as $1 \times 1$ convolutions.
+- **Computational cost** is slightly higher than traditional methods but provides **more reliable insights** into neural network training dynamics.
+
+🚀 **Future Improvements**:
+
+- Explore **higher-dimensional projections** for more accurate landscape representation.
+- Apply the method to **transformers and non-CNN architectures**.
+- Investigate **real-time visualization techniques** during training.
 
 
 
+# **Explanation of Figure 4: 3D Loss Landscape Visualization**
 
+## **Overview**
 
+Figure 4 in the paper presents **3D loss landscape visualizations** for different neural network architectures, specifically **ResNet-110 without skip connections** and **DenseNet-121** trained on CIFAR-10. These 3D visualizations provide insights into the non-convexity and sharpness of the loss surface, helping to explain why certain architectures are more trainable than others.
+
+------
+
+## **Steps to Generate the 3D Loss Landscape**
+
+The 3D loss landscape is created by **projecting the high-dimensional loss function** onto a 2D plane using two independent random direction vectors. The following steps outline the process:
+
+### **Step 1: Select a Reference Point**
+
+- Choose a **trained model parameter set** $\theta^*$ (e.g., the final converged weights after training).
+- This serves as the **center point** of the visualization.
+
+### **Step 2: Generate Random Direction Vectors**
+
+- Generate two independent random Gaussian direction vectors 
+
+  $\xi$
+
+   and 
+
+  $\eta$
+
+   with the same dimension as 
+
+  $\theta^*$
+
+  :
+
+  ```
+  $$\xi \sim \mathcal{N}(0, I), \quad \eta \sim \mathcal{N}(0, I)$$
+  ```
+
+- Apply 
+
+  filter-wise normalization
+
+   to ensure comparability:
+
+  ```
+  $$\xi_{i,j} \gets \frac{\xi_{i,j}}{\|\xi_{i,j}\|} \cdot \|\theta_{i,j}\|
+  $$
+  ```
+
+  ```
+  $$\eta_{i,j} \gets \frac{\eta_{i,j}}{\|\eta_{i,j}\|} \cdot \|\theta_{i,j}\|
+  $$
+  ```
+
+- This ensures that different architectures have a comparable loss landscape visualization.
+
+### **Step 3: Perturb the Model Parameters**
+
+- Modify the parameters along the two directions to obtain new weight configurations:
+
+  ```
+  $$\theta(\alpha, \beta) = \theta^* + \alpha \xi + \beta \eta$$
+  ```
+
+- Here, $\alpha$ and $\beta$ are scalar perturbations that define the movement in the loss landscape.
+
+### **Step 4: Compute the Loss Values**
+
+- Evaluate the loss function 
+
+  $L(\theta(\alpha, \beta))$
+
+   on the validation dataset for a range of values:
+
+  ```
+  $$f(\alpha, \beta) = L(\theta^* + \alpha \xi + \beta \eta)$$
+  ```
+
+- This produces a **grid of loss values** that represents the loss surface.
+
+### **Step 5: Plot the 3D Loss Surface**
+
+- Construct a 3D mesh plotwith:
+  - **X-axis:** $\alpha$ (perturbation along direction $\xi$)
+  - **Y-axis:** $\beta$ (perturbation along direction $\eta$)
+  - **Z-axis:** $f(\alpha, \beta)$ (loss function value)
+- The surface is rendered using a colormap to indicate different loss values.
+
+------
+
+## **Key Observations from Figure 4**
+
+1. **ResNet-110 without skip connections**:
+   - The loss landscape is **highly chaotic** with steep valleys and large regions of high curvature.
+   - The sharp changes in the loss surface indicate **poor trainability**.
+   - This explains why deep networks without skip connections often struggle to converge.
+2. **DenseNet-121**:
+   - The loss landscape is **much smoother and more convex**.
+   - The loss variations are more gradual, suggesting **better trainability and generalization**.
+   - This supports the idea that well-designed architectures (such as DenseNets) provide more stable optimization surfaces.
+
+------
+
+## **Why is This Visualization Important?**
+
+- **Provides empirical evidence** on how architecture choices affect optimization difficulty.
+- **Reveals the transition from convex to chaotic behavior** in deep networks.
+- **Supports the argument that skip connections improve trainability** by smoothing the loss landscape.
+
+🚀 **Future Work**:
+
+- Apply this technique to **transformer architectures**.
+- Investigate **dynamic loss landscape evolution** during training.
+- Use **higher-dimensional embeddings** to visualize more complex optimization trajectories.
 
 
 
@@ -3204,6 +3407,117 @@ Fisher-Rao Norm (Liang et al. 2019) 基于信息几何的思想，把模型参�
 - **简要公式**：  
   若 $F(\theta)$ 表示在 $\theta$ 处的 Fisher 信息矩阵，Norm 例如 $\|F(\theta)\|_{\text{something}}$，具体可采用矩阵核范数或其他范数。
 
+相关论文内容：
+# **Fisher-Rao度量、几何结构与神经网络复杂性分析**
+
+## **1. 研究范围（Scope/Setting）**
+本论文研究深度神经网络的泛化能力，重点探索基于**几何不变性**的复杂度度量方法。作者提出了一种新的复杂度度量——**Fisher-Rao范数**，旨在：
+1. 研究神经网络的复杂度如何影响泛化能力。
+2. 通过几何角度定义复杂性，使其具有良好的不变性。
+3. 统一已有的复杂度度量方法，并提出更具解释性的泛化误差界限。
+
+## **2. 核心思想（Key Idea）**
+论文的核心思想是基于**信息几何（Information Geometry）**的视角，提出**Fisher-Rao范数**作为神经网络复杂度的新度量标准。其关键特点包括：
+- **几何不变性**：Fisher-Rao范数基于Fisher信息矩阵，能保持网络结构变化下的稳定性。
+- **统一现有度量方法**：该范数能涵盖已有的 $L_2$ 范数、路径范数、谱范数等方法。
+- **泛化能力解释**：论文推导了基于Fisher-Rao范数的泛化误差界限，表明该度量能更准确地描述神经网络的泛化能力。
+
+## **3. 研究方法（Method）**
+### **3.1 Fisher-Rao范数的定义**
+Fisher-Rao范数定义如下：
+$$
+\|\theta\|_{fr}^2 = \mathbb{E} \left[ \left\| \frac{\partial \ell(f_\theta(x), y)}{\partial f_\theta(x)} \right\|^2 \right]
+$$
+其中：
+- $ \ell(f_\theta(x), y) $ 表示损失函数，
+- $ f_\theta(x) $ 是神经网络的输出。
+
+该范数的计算基于Fisher信息矩阵：
+$$
+I_\theta = \mathbb{E}_{(X, Y) \sim P} \left[ \nabla_\theta \log P(Y | X) \nabla_\theta \log P(Y | X)^T \right]
+$$
+其几何不变性确保了度量方法不会受到网络参数化方式的影响。
+
+### **3.2 主要理论推导**
+- 论文证明Fisher-Rao范数满足：
+  $$
+  \|\theta\|_{fr}^2 \leq (L+1)^2 \mathbb{E} \left[ \left\| \frac{\partial \ell}{\partial f} \right\|^2 \right]
+  $$
+  其中，$ L $ 是网络深度，表明该范数适用于不同深度的网络。
+
+- 论文还推导了 Fisher-Rao 范数与已有复杂度度量（路径范数、谱范数等）之间的关系，并证明：
+  $$
+  \|\theta\|_{fr} \leq C \|\theta\|_{\text{path}} \quad \text{and} \quad \|\theta\|_{fr} \leq C \|\theta\|_{\text{spectral}}
+  $$
+  其中 $ C $ 为常数，说明 Fisher-Rao 范数在数学上能统摄已有方法。
+
+### **3.3 泛化误差界限**
+- 论文推导了 Fisher-Rao 范数的泛化误差上界：
+  $$
+  R_N(\Theta) \leq O\left(\frac{\|\theta\|_{fr}}{\sqrt{N}}\right)
+  $$
+  其中，$ R_N(\Theta) $ 为经验 Rademacher 复杂度，$ N $ 为样本数。
+
+## **4. 主要贡献（Contributions）**
+1. **提出Fisher-Rao范数** 作为新的神经网络复杂度度量，具备几何不变性。
+2. **理论上证明Fisher-Rao范数可以统一已有的范数度量**，如路径范数、谱范数等。
+3. **推导了更严格的泛化误差界限**，提供更优的泛化能力解释。
+4. **实验验证了Fisher-Rao范数的有效性**，证明其在CIFAR-10等数据集上的适用性。
+
+## **5. 论文的创新点（Difference and Innovation）**
+| 方法               | 是否具有不变性 | 是否有严格泛化界 | 是否统一已有度量 |
+| ------------------ | -------------- | ---------------- | ---------------- |
+| $L_2$ 范数         | ❌              | ❌                | ❌                |
+| 路径范数           | ❌              | ✅                | ❌                |
+| 谱范数             | ❌              | ✅                | ❌                |
+| **Fisher-Rao范数** | ✅              | ✅                | ✅                |
+
+Fisher-Rao范数的**关键创新**在于：
+1. **几何不变性**：相比于路径范数和谱范数，该范数能保持网络结构变化时的稳定性。
+2. **理论框架的统一**：它涵盖了现有的多种复杂度度量，为神经网络的泛化能力提供了更具解释性的数学理论。
+3. **更严格的泛化误差界限**：该范数的界限较其他方法更严格，使其成为衡量泛化能力的更优工具。
+
+## **6. 结果与结论（Results and Conclusion）**
+### **6.1 实验结果**
+- 在**CIFAR-10**数据集上的实验结果表明：
+  - **Fisher-Rao范数能够较好地预测神经网络的泛化能力**。
+  - **Fisher-Rao范数对网络宽度的变化具有稳定性**，相比之下，路径范数和谱范数表现出较大波动。
+  - Fisher-Rao范数在**随机标签实验（Random Labeling）**中表现优越，能够准确区分不同泛化能力的模型。
+
+### **6.2 结论**
+- 论文提出的**Fisher-Rao范数提供了一种更优的神经网络复杂度度量方法**，具有良好的不变性和更严格的泛化误差界限。
+- 该方法能**统一现有的复杂度度量方法**，并能更准确地描述神经网络的泛化能力。
+- **实验验证了该方法的有效性**，但仍需进一步探索更高效的计算方法。
+
+## **7. 讨论与未来研究方向（Discussion and Future Work）**
+### **7.1 论文的不足之处**
+1. **计算成本较高**：
+   - Fisher-Rao范数涉及Fisher信息矩阵的计算，在大规模神经网络中计算代价较高。
+   - 需要研究更高效的计算方法，例如低秩分解或近似计算。
+
+2. **适用范围仍需拓展**：
+   - 目前实验主要针对CNN，在Transformer、RNN等其他结构中的适用性仍需进一步验证。
+
+3. **理论分析仍可优化**：
+   - 论文证明了泛化误差界限，但该界限是否最优仍需进一步研究。
+
+### **7.2 未来研究方向**
+1. **高效计算方法**：
+   - 研究近似计算或自适应计算方法，以降低计算成本。
+   - 利用低秩分解方法优化计算过程。
+
+2. **拓展至更多网络架构**：
+   - 在Transformer、RNN等结构上验证Fisher-Rao范数的适用性。
+   - 结合自然梯度优化（Natural Gradient Descent）进行训练优化。
+
+3. **优化泛化误差界限**：
+   - 研究更紧密的误差界限，探索神经网络泛化能力的最优解释。
+
+## **8. 总结**
+本论文提出了一种新的神经网络复杂度度量方法——**Fisher-Rao范数**，并证明其具有**几何不变性**、**更严格的泛化误差界限**，以及**能够统一已有的复杂度度量方法**。实验结果表明，该方法能有效衡量神经网络的泛化能力。然而，其计算成本仍然较高，未来研究应关注更高效的计算方法及更广泛的适用性。
+
+
+
 ---
 
 ## 4. 局部熵梯度（Gradient of Local Entropy, μLE）
@@ -3849,15 +4163,11 @@ SAM 主要包含两个步骤：
 
   1. **计算对抗扰动方向**：
 
-     ```
      $$\epsilon = \rho \frac{\nabla_{\theta} L(\theta)}{\|\nabla_{\theta} L(\theta)\|}$$
-     ```
-
+     
   2. **计算扰动后的梯度并更新权重**：
 
-     ```
      $$\theta_{t+1} = \theta_t - \eta \nabla_{\theta} L(\theta + \epsilon)$$
-     ```
 
 - 计算成本几乎 **翻倍**，尤其在大规模模型（如 ViT、GPT）训练时会严重影响效率。
 
@@ -5211,6 +5521,7 @@ BAR 提供了两种变体：
 - **SGD 存在的问题**：  
   SGD 训练时，梯度更新不加任何约束，容易让噪声权重和信号权重同步增长，从而导致有害过拟合。
 - **SAM 解决方案**：
+  
   - SAM 每次更新前 **先计算梯度方向的扰动**：
     $$
     \epsilon = \tau \frac{\nabla L(W)}{\|\nabla L(W)\|}.
@@ -6977,3 +7288,37 @@ $$
 
 **适用场景**：
 - 适用于 **深度神经网络、大规模训练任务**，特别是在高维优化空间中有助于减少过拟合。
+
+
+
+# 个人总结
+
+Given:
+  - Large pretrained weights W (frozen or partially trainable in certain blocks).
+  - LoRA parameters DeltaW, rank r, small dimension subspace.
+  - A 'merge' operation: Merge(W, DeltaW) => W_merged (only for forward pass).
+  - A function RandPerturb(x) => x + ε,   (One-step or random strategy).
+  - A small subset of layers S to also partially update beyond LoRA.
+
+For each iteration t:
+  1. // Gradient Accumulation
+     for each micro-batch in an accumulation cycle:
+       - W_merged = Merge(W, DeltaW)   // no extra large copy, done on-the-fly
+       - Possibly do W_merged' = RandPerturb(W_merged)
+       - Compute loss = L(W_merged') in FP16/BF16
+       - Accumulate gradient wrt DeltaW (+ partial blocks in S if any)
+    
+  2. // Single update step after accumulation
+     - DeltaW := DeltaW - η * accumulated_grad(DeltaW)
+       (Optionally combined with partial updates on W[S])
+     - If using "EMA on DeltaW", do deltaW_ema = alpha * deltaW_ema + (1-alpha)*DeltaW
+
+  3. Periodically do some refine or "clip" operation on DeltaW 
+     to maintain low-rank or re-init random directions if needed.
+
+End
+
+
+
+# 数学基础总结 
+

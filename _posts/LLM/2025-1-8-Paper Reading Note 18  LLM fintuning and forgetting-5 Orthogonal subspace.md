@@ -2,8 +2,8 @@
 layout: post
 title:  Paper Reading 16 LLM finetuning and forgetting - 5 Orthogonal subspace
 categories: [Paper Reading,  LLM, Continual Learning,] 
-description:  [Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models]
-keywords: [Paper Reading,  LLM, Continual Learning,  Orthogonal subspace] 
+description:  [Learn or Recall? Revisiting Incremental Learning with Pre-trained Language Models,LoRA ]
+keywords: [Paper Reading,  LLM, Continual Learning,  Orthogonal subspace, LoRA ] 
 ---
 
 
@@ -2738,7 +2738,7 @@ $$
     $$
     \Delta W^{(i)} = \beta_{ij} P_{\mathcal{M}_j} + (1 - \beta_{ij}) P_{\mathcal{M}_i} 
     $$
-    
+  
 - 其中 $\beta_{ij} = \frac{\text{Sim}(i, j)}{\sum_{k \neq i} \text{Sim}(i, k)}$。
 
 ------
