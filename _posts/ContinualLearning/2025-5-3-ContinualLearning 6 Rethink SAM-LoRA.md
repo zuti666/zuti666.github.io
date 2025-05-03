@@ -456,8 +456,8 @@ $$
 
 calcualate the N step 's gradient, then do one time gradient update 
 $$
-g = \lambda g_N + (1 - \lambda) \sum_{i=1}^{N-1} g_0 
- = \lambda \nabla_\theta \mathcal{L}(\theta + \epsilon;\mathcal{B}_N) +  \sum_{i=1}^{N-1}(1 - \lambda) \nabla_\theta \mathcal{L}(\theta; \mathcal{B_i})
+g = \lambda g_N + (1 - \lambda) \sum_{i=1}^{N} g_i 
+ = \lambda \nabla_\theta \mathcal{L}(\theta + \epsilon;\mathcal{B}_N) +  \sum_{i=1}^{N}(1 - \lambda) \nabla_\theta \mathcal{L}(\theta; \mathcal{B_i})
 $$
 
 
