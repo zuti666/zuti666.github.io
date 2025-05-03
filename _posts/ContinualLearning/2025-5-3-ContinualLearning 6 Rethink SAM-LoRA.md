@@ -81,7 +81,7 @@ $$
 $$
 
 
-where $|\cdot|$ denotes the element-wise norm and scaling.
+where $\cdot$ denotes the element-wise norm and scaling.
 
 
 
@@ -151,7 +151,7 @@ $$
 \mathcal{L}(W; \mathcal{B}) \\
 g = \sum_{i=1}^{N} \nabla_{W} \mathcal{L}(W; \mathcal{B_i})
 $$
-**
+
 
 **1.2** Then, it calculates the normalized perturbation $\epsilon$ in the direction of the gradient:
 
@@ -189,7 +189,7 @@ $$
    g_{\text{adv}}= \nabla_{W} \mathcal{L}(W + \epsilon^*; \mathcal{B}_N).
 \end{equation}
 $$
-**
+
 
 **2.3** Finally, SAM restores the original parameters $W$, and applies a standard optimizer step using $g_{\text{adv}}$:
 
@@ -374,6 +374,8 @@ A mixed loss is then proposed:
 $$
 \mathcal{L}_m(\theta) = \lambda \cdot \mathcal{L}_{\text{Bayes}}(\theta) + (1 - \lambda) \cdot \mathcal{L}(\theta)
 $$
+
+
 where $\lambda \in [0,1]$ controls the trade-off between robustness and task-specific learning.
 
 
@@ -504,6 +506,8 @@ $$
 $$
 \epsilon \sim \mathcal{N}(0, \sigma^2 \cdot \|\theta\|)
 $$
+
+
 **2.2** Add noise , here only add on Lora part
 $$
 A_{adv} =  A + \epsilon, B_{adv} = B + \epsilon \\
@@ -511,10 +515,16 @@ W_{advLoRA} =  W_0 + (B + \epsilon ) (A + \epsilon)
 $$
 
 
+
 **2.3** Evaluate perturbed loss and gradient:
+
+
 $$
 g_1 = \nabla_\theta \mathcal{L}(\theta + \epsilon) \\
 $$
+
+
+
 
 $$
 g_{(1,A)} = \nabla_{A} \mathcal{L}(W_{advLoRA}; \mathcal{B})=\nabla_{A} \mathcal{L}(W_0 +(B + \epsilon ) (A + \epsilon); \mathcal{B}) \\
@@ -663,6 +673,8 @@ $$
 
 
 **3.2** Update parameters:
+
+
 $$
 \theta \leftarrow \theta - \eta \cdot g
 $$
