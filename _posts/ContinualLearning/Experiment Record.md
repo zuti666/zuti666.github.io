@@ -602,3 +602,46 @@ Note Here the model is ViT , we need add a classifier for each task.
 
 
 
+# E5 SAM  with Nlora
+
+
+
+1. **📚 Scope**:  **NLP**
+
+2. **🧠 Base Model**: `T5-small`
+
+3. **🗂️ Training Set**:   Multi-task continual training  follow paper's setting
+
+4. **🗃️ Dataset**: 
+
+   order1 : `DBpedia`  **amazon ** **agnews**   **yahoo**
+
+5. **⚙️ Optimizer**:  `sgd `   sam-sgd
+
+6. **⚙️ Hyperparameters**:
+   ‣ Learning Rate:  0.01
+   ‣ SAM ρ:  0.20
+
+7. **🧩 Task Setting**: Multi-domain Task-Incremental
+
+8. **🔧 Experiment Setup**:
+
+   -  Nlora 
+   -  new task , new lora
+
+9. **📖 Reference**: 
+
+10. **🎯 Evaluation Metrics**: 
+
+    ‣ Model's performance: 
+
+    - 
+
+11. **📊 Results**: 
+
+    1. 
+
+12. 📊 **Results Visualization**:
+
+13. **🧾 Conclusion**:  
+
