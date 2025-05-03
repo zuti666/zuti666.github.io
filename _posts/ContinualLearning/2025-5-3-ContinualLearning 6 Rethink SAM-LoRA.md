@@ -405,7 +405,15 @@ $$
 $$
 
 
-**2.2** Evaluate perturbed loss and gradient:
+**2.2** Add noise to the model and evaluate perturbed loss
+
+
+$$
+\mathcal{L}(\theta + \epsilon;\mathcal{B})
+$$
+
+
+ **2.3** Calculate  perturbed gradient:
 $$
 g_1 = \nabla_\theta \mathcal{L}(\theta + \epsilon;\mathcal{B})
 $$
