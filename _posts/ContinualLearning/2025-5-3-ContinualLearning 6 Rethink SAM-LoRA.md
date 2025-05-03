@@ -348,6 +348,84 @@ here , the  noise are only affect the local LoRA paramter rather than the whole 
 
 
 
+# LPF-SGD 
+
+
+
+## Intro 
+
+![image-20250503193124458](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250503193124755.png)
+
+
+
+![image-20250503193229933](https://zuti.oss-cn-qingdao.aliyuncs.com/img/20250503193230204.png)
+
+
+
+## Imply Step 
+
+### Step 1 Generate Noise 
+
+
+
+**1  Uniform Noise (Gaussian distribution)** 
+
+
+$$
+K \sim \mathcal{N}(0, \gamma \sum)
+$$
+
+
+$\mathcal{N}(0, \gamma \sum)$ in the algorithm stands for a sample from a Gaussian distribution, which means 
+
+
+$$
+\epsilon_{ij} \sim \mathcal{N}(0,  \gamma  \cdot \sigma^2)
+$$
+
+
+**2 filter-noise**
+
+To be more specific,  $K \sim \mathcal{N}(0, \gamma \sum)$   and we set the matrix $\sum $ to be proportional to the norm of the parameters in each filter of the network, i.e., we set $Σ = diag(||θ^t_1||, ||θ^t_2|| · · · ||θ^t_k||)$, where $θ^t_k$ is  the weight matrix of the $k^{th}$ filter at iteration $t$ and $γ$ is the LPF radius.
+
+Finally, we increase $γ$ during network training to progressively increase the area of the loss surface that is explored at each gradient update. This is done according to the following rule: 
+$$
+ γ_t = γ_0(α/2(− cos(tπ/T ) + 1) + 1)
+$$
+ where $T$ is total number of iterations (epochs * gradient updates per epoch) and $α$ is set such that $\gamma_{T} = (α + 1) ∗ γ_0$. This policy can be justified by the fact that the more you progress with the training, the more you care to recover flat regions in the loss landscape.
+
+
+$$
+K \sim \mathcal{N}(0, \gamma_t \cdot  diag(\|W_{1,:}\|, \|W_{2,:}\| \dots, \|W_{k,:}\|))
+$$
+
+$$
+\epsilon_{ij} \sim \mathcal{N}\left(0,  \gamma_t  \cdot \right \|W_{i,:}\|_2)
+$$
+
+
+where $W_{i,:}$  is  the $i$-th row of $W$ (i.e., the $i$-th filter)
+
+Noise scale depends on the norm of each filter. Filters with higher L2 norm receive proportionally larger noise.
+
+
+
+### Step 2  Add noise  and calculate the Loss
+
+
+$$
+\mathcal{L}(\theta + \epsilon; \mathcal{B})
+$$
+
+
+### Step3 Calculate the gradient 
+
+$$
+g = \nabla_\theta \mathcal{L}(\theta + \epsilon; \mathcal{B})
+$$
+
+
+
 
 
 
@@ -401,7 +479,7 @@ $$
 
 **2.1** Sample noise:
 $$
-\epsilon \sim \mathcal{N}(0, \sigma^2 \cdot \|\theta\|)
+\epsilon \sim \mathcal{N}(0, \sigma^2 )
 $$
 
 
@@ -521,6 +599,12 @@ Sample independent noise for LoRA components:
 
 $$
 \epsilon_A \sim \mathcal{N}(0, \sigma^2 \cdot \|A\|_2), \quad \epsilon_B \sim \mathcal{N}(0, \sigma^2 \cdot \|B\|_2)
+$$
+
+
+
+$$
+\epsilon_A \sim \mathcal{N}(0, \sigma^2 ), \quad \epsilon_B \sim \mathcal{N}(0, \sigma^2 )
 $$
 
 
@@ -652,6 +736,12 @@ $$
 
 
 
+$$
+\epsilon_{W_0} \sim \mathcal{N}(0, \sigma^2 ), \quad
+\epsilon_A \sim \mathcal{N}(0, \sigma^2 ), \quad
+\epsilon_B \sim \mathcal{N}(0, \sigma^2 )
+$$
+
 
 **2.2** Add noise , try to on the whole model 
 
@@ -659,7 +749,7 @@ $$
 $$
 A_{adv} =  A + \epsilon, B_{adv} = B + \epsilon \\
 W_{advFull} =  (W_0+\epsilon) + (B + \epsilon ) (A + \epsilon) 
-\sim W_0+ BA + \epsilon   
+\sim W_0+ BA + \epsilon
 $$
 
 
@@ -734,3 +824,190 @@ $$
 
 
 
+# Flat -LoRA
+
+
+
+purpose 
+
+
+
+
+$$
+\begin{equation}
+\min _{\mathbf{A}, \mathbf{B}} \underset{\epsilon \sim \mathcal{N}\left(0, \sigma^2 \mathbf{I}\right)}{\mathbb{E}} L(\mathbf{W}+s \cdot \mathbf{B} \mathbf{A}+\boldsymbol{\epsilon})
+\end{equation}
+$$
+
+
+which is equal to 
+$$
+\min _{\mathbf{A}, \mathbf{B}}  \mathcal{L}_{\text{Bayes}}(W) 
+= 
+\min _{\mathbf{A}, \mathbf{B}}  \mathbb{E}_{\epsilon \sim \mathcal{N}(0, \sigma^2)} [\mathcal{L}(W_0+AB + \epsilon)]
+$$
+
+
+## Calculate Step 
+
+### Step1 Generate noise
+
+the noise inject 
+
+​	
+$$
+{ 
+\epsilon \sim \mathcal{N}
+\left(0, \frac{\sigma^2}{n} \cdot \mathrm{diag}\left(\|W'_{1,:}\|_2^2, \dots, \|W'_{m,:}\|_2^2\right) \cdot \mathbf{1}_{m \times n} \right)
+
+}
+$$
+
+
+即对每个输出 filter $i$，整个 row $W'_{i,:}$ 的噪声满足：
+
+
+$$
+\epsilon_{i,:} \sim \mathcal{N}\left(0, \frac{\sigma^2}{n} \cdot \|W'_{i,:}\|_2^2 \cdot \mathbf{1}_{n} \right)
+$$
+1 **Filter-aware**：对每个输出通道（filter）赋予不同扰动幅度，$|W'_i|_2^2$ 越大，对其加的噪声越强；
+
+2 **Input-dim-aware**：所有元素的总扰动幅度不随输入维度 $n$ 增加，采用 $1/n$ 缩放。
+
+
+
+**Step2  Add noise on the whole model**
+
+
+$$
+A_{adv} =  A + \epsilon, B_{adv} = B + \epsilon \\
+W_{advFull} =  (W_0+\epsilon) + (B + \epsilon ) (A + \epsilon) 
+\sim W_0+ BA + \epsilon
+$$
+
+
+### Step 3   **Calculate perturbed gradient**
+
+
+$$
+g_{A} = \nabla_{A} \mathcal{L}(W_{advFull}; \mathcal{B})=\nabla_{A} \mathcal{L}(W_0 +BA + \epsilon); \mathcal{B}) \\
+g_{B} = \nabla_{B} \mathcal{L}(W_{advFull}; \mathcal{B})=\nabla_{B} \mathcal{L}(W_0 +BA + \epsilon); \mathcal{B})
+$$
+
+
+# Noise Inject 
+
+Absolutely. Here's the **complete English version** of the unified summary for the noise injection strategies discussed above, presented in a structured and consistent format suitable for inclusion in a paper’s **method section** or **appendix**.
+
+------
+
+# ✅ Unified Formulation of Noise Injection Strategies
+
+This section presents a unified mathematical formulation for various random weight perturbation (RWP) strategies, including filter-aware, element-wise, and Fisher-scaled variants.
+
+------
+
+## 🔁 Notation
+
+Let:
+
+- $W \in \mathbb{R}^{m \times n}$: a weight matrix, with $m$ filters (rows) and $n$ input dimensions per filter;
+- $W_{i,:}$: the $i$-th row of $W$ (i.e., the $i$-th filter);
+- $\epsilon \in \mathbb{R}^{m \times n}$: the injected perturbation;
+- $\sigma$: base noise scale hyperparameter;
+- $\gamma$: filter-aware scaling factor;
+- $\eta$: Fisher regularization strength;
+- $F_{ij}$: Fisher information at position $(i,j)$;
+- $|W|_F$: Frobenius norm of $W$;
+- $\mathcal{N}(0, v^2)$: Gaussian distribution with mean 0 and variance $v^2$;
+- $\odot$: element-wise (Hadamard) product.
+
+------
+
+## 🧮 General Expression
+
+All noise injection schemes can be unified under the following general form:
+
+$\boxed{ \epsilon = Z \odot S, \quad \text{where } Z_{ij} \sim \mathcal{N}(0, 1) }$
+
+Here, $S$ defines the **scaling matrix**, controlling the standard deviation of the perturbation at each position. We specify $S$ differently for each method below.
+
+------
+
+## 🧩 Strategy 1: Standard RWP (Uniform Noise)
+
+$S_{ij} = \sigma \quad \Rightarrow \quad \epsilon_{ij} \sim \mathcal{N}(0, \sigma^2)$
+
+> Every parameter receives equal, isotropic noise.
+
+------
+
+## 🧩 Strategy 2: Matrix-norm-aware Scaling
+
+$S_{ij} = \sigma \cdot \|W\|_F \quad \Rightarrow \quad \epsilon_{ij} \sim \mathcal{N}(0, \sigma^2 \cdot \|W\|_F^2)$
+
+> Entire matrix shares a uniform noise scale based on its overall magnitude.
+
+------
+
+## 🧩 Strategy 3: Element-wise Scaling
+
+$S_{ij} = \sigma \cdot |W_{ij}| \quad \Rightarrow \quad \epsilon_{ij} \sim \mathcal{N}(0, \sigma^2 \cdot W_{ij}^2)$
+
+> Each parameter receives a noise scale proportional to its own absolute value.
+
+------
+
+##  Strategy 4: **Filter-wise Gaussian distribution (LPF-SGD)**
+
+$S_{ij} = \sqrt{\gamma_t} \cdot \|W_{i,:}\|_2 \quad \Rightarrow \quad \epsilon_{ij} \sim \mathcal{N}\left(0, \gamma_t \cdot \|W_{i,:}\|_2^2\right)$
+
+> Noise scale depends on the norm of each filter. Filters with higher L2 norm receive proportionally larger noise.
+
+
+
+## 🧩 Strategy 5: **Adaptive Random Weight Perturbation** **(RWP)**
+
+This can be used **in combination** with any of the above strategies to reduce noise in highly sensitive directions.
+
+Let $S_{ij}^{\text{base}}$ be the original scaling (from strategies 1–4). Then:
+
+
+
+$S_{ij}^{\text{fisher}} = \frac{S_{ij}^{\text{base}}}{\sqrt{1 + \eta \cdot F_{ij}}} \quad \Rightarrow \quad \epsilon_{ij} \sim \mathcal{N}\left(0, \frac{(S_{ij}^{\text{base}})^2}{1 + \eta \cdot F_{ij}} \right)$
+
+
+
+> Fisher information suppresses perturbation in directions with high sensitivity.
+
+
+
+
+
+## 🧩 Strategy 6: **Effective Random Perturbation** **(Flat-****LoRA****)**
+
+$S_{ij} = \frac{\sigma \cdot \|W_{i,:}\|_2}{\sqrt{n}} \quad \Rightarrow \quad \epsilon_{ij} \sim \mathcal{N}\left( 0, \frac{\sigma^2 }{n} \|W_{i,:}\|_2^2  \right)$
+
+> Noise scale depends on the norm of each filter. Filters with higher L2 norm receive proportionally larger noise.
+>
+> 
+
+
+
+------
+
+## ✅ Summary Table
+
+| Strategy              | Scaling Term $S_{ij}$                                  | Distribution $\epsilon_{ij}$ | Structure-aware | Fisher-aware                |
+| --------------------- | ------------------------------------------------------ | ---------------------------- | --------------- | --------------------------- |
+| Standard RWP          | $\sigma$                                               | $\mathcal{N}(0, \sigma^2)$   | ❌ No            | ❌ No                        |
+| Filter-aware RWP      | $\dfrac{\gamma \cdot |W_{i,:}|_2}{n}$                  | $\mathcal{N}(0, (\cdot)^2)$  | ✅ Row-wise      | ❌ No                        |
+| Matrix-norm-aware     | $\sigma \cdot |W|_F$                                   | $\mathcal{N}(0, (\cdot)^2)$  | ✅ Global        | ❌ No                        |
+| Element-wise scaling  | $\sigma \cdot                                          | W_{ij}                       | $               | $\mathcal{N}(0, (\cdot)^2)$ |
+| Fisher-scaled variant | $\dfrac{S_{ij}^{\text{base}}}{\sqrt{1 + \eta F_{ij}}}$ | $\mathcal{N}(0, (\cdot)^2)$  | ✅ (Inherited)   | ✅ Yes                       |
+
+------
+
+This unified formulation and notation enables a clear comparison of noise injection mechanisms and can be directly adopted in your method section or appendix.
+
+Would you like a LaTeX-ready version of this table and equations?
