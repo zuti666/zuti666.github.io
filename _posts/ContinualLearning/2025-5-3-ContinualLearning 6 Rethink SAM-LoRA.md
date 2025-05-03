@@ -516,6 +516,24 @@ $$
 $$
 
 
+Sample independent noise for LoRA components:
+
+
+$$
+\epsilon_A \sim \mathcal{N}(0, \sigma^2 \cdot \|A\|_2), \quad \epsilon_B \sim \mathcal{N}(0, \sigma^2 \cdot \|B\|_2)
+$$
+
+
+也可以使用更细粒度的 element-wise 噪声版本（如果需要）：
+
+
+$$
+[\epsilon_A]_{ij} \sim \mathcal{N}(0, \sigma^2 \cdot |[A]_{ij}|^2), \quad [\epsilon_B]_{ij} \sim \mathcal{N}(0, \sigma^2 \cdot |[B]_{ij}|^2)
+$$
+
+
+
+
 **2.2** Add noise , here only add on Lora part
 $$
 A_{adv} =  A + \epsilon, B_{adv} = B + \epsilon \\
@@ -617,6 +635,22 @@ $$
 $$
 \epsilon \sim \mathcal{N}(0, \sigma^2 \cdot \|\theta\|)
 $$
+Sample noise for full model parameters, including frozen $W_0$:
+
+
+$$
+\epsilon_W \sim \mathcal{N}(0, \sigma^2 \cdot \|W_0 + BA\|_2)
+$$
+若将 $\epsilon_W$ 分解为对应结构的噪声项，可写作：
+
+
+$$
+\epsilon_{W_0} \sim \mathcal{N}(0, \sigma^2 \cdot \|W_0\|_2), \quad
+\epsilon_A \sim \mathcal{N}(0, \sigma^2 \cdot \|A\|_2), \quad
+\epsilon_B \sim \mathcal{N}(0, \sigma^2 \cdot \|B\|_2)
+$$
+
+
 
 
 **2.2** Add noise , try to on the whole model 
