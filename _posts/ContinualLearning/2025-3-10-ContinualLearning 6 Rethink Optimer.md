@@ -1507,3 +1507,8 @@ with self.compute_loss_context_manager():
 如你所见，你的策略实际上很好地结合了 **loss landscape smoothness（通过扰动实现）** 与 **轻量更新（仅 LoRA）** 的目标。
 
 是否还希望进一步测试扰动是否对 loss 有提升泛化的作用（如对比 $\mathcal{L}(w)$ 和 $\mathcal{L}(w + \epsilon)$ 的 flatness）？
+
+
+$$
+ L_{orth}(A_i,A_t) =  \sum_{j,k} || O_{i,t}[j,k] ||^2 =  \sum_{j,k} || A^T_iA_t[j,k] ||^2
+$$
