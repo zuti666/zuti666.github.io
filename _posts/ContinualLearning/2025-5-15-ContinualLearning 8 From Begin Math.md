@@ -124,13 +124,13 @@ $$
     $$
     \mathcal{L}_{\mathcal{D}}(Q) := \mathbb{E}_{f \sim Q} \left[ \mathcal{L}_{\mathcal{D}}(f) \right] \tag{3}
     $$
-    
+  
 - **分布 $Q$ 的经验风险**为：
   
 - $$
     \mathcal{L}_S(Q) := \mathbb{E}_{f \sim Q} \left[ \mathcal{L}_S(f) \right]  \tag{4}
     $$
-  
+
   
 
 我们还假设存在一个**先验分布 $P$（数据无关）**，也是定义在 $\mathcal{F}$ 上的概率分布，表示我们在观察数据之前对模型的信念。
@@ -232,4 +232,35 @@ $$
 
 
 
+$$
+\mathbb{E}_{f \sim Q} \left[ \mathcal{L}_{\mathcal{D}}(f) \right] 
+\leq 
+\mathbb{E}_{f \sim Q} \left[ \hat{\mathcal{L}}_S(f) \right] + 
+\sqrt{\frac{D(Q\|P)+ \ln \frac{1}{\delta}+\ln m+2}{2m-1}}
+$$
 
+
+**any measurable loss function $l$**
+
+a possibly uncountable set $F$
+
+$Q$ ranges over all distributions (measures) on $F$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$$
+Q^*(\theta) = \frac{\pi(\theta) \cdot \exp(-n \cdot \hat{L}_S(\theta))}{Z_{S}}
+$$

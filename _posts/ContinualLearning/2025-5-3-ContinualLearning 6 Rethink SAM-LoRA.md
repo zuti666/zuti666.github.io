@@ -40,6 +40,12 @@ $$
 This approach ensures that the update direction accounts for local sharpness, promoting parameter solutions that generalize better.
 
 
+$$
+\boldsymbol{\epsilon}^*(\boldsymbol{w}) \triangleq \underset{\|\epsilon\|_p \leq \rho}{\arg \max } L_{\mathcal{S}}(\boldsymbol{w}+\boldsymbol{\epsilon}) \approx \underset{\|\epsilon\|_p \leq \rho}{\arg \max } L_{\mathcal{S}}(\boldsymbol{w})+\boldsymbol{\epsilon}^T \nabla_{\boldsymbol{w}} L_{\mathcal{S}}(\boldsymbol{w})=\underset{\|\epsilon\|_p \leq \rho}{\arg \max } \boldsymbol{\epsilon}^T \nabla_{\boldsymbol{w}} L_{\mathcal{S}}(\boldsymbol{w}) .
+$$
+
+
+
 
 ## Calcualte Step 
 
@@ -537,6 +543,15 @@ $$
 g = \lambda g_N + (1 - \lambda) \sum_{i=1}^{N} g_i 
  = \lambda \nabla_\theta \mathcal{L}(\theta + \epsilon;\mathcal{B}_N) +  \sum_{i=1}^{N}(1 - \lambda) \nabla_\theta \mathcal{L}(\theta; \mathcal{B_i})
 $$
+
+
+
+
+$$
+g 
+ =   a \sum_{i=1}^{N} \nabla_{W} \mathcal{L}(\theta; \mathcal{B_i}) +b \nabla_{ W} \mathcal{L}(\theta + \epsilon;\mathcal{B}_N) 
+$$
+
 
 
 
