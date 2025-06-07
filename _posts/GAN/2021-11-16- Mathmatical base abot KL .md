@@ -236,3 +236,65 @@ $$
 
 nebulaf91的博客http://blog.csdn.net/u011508640/article/details/72815981
 
+
+
+
+
+# 扩展   先验和后验均为高斯分布时如何推导具体公式
+
+
+
+当然，这里给出**KL 散度（Kullback–Leibler Divergence）**的一般定义，并说明在先验和后验均为高斯分布时如何推导具体公式。
+
+------
+
+## 1. **KL 散度的一般定义**
+
+KL 散度衡量两个概率分布 $P$ 和 $Q$ 之间的距离（严格来说是“相对熵”，不是对称的距离），其定义如下：
+
+$\mathrm{KL}(P \parallel Q) = \int P(x) \log \frac{P(x)}{Q(x)} \, dx$
+
+- $P(x)$：目标分布（通常为后验）
+- $Q(x)$：参考分布（通常为先验）
+
+KL 散度反映了用 $Q$ 去近似 $P$ 时造成的信息损失。
+
+------
+
+## 2. **高斯分布之间的 KL 散度公式推导**
+
+假设 $P = \mathcal{N}(\mu_P, \Sigma_P)$，$Q = \mathcal{N}(\mu_Q, \Sigma_Q)$，即均值分别为 $\mu_P, \mu_Q$，协方差矩阵为 $\Sigma_P, \Sigma_Q$。
+
+多维高斯分布之间的KL散度为：
+
+$\mathrm{KL}(P \parallel Q) = \frac{1}{2} \left[ \operatorname{tr}(\Sigma_Q^{-1} \Sigma_P) + (\mu_Q - \mu_P)^\top \Sigma_Q^{-1} (\mu_Q - \mu_P) - k + \ln\left( \frac{\det \Sigma_Q}{\det \Sigma_P} \right) \right]$
+
+- $k$ 是分布的维度
+- $\operatorname{tr}(\cdot)$ 表示迹（矩阵对角线元素之和）
+
+------
+
+### **特例：对角协方差且各维方差一致**
+
+如果 $\Sigma_P = \sigma_P^2 I$，$\Sigma_Q = \sigma_Q^2 I$，即都是各向同性高斯分布（对角且等方差），公式化简为：
+
+$\mathrm{KL}(P \parallel Q) = \frac{1}{2} \left[ k \cdot \frac{\sigma_P^2}{\sigma_Q^2} + \frac{||\mu_P - \mu_Q||^2}{\sigma_Q^2} - k + k \cdot \ln\left(\frac{\sigma_Q^2}{\sigma_P^2}\right) \right]$
+
+------
+
+## 3. **与题干中公式的对照**
+
+你题目中的 KL 公式：
+
+$\mathrm{KL}(P||Q) = \frac{1}{2} \left[ k\frac{\sigma_Q^2}{\sigma_P^2} + \frac{\|\mu_P-\mu_Q\|^2}{\sigma_P^2} - k + k \log \frac{\sigma_P^2}{\sigma_Q^2} \right]$
+
+和标准推导中的表达式实际上等价，只是写法略有不同（有的文献用 $\sigma_P^2/\sigma_Q^2$，有的用 $\sigma_Q^2/\sigma_P^2$，具体看分布顺序和符号定义，注意上下文约定）。
+
+------
+
+## 4. **简明结论**
+
+- **KL散度的推导基于高斯分布概率密度函数带入KL定义，积分后得到上述封闭形式公式。**
+- 这个公式是**PAC-Bayes、变分推断、贝叶斯神经网络**等方法中的基本工具。
+
+如需详细推导每一步，可继续补充。
