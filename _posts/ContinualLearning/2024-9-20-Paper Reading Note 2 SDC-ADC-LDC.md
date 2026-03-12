@@ -1253,13 +1253,18 @@ $f(\sum(a)) = \sum(f(a))$
 
 
 
+linear_probe_softmax_per_task_eval
 
 
 
-
-
-
-
+$$
+# python utils/prepare_tiny_imagenet_c_split.py \
+#   --in-root data/tiny-imagenet-c/extracted/Tiny-ImageNet-C \
+#   --out-root data/tiny-imagenet-c_123_01-CL \
+#   --severities 1 2 3 \
+#   --keep-ratio-per-class 0.1 \
+#   --seed 42
+$$
 
 
 
